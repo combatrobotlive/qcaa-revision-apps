@@ -14,6 +14,14 @@
 @media print{#dk-public-attribution{font-size:8pt;background:#fff;color:#555;border-top:1px solid #ccc}}
 </style>
 
+
+<!-- QCAA Revision Apps: back-to-hub control -->
+<style id="qraa-back-to-hub-style">
+.qraa-back-to-hub{position:fixed;left:14px;bottom:14px;z-index:2147483646;display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border:1px solid rgba(255,255,255,.3);border-radius:999px;background:#173f58;color:#fff!important;text-decoration:none!important;font:700 12px/1.2 Arial,Helvetica,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.22);opacity:.84;transition:opacity .15s ease,transform .15s ease}
+.qraa-back-to-hub:hover,.qraa-back-to-hub:focus{opacity:1;transform:translateY(-1px);outline:2px solid #fff;outline-offset:2px}
+@media(max-width:600px){.qraa-back-to-hub{left:10px;bottom:10px;padding:7px 10px;font-size:11px}}
+@media print{.qraa-back-to-hub{display:none!important}}
+</style>
 </head><body>
 <header class="top"><div class="brand"><div class="logo">IT</div><div><strong>Italian</strong><small>QCAA Unit 4 / Il mio presente; il mio futuro</small></div></div><nav><button class="nav active" data-view="home">Home</button><button class="nav" data-view="practice">Practice</button><button class="nav" data-view="sets">Stimulus sets</button><button class="nav" data-view="mock">Mock</button><button class="nav" data-view="toolkit">Language toolkit</button><button class="nav" data-view="teacher">Teacher</button><button class="nav" data-view="progress">Progress</button><button class="nav" data-view="guide">Guide</button></nav></header>
 <div class="shell"><aside class="side"><div class="panel"><h3>Build your practice</h3><div class="field"><label>Topic</label><select id="topicFilter"><option value="">Both Unit 4 topics</option><option value="T1">1. The present</option><option value="T2">2. Future choices</option></select></div><div class="field"><label>Response</label><select id="kindFilter"><option value="">Any</option><option value="written_it">Italian short response</option><option value="written_en">English short response</option><option value="auto">Auto-marked drills</option></select></div><div class="field"><label>Variant</label><select id="variantFilter"><option value="">Mixed A / B / C</option><option>A</option><option>B</option><option>C</option></select></div><div class="field"><label>Find a skill</label><input id="search" placeholder="context, purpose, I24…"></div><label class="check"><input id="unattempted" type="checkbox"> Not yet attempted</label><label class="check"><input id="needs" type="checkbox"> Needs revision</label><div id="pool" class="tiny muted"></div><button class="btn primary full" id="random">Random question →</button><button class="btn full" id="make10">Build 10-question set</button></div><div class="panel"><h3>Exact set code</h3><div class="field"><input id="codeInput" placeholder="Paste ITA1… code"></div><button class="btn full" id="openCode">Open code</button><button class="btn full" id="copyCode">Copy current set code</button><button class="btn full" id="saveSet">Save current set</button></div><div class="panel tiny muted">Unofficial practice app. All stimuli and questions are newly written for revision and are not QCAA exam material.</div></aside>
@@ -78,4 +86,7 @@ Southport State High School is listed as the creator's professional affiliation 
   <details><summary>About / reuse</summary><div class="dk-attribution-more">Shared free for educational use. Please retain this attribution when redistributing the resource. Southport State High School is listed as the creator's professional affiliation only; no endorsement by the school is implied.</div></details>
 </footer>
 
+
+<a class="qraa-back-to-hub" href="./index.html" aria-label="Back to all QCAA Revision Apps" title="Back to all QCAA Revision Apps">&#8592; All revision apps</a>
+<!-- /QCAA Revision Apps: back-to-hub control -->
 </body></html>

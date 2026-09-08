@@ -12,6 +12,14 @@
 @media print{#dk-public-attribution{font-size:8pt;background:#fff;color:#555;border-top:1px solid #ccc}}
 </style>
 
+
+<!-- QCAA Revision Apps: back-to-hub control -->
+<style id="qraa-back-to-hub-style">
+.qraa-back-to-hub{position:fixed;left:14px;bottom:14px;z-index:2147483646;display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border:1px solid rgba(255,255,255,.3);border-radius:999px;background:#173f58;color:#fff!important;text-decoration:none!important;font:700 12px/1.2 Arial,Helvetica,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.22);opacity:.84;transition:opacity .15s ease,transform .15s ease}
+.qraa-back-to-hub:hover,.qraa-back-to-hub:focus{opacity:1;transform:translateY(-1px);outline:2px solid #fff;outline-offset:2px}
+@media(max-width:600px){.qraa-back-to-hub{left:10px;bottom:10px;padding:7px 10px;font-size:11px}}
+@media print{.qraa-back-to-hub{display:none!important}}
+</style>
 </head><body><div class="app"><header class="topbar"><div class="brand"><div style="width:42px;height:42px;border-radius:9px;background:#6b1f2a;color:white;display:grid;place-items:center;font-weight:700;font-size:20px">⚖</div><div><h1>Legal Studies EA Practice</h1><small>Version 1 · Unit 4 Topics 1 & 3 · 2026 QCAA-aligned practice</small></div></div><div class="top-actions"><button class="btn ghost" id="homeBtn">Home</button><button class="btn ghost" id="progressBtn">Progress</button><button class="btn ghost" id="scenarioTopBtn">Case-study lab</button><button class="btn ghost" id="toolsBtn">EA tools</button><button class="btn ghost hidden" id="installBtn">Install app</button></div></header><div class="layout"><aside class="sidebar">
 <div class="panel"><h3>Question filters</h3><div class="field"><label>Topic</label><select id="topicFilter"></select></div><div class="field"><label>Subtopic</label><select id="sectionFilter"></select></div><div class="field"><label>Cognitive verb</label><select id="verbFilter"></select></div><div class="field"><label>Difficulty</label><select id="diffFilter"></select></div><div class="field"><label>Response type</label><select id="typeFilter"><option value="">Any response</option><option value="exact">Auto-marked identification</option><option value="text">Written / reasoning</option></select></div><div class="field"><label>Search / family</label><input id="searchFilter" placeholder="e.g. CRPD, protest, 106"></div><label class="check"><input id="unattempted" type="checkbox"> Unattempted only</label><p id="filterSummary" class="muted small"></p><button class="btn primary full" id="randomBtn">🎲 Random question (<span id="poolCount">0</span>)</button></div>
 <div class="panel"><h3>Practice modes</h3><button class="btn full gap-bottom" id="random10Btn">Random 10</button><button class="btn full gap-bottom" id="shortBtn">Short-response drill</button><button class="btn full gap-bottom" id="analysisBtn">Analysis drill</button><button class="btn full gap-bottom" id="evaluationBtn">Evaluation drill</button><button class="btn full gap-bottom" id="fullEABtn">2025-style 44-mark EA</button><button class="btn full gap-bottom" id="mcSprintBtn">Concept sprint 20</button><button class="btn full" id="scenarioSideBtn">◇ Generated legal case-study lab</button></div>
@@ -112,4 +120,7 @@ Southport State High School is listed as the creator's professional affiliation 
   <details><summary>About / reuse</summary><div class="dk-attribution-more">Shared free for educational use. Please retain this attribution when redistributing the resource. Southport State High School is listed as the creator's professional affiliation only; no endorsement by the school is implied.</div></details>
 </footer>
 
+
+<a class="qraa-back-to-hub" href="./index.html" aria-label="Back to all QCAA Revision Apps" title="Back to all QCAA Revision Apps">&#8592; All revision apps</a>
+<!-- /QCAA Revision Apps: back-to-hub control -->
 </body></html>

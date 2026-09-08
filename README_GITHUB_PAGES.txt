@@ -15,3 +15,9 @@ IMPORTANT
   and paste your Ko-fi / Buy Me a Coffee URL between the quotes.
 - This website package is based on the public-attributed batch ZIP.
 - The Japanese app is not present in that batch, so it is not linked by this version of the landing page. Add it in a later batch rather than leaving a broken link.
+
+
+UPDATE v1.1 — Back to hub link
+Every app HTML file now includes a small fixed "← All revision apps" button at the lower-left.
+The button links to ./index.html because all apps are published in the repository root.
+It is hidden when printing.

@@ -16,6 +16,14 @@
 @media print{#dk-public-attribution{font-size:8pt;background:#fff;color:#555;border-top:1px solid #ccc}}
 </style>
 
+
+<!-- QCAA Revision Apps: back-to-hub control -->
+<style id="qraa-back-to-hub-style">
+.qraa-back-to-hub{position:fixed;left:14px;bottom:14px;z-index:2147483646;display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border:1px solid rgba(255,255,255,.3);border-radius:999px;background:#173f58;color:#fff!important;text-decoration:none!important;font:700 12px/1.2 Arial,Helvetica,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.22);opacity:.84;transition:opacity .15s ease,transform .15s ease}
+.qraa-back-to-hub:hover,.qraa-back-to-hub:focus{opacity:1;transform:translateY(-1px);outline:2px solid #fff;outline-offset:2px}
+@media(max-width:600px){.qraa-back-to-hub{left:10px;bottom:10px;padding:7px 10px;font-size:11px}}
+@media print{.qraa-back-to-hub{display:none!important}}
+</style>
 </head><body>
 <header class="top"><div class="brand"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAGKklEQVR4nO3d3XHrNhRFYdxM2nBbrsLluAq35UKUB2Q0uvqhQO4D4GxwfZOnJKZAYhGkJMv6c7lcCnDUP7MHAG8EBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBATJv7MH8JePr8/ZQ/Dw+/0zewj/+zP9c2FEI5ob07SA6CbWrIwmBEQ6/YzPaHRA1DPAyIzGBUQ6g43JaNDTeOoZb8wxHxEQ9cwy4Mh3D4h65up9/PsGRD0ZdJ2FjgFRTx795qJXQNSTTacZ6RIQ9eTUY154Nx6S+IBYfjILn53ggKgnv9g54hIGSWRALD8uAmeKFQgSAoIkLCCuX16i5osVCBICgoSAIIkJiBsgRyGzxgoECQFBQkCQ5Pps/HSNH4Xhnu/q7AEd+/DU3U+duaczBhT+ibvbDZ4tpnMFNODDmvUhzpPRKQIa/ycHro+4fEmLBzT9DzEtvyAtG9CxdBpneu/GF85ozYDaJ/jYpN79VOPD/X7/rNfQagFNeSHnurW3j77eUrTUK9Et9Xx8ffabv8aNT78zC7TOCrQ9KyNP+pYFaZnL2QoB5Unn6UO/Gt4alzP7S1jaehrH4H458w5o4+h3vdfZa3sw1g0ZB7Rdz8iRNFqyIdeA7Oqp1mvIMqBXxzrVZeuVjUE6NuQX0EY9g0eiWKYhv4Ce8qqnchzzI7OAnp6gvjPxdORei5BTQIvVU7k3ZBOQ0TEN4bK/NgE95b78VNZ74RHQkhevW74XMoOAlq+nMm3IICBklj2gkyw/leMilD2gR6vWU9ntXeqAkp98w2Q+DqkDemR3gh7gtY9mASGbvAFlXrfHS3s08gb0yGttVxjtadKA0p5wE+U8JkkDemR0UoZw2V+bgJATAUGSMaDHi73Leh7rca8T3gZlDAhGVggo4Xl5Hiv8cYVypr9JmI39CsTyM1e6gLiDvpX/PjpdQPBCQJB4B8R3VkznHRCmIyBICAgSAoKEgCAhIEgICBICgoSAIEkX0K63D499b5eR/G8tpwsIXggIEgKCxD4gr9ug5MM7IGNA+X8NT/H7/VP/afk/7/5NtjvokjMgUdra7gaWdpy7rBBQwvOyhemw79gEtOt8TXhy7x1Swl14KmlAe89Ou7P5wIBz7mPSgJ7yXYRWXX5K5oD0RSjJNIQ8mcq5/JTMAYWY3tD0AfRmFlD+b4l/6+0gvZpLHVDIUj9xPqJeCcx8YqQO6Km3QTxtaHBGTx+xpQOv5afkD+jY94/M/daSw18Q4/jNMtkDOmxWQ44RKAwCOpzCqx/slNGrLTfWY1qeQUAluqESndHG1taup7j/ibvf75+3R/nj6/PV7Ip/GO/YrdiB7WRmE9BGBy0/Wzbn6fY/bc964xj0xcNi+Sml/LlcLvpWhu2tuNSPOdd3HY25Fy/9gHjcA12Jz60+vj67zs3e7fve+lyZBfTKrjOpR0YHtml963NldgmrxKc8jVtrcXjHY3fhMD1iy4DKno+rRm02ZPvbD5HqMDZyDagkm4lG2cZ8upvoWxtHPOftRbZ6QhgHVN41lCej7cH41lPcAypBr/t1tcAvwW2weSV6w/YLzfXfJ7zDcE+nWiGgavu9jpHfBzXgqVwe9pewW42/tNXvuta48WXqKSutQNXb902r2AVp13sp+sOlslpAVftb98e+ruXYGrZePWXVgErzUnSn09VtyXSqZQOqjmUUPoCFLR5QdZ3FYSUt383VKQK6GrAgnSedKubN1GJ74EJiOvO+D1qBMryl0E/OvRuT9VIvJGI8AoIkLKCcyzheiZovViBIIgNiEXIROFODnoWZPtHFW8GXMBah/GLniHsgSOIDYhHKLHx2WIFOpMe53SUgFqHz6LUC0VA2nWak4yWMhvLoNxd974FoKIOus9D9JpqG5up9/Ec8C6OhWQYc+bDfSHyLdzNGGnbSjguoIqMBRi75owMqNNTT+LuFCQFVZBRr1o3mtICuKEk09znK/IBuEVOjPE9scwUEO7wbDwkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBATJf3UmsA2PM1wjAAAAAElFTkSuQmCC" alt="PE app icon"><div><h1>Physical Education EA Practice</h1><small>QCAA Unit 4 practice · v1</small></div></div><div class="top-actions"><button class="btn" id="homeBtn">Home</button><button class="btn" id="scenarioTopBtn">Generated stimulus</button><button class="btn" id="progressBtn">Progress</button><button class="btn hidden" id="installBtn">Install app</button></div></header>
 <div class="layout"><aside class="side">
@@ -100,4 +108,7 @@ Southport State High School is listed as the creator's professional affiliation 
   <details><summary>About / reuse</summary><div class="dk-attribution-more">Shared free for educational use. Please retain this attribution when redistributing the resource. Southport State High School is listed as the creator's professional affiliation only; no endorsement by the school is implied.</div></details>
 </footer>
 
+
+<a class="qraa-back-to-hub" href="./index.html" aria-label="Back to all QCAA Revision Apps" title="Back to all QCAA Revision Apps">&#8592; All revision apps</a>
+<!-- /QCAA Revision Apps: back-to-hub control -->
 </body></html>
