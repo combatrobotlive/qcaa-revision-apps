@@ -1,0 +1,17 @@
+GITHUB PAGES UPDATE — COMPLETE QCAA GENERAL COLLECTION
+
+The easiest update from your current site:
+1. Unzip QCAA_Revision_Apps_Complete_Update_Patch.zip.
+2. In the qcaa-revision-apps GitHub repository, choose Add file > Upload files.
+3. Drag every file from the unzipped patch into the repository root.
+4. Existing index.html will be replaced; the subject apps will be added. Japanese is included again for safety and can simply overwrite the existing copy.
+5. Commit with a message such as: Complete QCAA General subject collection
+6. GitHub Pages will redeploy automatically. No Pages settings need to change.
+
+After deployment, the landing page should show:
+- 45 QCAA subject/unit apps
+- 41 standard (non-Extension) General subjects covered
+- 1 NSW HSC Engineering bonus app
+- 46 app cards total when All is selected
+
+The full website ZIP is also provided as a clean master copy.
