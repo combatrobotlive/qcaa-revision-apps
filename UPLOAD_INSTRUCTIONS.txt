@@ -1,0 +1,18 @@
+INTERSTATE ENGINEERING WEBSITE UPDATE
+
+This patch is intended for the existing qcaa-revision-apps GitHub Pages repository after the complete QCAA General-subject update.
+
+Upload all files in this folder to the repository root using Add file > Upload files.
+- index.html replaces the current landing page.
+- the seven interstate Engineering HTML files are added/replaced.
+
+Suggested commit message:
+Add Engineering around Australia section
+
+The new landing page keeps the Queensland QCAA collection as the main section and adds a visually separate “Engineering around Australia” section for NSW, VIC, WA, ACT, TAS, SA and NT.
+
+Expected counts on the landing page:
+- 41 standard QCAA General subjects
+- 45 Queensland QCAA app files
+- 7 interstate Engineering apps
+- 52 app cards total
