@@ -1,0 +1,23 @@
+QCAA PRACTICE APPS — PUBLIC ATTRIBUTED RELEASE
+
+Creator
+Daniel Kerrison
+Engineering Teacher, Southport State High School
+
+AI-assisted development
+ChattyJeeps (ChatGPT by OpenAI)
+
+Release note
+The HTML apps in this folder have had only public-release attribution added. Their existing app names, version numbers, filenames and learning functionality have otherwise been preserved.
+
+Visible attribution
+Each app now includes a small footer identifying Daniel Kerrison and the AI-assisted development. The footer includes an expandable About / reuse note.
+
+Embedded attribution
+Each HTML file also includes author, generator and rights metadata plus a source-code attribution comment.
+
+Reuse wording
+Shared free for educational use. Please retain attribution when redistributing. Southport State High School is listed as the creator's professional affiliation only; no endorsement by the school is implied.
+
+Important
+This wording is a practical attribution statement, not legal advice or a formal open-source/Creative Commons licence.
