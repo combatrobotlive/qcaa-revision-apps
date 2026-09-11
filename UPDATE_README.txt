@@ -1,27 +1,16 @@
-MAIN PAGE UPDATE — 10 September 2026
+MAIN PAGE AND V2 APP REFRESH — 11 September 2026
 
-Upload the contents of this folder into the same GitHub website folder as the existing index.html, replacing matching files. Keep all other website files, including site-shell-sw.js and engineering-australia.html.
+Upload every HTML file in this folder to the same GitHub website folder as the current index.html and replace matching files. This is an incremental update package. Keep all unlisted website files, including engineering-australia.html and site-shell-sw.js.
 
-Includes the updated index.html, six science companions, Design v2 and copies at their previous website filenames to preserve old links. Existing Engineering unit/report links and all other subjects remain in place. This is an update package, not the complete website.
+The main page now links to 15 v2/v2.1 companions:
+• General Mathematics, Mathematical Methods and Specialist Mathematics
+• Agricultural Science, Biology, Chemistry, Earth & Environmental Science, Marine Science, Physics and Psychology
+• Accounting, Aerospace Systems, Design, Digital Solutions and Food & Nutrition
 
-The main page highlights v2/v2.1 versions, includes an Updated companions filter, describes whole-course and IA features, and adds a feedback section. Agriculture remains the existing revision app. Question-bank content has not been changed or independently re-audited in this hub update.
+The eight newest upgrades are General Mathematics, Mathematical Methods, Specialist Mathematics, Agricultural Science, Accounting, Aerospace Systems, Digital Solutions and Food & Nutrition.
 
-FEEDBACK SETUP
-Create a Microsoft Form titled Senior Revision Apps — Feedback.
-Description: Help improve these free educational apps. Report an error or suggest an addition. Please do not include student names, student assessment work or private information. Contact details are optional. Not all suggestions can be implemented.
+Every upgraded app is included twice: its clearly named v2 filename and the previous website filename. The main page opens the v2 filename, while existing bookmarks and older shared links also open the upgraded version.
 
-Fields:
-1. Feedback type (required): Incorrect answer/explanation; Technical problem; Missing content; Feature suggestion; Other feedback.
-2. Subject/app (required).
-3. App version (optional).
-4. Unit/topic and question number or set code (optional).
-5. What happened, or what would you like added? (required long text).
-6. For an error: exact question wording/numbers, current answer and suggested correction/source (optional long text).
-7. Browser/device (optional; useful for technical problems).
-8. Email address for a reply (optional).
+The Updated companions filter now displays all 15 upgrades. The Microsoft Forms feedback button remains connected.
 
-Choose Collect responses > Anyone can respond, if available on your account, to allow outside-school users without sign-in. Keep the responses private. Copy the RESPONSE link, not an editing link, and send it to ChattyJeeps to connect; alternatively insert it into FEEDBACK_FORM_URL in index.html. Until connected, the page explicitly says submissions are not open and collects no data.
-
-Microsoft instructions: https://support.microsoft.com/en-us/forms/send-a-form-and-collect-responses
-
-Checks: hub JavaScript syntax, preserved subject/state inventories, changed link targets present in the package. This package has not been uploaded to the live GitHub website.
+Checks completed: main-page JavaScript syntax; 45-card QCAA inventory; 15 Updated companions; every updated link present in this package; original interstate Engineering inventory preserved.
