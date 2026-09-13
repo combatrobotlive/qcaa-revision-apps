@@ -1,16 +1,16 @@
-MAIN PAGE AND V2 APP REFRESH — 11 September 2026
+UNIT APP HUB UPDATE — 13 September 2026
 
-Upload every HTML file in this folder to the same GitHub website folder as the current index.html and replace matching files. This is an incremental update package. Keep all unlisted website files, including engineering-australia.html and site-shell-sw.js.
+Upload every file in this folder to the same GitHub Pages folder as your existing index.html, replacing matching files. Keep all unlisted files already on the website.
 
-The main page now links to 15 v2/v2.1 companions:
-• General Mathematics, Mathematical Methods and Specialist Mathematics
-• Agricultural Science, Biology, Chemistry, Earth & Environmental Science, Marine Science, Physics and Psychology
-• Accounting, Aerospace Systems, Design, Digital Solutions and Food & Nutrition
+The main page now gives students two ways into the collection:
 
-The eight newest upgrades are General Mathematics, Mathematical Methods, Specialist Mathematics, Agricultural Science, Accounting, Aerospace Systems, Digital Solutions and Food & Nutrition.
+• Open the subject’s full course companion.
+• Choose a dedicated Unit 1, 2, 3 or 4 app directly from the subject card.
 
-Every upgraded app is included twice: its clearly named v2 filename and the previous website filename. The main page opens the v2 filename, while existing bookmarks and older shared links also open the upgraded version.
+The new Unit apps filter shows the 15 subjects with dedicated unit apps:
 
-The Updated companions filter now displays all 15 upgrades. The Microsoft Forms feedback button remains connected.
+General Mathematics; Mathematical Methods; Specialist Mathematics; Agricultural Science; Earth & Environmental Science; Marine Science; Food & Nutrition; Economics; Geography; Legal Studies; Ancient History; Modern History; Philosophy & Reason; Aboriginal & Torres Strait Islander Studies; and Literature.
 
-Checks completed: main-page JavaScript syntax; 45-card QCAA inventory; 15 Updated companions; every updated link present in this package; original interstate Engineering inventory preserved.
+This package includes 53 dedicated Unit 1–4 apps, the current Engineering Unit 1–4 pathway, the 15 existing course companions and the updated main page. The Microsoft Forms feedback button remains connected.
+
+Checks completed: 45 QCAA subject cards; 53 unit links across 15 subjects; all unit links present in this package; Unit apps filter; normal search/filter rendering; and current Engineering links.
