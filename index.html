@@ -51,7 +51,14 @@ if(b)b.addEventListener('click',()=>{try{const data={format:'SeniorRevisionAppsS
     "Modern History":[["Unit 1","Modern_History_Unit_1_V2.html"],["Unit 2","Modern_History_Unit_2_V2.html"],["Unit 3","Modern_History_Unit_3_V2.html"]],
     "Philosophy & Reason":[["Unit 1","Philosophy_Reason_QCAA_Unit_1_Fundamentals_of_Reason_Revision_App_v2_Standalone.html"],["Unit 2","Philosophy_Reason_QCAA_Unit_2_Reason_in_Philosophy_Revision_App_v2_Standalone.html"],["Unit 3","Philosophy_Reason_QCAA_Unit_3_Moral_Philosophy_and_Schools_of_Thought_Revision_App_v2_Standalone.html"]],
     "Aboriginal & Torres Strait Islander Studies":[["Unit 1","Aboriginal_and_Torres_Strait_Islander_Studies_Unit_1_Revision_App_v2.html"],["Unit 2","Aboriginal_and_Torres_Strait_Islander_Studies_Unit_2_Revision_App_v2.html"],["Unit 3","Aboriginal_and_Torres_Strait_Islander_Studies_Unit_3_Revision_App_v2.html"]],
-    "Literature":[["Unit 1","Literature_Unit_1_Introduction_to_Literary_Studies_Revision_App_v2.html"],["Unit 2","Literature_Unit_2_Intertextuality_Revision_App_v2.html"],["Unit 3","Literature_Unit_3_Literature_and_Identity_Revision_App_v2.html"]]
+    "Literature":[["Unit 1","Literature_Unit_1_Introduction_to_Literary_Studies_Revision_App_v2.html"],["Unit 2","Literature_Unit_2_Intertextuality_Revision_App_v2.html"],["Unit 3","Literature_Unit_3_Literature_and_Identity_Revision_App_v2.html"]],
+    "Physics":[["Unit 1","Physics_QCAA_Unit1_Practice_App_v1_Standalone.html"],["Unit 2","Physics_QCAA_Unit2_Practice_App_v1_Standalone.html"],["Unit 3","Physics_QCAA_Unit3_Practice_App_v1_Standalone.html"],["Unit 4","Physics_QCAA_Unit4_Practice_App_v2_2_Standalone.html"]],
+    "Chemistry":[["Unit 1","Chemistry_Unit1_Revision_App_v2_Standalone.html"],["Unit 2","Chemistry_Unit2_Revision_App_v2_Standalone.html"],["Unit 3","Chemistry_Unit3_Revision_App_v2_Standalone.html"],["Unit 4","Chemistry_Unit4_Revision_App_v2_Standalone.html"]],
+    "Biology":[["Unit 1","Biology_QCAA_Unit1_Revision_App_v2_Standalone.html"],["Unit 2","Biology_QCAA_Unit2_Revision_App_v2_Standalone.html"],["Unit 3","Biology_QCAA_Unit3_Revision_App_v2_Standalone.html"],["Unit 4","Biology_QCAA_Unit4_Revision_App_v2_1_Standalone.html"]],
+    "Psychology":[["Unit 1","Psychology_Unit1_QCAA_Revision_App_v2_Standalone.html"],["Unit 2","Psychology_Unit2_QCAA_Revision_App_v2_Standalone.html"],["Unit 3","Psychology_Unit3_QCAA_Revision_App_v2_Standalone.html"],["Unit 4","Psychology_QCAA_Unit4_Revision_App_v2_1_Standalone.html"]],
+    "Business":[["Unit 1","Business_QCAA_Unit_1_Revision_App_v2_No_AI.html"],["Unit 2","Business_QCAA_Unit_2_Revision_App_v2_No_AI.html"],["Unit 3","Business_QCAA_Unit_3_Revision_App_v2_No_AI.html"]],
+    "Study of Religion":[["Unit 1","Study_of_Religion_Unit_1_Revision_App_v2.html"],["Unit 2","Study_of_Religion_Unit_2_Revision_App_v2.html"],["Unit 3","Study_of_Religion_Unit_3_Revision_App_v2.html"]],
+    "English":[["Unit 1","English_QCAA_Unit_1_Revision_App_v2_Standalone.html"],["Unit 2","English_QCAA_Unit_2_Revision_App_v2_Standalone.html"],["Unit 3","English_QCAA_Unit_3_Revision_App_v2_Standalone.html"],["Unit 4","English_QCAA_Unit_4_Revision_App_v2_Standalone.html"]]
   };
   QCAA.forEach(function(app){
     if(UNIT_APPS[app.name]) app.units=UNIT_APPS[app.name].map(function(unit){return {label:unit[0],file:unit[1]};});
@@ -84,15 +91,15 @@ if(b)b.addEventListener('click',()=>{try{const data={format:'SeniorRevisionAppsS
   };
   $("search").oninput=function(){render();};
   document.querySelector(".hero h1").textContent="A study hub for every QCAA General subject.";
-  document.querySelector(".hero p").textContent="Open a full course companion or choose a dedicated Unit 1–4 app for the subjects that now have them. The unit-app collection covers 15 subjects, while every subject still has a main revision app.";
+  document.querySelector(".hero p").textContent="Open a full course companion or go straight to the relevant unit where a subject has dedicated unit apps. The unit-app collection now covers 22 subjects, while every subject still has a main revision app.";
   var stats=document.querySelectorAll(".stat");
-  if(stats.length>3){stats[1].innerHTML="<b>53</b><span>dedicated Unit 1–4 apps</span>";stats[3].innerHTML="<b>15</b><span>upgraded v2 companions</span>";}
+  if(stats.length>3){stats[1].innerHTML="<b>79</b><span>dedicated unit apps</span>";stats[3].innerHTML="<b>15</b><span>upgraded v2 companions</span>";}
   var strip=document.querySelector(".site-v2-inner");
-  if(strip){strip.querySelector("b").textContent="Updated 13 September 2026";strip.querySelector("span").textContent="Fifty-three Unit 1–4 apps are now available across 15 subjects. Use the Unit apps filter, or choose a unit directly from a subject card.";}
+  if(strip){strip.querySelector("b").textContent="Updated 13 September 2026";strip.querySelector("span").textContent="Seventy-nine dedicated unit apps are now available across 22 subjects. Use the Unit apps filter, or choose a unit directly from a subject card.";}
   var intro=document.querySelector("#queensland .section-head p");
-  if(intro)intro.textContent="Each subject has a main revision app. Fifteen subjects also have dedicated unit apps, so students can go directly to the part of the course they are studying.";
+  if(intro)intro.textContent="Each subject has a main revision app. Twenty-two subjects also have dedicated unit apps, so students can go directly to the part of the course they are studying.";
   var about=document.querySelector(".about-card p");
-  if(about)about.textContent="Fifteen subjects now include dedicated Unit 1–4 apps, alongside their main course companions. The hub keeps those choices together while Engineering retains its separate unit and report pathways.";
+  if(about)about.textContent="Twenty-two subjects now include dedicated unit apps, alongside their main course companions. The hub keeps those choices together while Engineering retains its separate unit and report pathways.";
   render();
 })();
 </script><script>
