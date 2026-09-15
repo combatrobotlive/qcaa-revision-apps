@@ -39,4 +39,29 @@ function renderTeacher(){$('teacherCode').value=state.session.length?code():'';$
 function renderProgress(){let attempted=APP.questions.filter(q=>state.attempts[q.title]).length,needs=APP.questions.filter(q=>state.needs[q.title]).length;$('stats').innerHTML='<div class="metric"><b>'+attempted+'</b><span>families attempted</span></div><div class="metric"><b>'+(APP.questions.length-attempted)+'</b><span>not yet attempted</span></div><div class="metric"><b>'+needs+'</b><span>needs revision</span></div>';$('progressRows').innerHTML=APP.topics.map(t=>{let a=APP.questions.filter(q=>q.area===t[0]),d=a.filter(q=>state.attempts[q.title]).length,p=a.length?Math.round(100*d/a.length):0;return '<div class="barrow"><b>'+esc(t[0])+'</b><div class="bar"><i style="width:'+p+'%"></i></div><span>'+d+'/'+a.length+'</span></div>'}).join('')}
 function renderReference(){$('referenceCards').innerHTML=APP.reference.map(r=>'<article class="card"><h3>'+esc(r[0])+'</h3><p>'+esc(r[1])+'</p></article>').join('');$('terms').innerHTML=APP.terms.map(t=>'<div class="term"><b>'+esc(t[0])+'</b><span>'+esc(t[1])+'</span></div>').join('')}
 function bind(){document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>show(b.dataset.view));['area','kind','difficulty','search','unattempted','needs'].forEach(id=>{$(id).oninput=$(id).onchange=poolText});$('random').onclick=()=>{let p=pool();if(!p.length)return toast('No questions match those filters.');let q=p[Math.floor(Math.random()*p.length)];begin([{title:q.title,seed:uid()}],'Random practice')};$('set8').onclick=()=>pickSet(8);$('start').onclick=$('random').onclick;$('previous').onclick=()=>{if(state.index>0){state.index--;renderQuestion()}};$('next').onclick=()=>{if(state.index<state.session.length-1){state.index++;renderQuestion()}};$('newVariant').onclick=()=>{if(state.session.length){state.session[state.index].seed=uid();save();renderQuestion()}};$('toggleNeed').onclick=()=>{let q=current();if(q){state.needs[q.title]=!state.needs[q.title];save();toast(state.needs[q.title]?'Marked for revision':'Revision flag cleared')}};$('printSet').onclick=()=>window.print();$('openCode').onclick=openCode;$('copyCode').onclick=()=>{if(!state.session.length)return toast('Build a set first.');let c=code();$('setcode').value=c;navigator.clipboard?.writeText(c);state.saved.unshift({name:state.name,code:c});state.saved=state.saved.slice(0,12);save();toast('Set code copied')};$('makeClass').onclick=()=>{pickSet(8);let c=code();state.saved.unshift({name:'Class set '+new Date().toLocaleDateString(),code:c});state.saved=state.saved.slice(0,12);save();$('teacherCode').value=c;show('teacher')};$('copyTeacher').onclick=()=>{if(!$('teacherCode').value)return toast('Generate a class set first.');navigator.clipboard?.writeText($('teacherCode').value);toast('Class code copied')};$('diagnose').onclick=()=>{let bad=APP.questions.filter(q=>!q.title||!q.area||!['choice','written'].includes(q.kind)||!Array.isArray(q.variants)||q.variants.length!==3||!APP.topics.some(t=>t[0]===q.area));let keys=APP.storageKey.includes('unit-'+APP.unit);$('diag').textContent=bad.length?'Check failed for: '+bad.map(q=>q.title||'?').join(', '):('Passed: Unit '+APP.unit+' only, '+APP.questions.length+' families, three versions per family, isolated storage '+(keys?'confirmed.':'key needs review.'))};$('exportProgress').onclick=()=>{let a=document.createElement('a'),b=new Blob([JSON.stringify({unit:APP.unit,key:APP.storageKey,state},null,2)],{type:'application/json'});a.href=URL.createObjectURL(b);a.download='Visual_Art_Unit_'+APP.unit+'_progress.json';a.click()};$('importProgress').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(x.unit!==APP.unit||x.key!==APP.storageKey)throw Error();state={...state,...x.state};save();toast('Progress imported')}catch(err){toast('That progress file belongs to a different app or is invalid.')}};r.readAsText(f)};$('clearProgress').onclick=()=>{if(confirm('Clear only Visual Art Unit '+APP.unit+' progress in this browser?')){state={attempts:{},needs:{},drafts:{},saved:[],session:[],index:0,name:'Practice'};save();toast('Unit progress cleared')}};$('exportPlan').onclick=()=>{let t='Visual Art Unit '+APP.unit+' planning notes\n\n'+$('planNotes').value,a=document.createElement('a'),b=new Blob([t],{type:'text/plain'});a.href=URL.createObjectURL(b);a.download='Visual_Art_Unit_'+APP.unit+'_planning_notes.txt';a.click()}}
-renderTopics();bind();poolText();renderProgress();show('home');})();</script></body></html>
+renderTopics();bind();poolText();renderProgress();show('home');})();</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Visual Art — Unit 4",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

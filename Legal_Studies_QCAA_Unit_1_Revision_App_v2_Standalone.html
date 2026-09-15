@@ -68,4 +68,29 @@ function shuffle(q,v){let a=q[7].map((x,i)=>({x,i})),z=h(q[0]+v);for(let i=a.len
 function filtered(){let t=$('#topic').value,k=$('#kind').value,l=$('#level').value,s=$('#find').value.toLowerCase();return Q.filter(q=>(!t||q[1]===t)&&(!k||q[5]===k)&&(!l||q[4]===l)&&(!s||(q[2]+' '+(q[5]==='mc'?q[9]:q[8])+' '+CFG.topics[q[1]].name).toLowerCase().includes(s))&&(!$('#unattempted').checked||!state.progress[q[0]]?.count)&&(!$('#needs').checked||state.progress[q[0]]?.rating==='needs'))}
 function renderQuestion(){let r=session[pos],q=fam(r.id),p=q[6],prompt=p[['A','B','C'].indexOf(r.v)];$('#position').textContent=`${pos+1} / ${session.length}`;$('#qid').textContent=`${q[0]} · Variant ${r.v}`;$('#qname').textContent=q[2];$('#chips').innerHTML=[CFG.topics[q[1]].name,q[5]==='mc'?'Multiple choice':'Written response',q[3]+' mark'+(q[3]===1?'':'s'),q[4]].map(x=>`<span class="chip">${esc(x)}</span>`).join('');$('#prompt').textContent=prompt;selected=null;let area=$('#answerArea');if(q[5]==='mc'){let sh=shuffle(q,r.v);area.innerHTML=`<div class="options">${sh.a.map((o,i)=>`<button class="option" data-i="${i}"><b>${String.fromCharCode(65+i)}.</b> ${esc(o.x)}</button>`).join('')}</div><button id="checkMC" class="btn primary">Check selected answer</button>`;$$('.option').forEach(b=>b.onclick=()=>{$$('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selected=Number(b.dataset.i)});$('#checkMC').onclick=()=>{if(selected===null)return toast('Choose an answer first');$$('.option').forEach((b,i)=>{b.classList.toggle('correct',i===sh.correct);b.classList.toggle('wrong',i===selected&&i!==sh.correct)});mark(selected===sh.correct?'got':'needs')}}else{let old=state.progress[q[0]]?.draft||'';area.innerHTML=`<label for="writtenAnswer">Your response</label><textarea id="writtenAnswer" placeholder="Write before opening the answer guide…"></textarea>`;$('#writtenAnswer').value=old;$('#writtenAnswer').oninput=e=>{state.progress[q[0]]={...(state.progress[q[0]]||{}),draft:e.target.value};save()}}$('#guide').classList.add('hidden');$('#guide').innerHTML=`<h3>Answer guide</h3><div>${esc(q[5]==='mc'?q[9]:q[8])}</div>`;$('#previous').disabled=pos===0;$('#next').textContent=pos===session.length-1?'Finish set':'Next →';}
 })();
-</script><script>(()=>{const by=s=>document.querySelector(s);const oldView=window.__legalView;function runBankCheck(){try{const script=[...document.scripts].map(x=>x.textContent).find(x=>x.includes('const Q='));const m=script&&script.match(/const Q=(.*?);\nconst \$/s);const bank=m?new Function('return ('+m[1]+')')():[];const ids=new Set(),bad=[];bank.forEach(q=>{if(ids.has(q[0]))bad.push('duplicate '+q[0]);ids.add(q[0]);if(!Array.isArray(q[6])||q[6].length!==3||!q[9])bad.push(q[0]);if(q[5]==='mc'&&(!Array.isArray(q[7])||q[8]<0||q[8]>=q[7].length))bad.push(q[0])});by('#teacherCheck').textContent=bad.length?'Check failed: '+bad.join(', '):'Passed: '+bank.length+' question families · '+(bank.length*3)+' generated A/B/C variants.'}catch(e){by('#teacherCheck').textContent='Check unavailable in this browser.'}}by('#teacherBuild').onclick=()=>by('#make10').click();by('#teacherProgress').onclick=()=>by('[data-view="progress"]').click();by('#runCheck').onclick=runBankCheck;})();</script></body></html>
+</script><script>(()=>{const by=s=>document.querySelector(s);const oldView=window.__legalView;function runBankCheck(){try{const script=[...document.scripts].map(x=>x.textContent).find(x=>x.includes('const Q='));const m=script&&script.match(/const Q=(.*?);\nconst \$/s);const bank=m?new Function('return ('+m[1]+')')():[];const ids=new Set(),bad=[];bank.forEach(q=>{if(ids.has(q[0]))bad.push('duplicate '+q[0]);ids.add(q[0]);if(!Array.isArray(q[6])||q[6].length!==3||!q[9])bad.push(q[0]);if(q[5]==='mc'&&(!Array.isArray(q[7])||q[8]<0||q[8]>=q[7].length))bad.push(q[0])});by('#teacherCheck').textContent=bad.length?'Check failed: '+bad.join(', '):'Passed: '+bank.length+' question families · '+(bank.length*3)+' generated A/B/C variants.'}catch(e){by('#teacherCheck').textContent='Check unavailable in this browser.'}}by('#teacherBuild').onclick=()=>by('#make10').click();by('#teacherProgress').onclick=()=>by('[data-view="progress"]').click();by('#runCheck').onclick=runBankCheck;})();</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Legal Studies — Unit 1",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

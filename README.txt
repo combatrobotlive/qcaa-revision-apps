@@ -1,48 +1,80 @@
-Senior Revision Apps — uniform Unit 1–4 release
+Senior Revision Apps — Unit 1–4 collection with GoatCounter analytics
 Prepared: 15 September 2026
 
-This release contains exactly:
-• 1 updated main page (index.html)
-• 164 current standalone unit apps (41 QCAA General subjects × 4 units)
+This package contains exactly 166 files:
+- 1 main page (index.html)
+- 164 standalone unit apps (41 QCAA General subjects x 4 units)
+- This README.txt
 
-The ZIP contains 166 files in total because it also includes this short guide.
-It deliberately excludes old combined course companions, duplicate app versions,
-preview images and earlier subject ZIPs.
+Your GoatCounter dashboard:
+https://qcaa-revision-apps.goatcounter.com/
 
-Publishing:
-1. Extract the ZIP.
-2. Upload every HTML file to the same root folder as the existing GitHub Pages site.
-3. Allow index.html and matching unit-app filenames to replace the existing versions.
-4. Keep existing files that are not in this release, including
-   engineering-australia.html, the seven interstate Engineering apps, and
-   Engineering_Report_Guidance_App_v1_2_Standalone.html.
-5. Wait for the site deployment to finish, then hard-refresh the main page.
+Publishing and starting the counts:
+1. Verify your email using the message from GoatCounter.
+2. Extract this ZIP.
+3. Upload all 165 HTML files to the same root folder as your existing GitHub
+   Pages site, replacing the matching filenames.
+4. Keep existing files outside this package, including engineering-australia.html,
+   the interstate Engineering apps and Engineering_Report_Guidance_App_v1_2_Standalone.html.
+5. Wait for the GitHub Pages deployment to finish, then refresh the live homepage
+   and open a unit app. Refresh your GoatCounter dashboard to check for visits.
 
-This is a QCAA unit-app update for the existing site, not a replacement for the
-entire site folder. Do not delete the existing site files. The report guidance
-and interstate resources remain linked but are not repackaged in this update.
-No live website has been published by preparing this ZIP.
+This package has been prepared for upload; no live site was changed here.
+Counts begin after the instrumented pages are published and opened. Earlier
+visits cannot be reconstructed by this update. Tracking blockers and restricted
+school networks may prevent visits from being recorded. Page-visit counts are
+usage estimates, not an exact headcount of individual students.
 
-The new main page shows Engineering prominently at the top and gives all 41
-QCAA General subjects the same four direct buttons: Unit 1, Unit 2, Unit 3 and Unit 4.
-Engineering also appears in the searchable subject list. Report guidance is a
-separate supporting link, not an extra unit. The existing feedback form remains.
+What the update does:
+- Adds one analytics loader to the homepage and each of the 164 QCAA unit apps.
+- Uses the same qcaa-revision-apps GoatCounter account throughout.
+- Gives every app a readable Subject — Unit N label in the dashboard.
+- Counts page visits only; it adds no answer, score, progress or button events.
+- Excludes query strings and fragments from the recorded page address.
+- Reduces referring-page URLs to their website origin.
+- Allows visits when an online app is embedded in a frame, such as QLearn.
+- Skips the analytics loader when a downloaded HTML file is opened locally.
+- Loads the counter asynchronously; practice features do not depend on it.
+
+The question banks, marking, saved-progress keys and unit navigation have not
+been changed. A usage-statistics note has been added to the homepage footer.
+The four German apps' speech note now specifies that no external speech API is
+called, so it does not incorrectly describe the whole app as making no external
+requests after this analytics addition.
+
+Scope:
+All 41 subjects still have four separate Unit 1–4 apps. Engineering stays featured
+and the existing feedback form, report-guidance link and interstate links remain.
+Report guidance and interstate resources are not included in this package and
+have not had analytics added by this update.
 
 Filename handling:
-Some supplied filenames contained spaces or literal %20 text. The deployment
-copies use safe underscores, and the homepage matches those exact filenames.
-The English General deployment copies use the English_QCAA_Unit_1... naming
-pattern. Engineering keeps its existing versioned filenames.
-Upload the HTML files together from this package; do not mix its homepage with
-older filenames. The contents of all 164 subject apps are unchanged.
+Use all the HTML files from this ZIP together. Deployment filenames containing
+spaces or literal %20 text were normalised to underscores in the earlier hub
+update. Engineering keeps its existing versioned filenames. This package uses
+exactly the same filenames as that update.
+
+Future updates in your separate subject chats:
+Add this instruction to your prompt:
+"Preserve the existing app-usage-analytics script in every unit app. Use the
+GoatCounter endpoint https://qcaa-revision-apps.goatcounter.com/count, with a
+clear Subject — Unit N title. Count page visits only, exclude query strings and
+fragments, retain origin-only referrers, allow online iframe visits, and skip
+tracking when the HTML is opened as a local file. Do not send answers, scores
+or saved progress. Keep each app fully usable if analytics is unavailable."
 
 Checks completed:
-- 41 subjects, each with exactly four separate unit targets.
-- All 164 unit links served successfully in local tests.
-- Every unit title matches its unit number.
-- All 219 embedded app scripts parse successfully.
-- Homepage search, category/state filters and backup logic tested.
-- Feedback, report guidance and interstate links retained.
-- No visual browser preview: this session blocks local preview URLs.
+- Exactly one analytics loader in each of the 165 HTML pages.
+- Correct account endpoint, subject/unit labels and asynchronous script loading.
+- Local-file skip, query/fragment exclusion and referrer handling checked in
+  isolated JavaScript runs without sending visits to the real dashboard.
+- Existing page content compared with the previous package, allowing only the
+  analytics additions, homepage notice, German speech-note correction and
+  trailing-newline differences.
+- All 164 unit-app links still match files included in this package.
 
-This was a homepage/link update, not a fresh syllabus or question-bank audit.
+Live receipt of analytics must be checked after deployment. No visual browser
+preview was available in this session, and this update is not a syllabus audit.
+
+GoatCounter setup documentation: https://www.goatcounter.com/help/start
+JavaScript settings: https://www.goatcounter.com/help/js

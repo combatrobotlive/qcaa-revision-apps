@@ -47,4 +47,29 @@ function renderTeacher(){let ids=state.teacher||[];$('teacherSummary').textConte
 function addTeacher(n){let existing=new Set(state.teacher||[]),p=shuffle(filtered()).filter(q=>!existing.has(q.id)).slice(0,n);state.teacher=(state.teacher||[]).concat(p.map(q=>q.id));save();renderTeacher();toast(p.length+' added.')}
 function runDiag(){let ids=BANK.map(q=>q.id),dups=ids.filter((x,i)=>ids.indexOf(x)!==i),badVar=BANK.filter(q=>!['A','B','C'].includes(q.variant)),badTopic=BANK.filter(q=>!APP.topics.includes(q.topic)),badNum=BANK.filter(q=>q.type==='numeric'&&(!Number.isFinite(q.value)||!Number.isFinite(q.tol))),families=unique(BANK.map(q=>q.family)),badFam=families.filter(f=>BANK.filter(q=>q.family===f).length!==3);let problems=dups.length+badVar.length+badTopic.length+badNum.length+badFam.length;$('diagnostic').innerHTML=problems?'<b class="status-bad">Check failed.</b> '+problems+' issue(s) found.':'<b class="status-good">Bank check passed.</b> '+BANK.length+' question versions, '+families.length+' families, all A/B/C variants, valid topics and numerical targets.'}
 $$('.nav').forEach(b=>b.onclick=()=>go(b.dataset.view));['topic','kind','variant','fresh','needs'].forEach(id=>$(id).onchange=updateCount);$('find').oninput=updateCount;$('random').onclick=randomQ;$('set10').onclick=()=>buildSet(10);$('begin').onclick=randomQ;$('homeData').onclick=()=>go('data');$('check').onclick=check;$('markOk').onclick=()=>markNeed(false);$('markNeed').onclick=()=>markNeed(true);$('previous').onclick=()=>{if(session.length){index=(index-1+session.length)%session.length;renderQuestion()}};$('next').onclick=()=>{if(session.length){index=(index+1)%session.length;renderQuestion()}};$('change').onclick=()=>{if(!current)return;let siblings=BANK.filter(q=>q.family===current.family&&q.id!==current.id),q=siblings[Math.floor(Math.random()*siblings.length)];session[index]=q;renderQuestion()};$('copy').onclick=()=>{if(!session.length)return toast('Open a set first.');copyText(encode(session.map(q=>typeof q==='string'?q:q.id)))};$('open').onclick=()=>{try{start(decode($('code').value.trim()),'Exact practice set')}catch(e){toast(e.message)}};$('add5').onclick=()=>addTeacher(5);$('add10').onclick=()=>addTeacher(10);$('clearSet').onclick=()=>{state.teacher=[];save();renderTeacher()};$('openTeacherSet').onclick=()=>{if(!(state.teacher||[]).length)return toast('Teacher set is empty.');start(state.teacher,'Teacher exact set')};$('teacherCode').onclick=e=>e.target.select();$('runDiag').onclick=runDiag;$('export').onclick=()=>{let blob=new Blob([JSON.stringify({app:'Physical Education Unit '+APP.unit,version:'v2',key:KEY,state:state},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Physical_Education_Unit_'+APP.unit+'_progress.json';a.click();URL.revokeObjectURL(a.href)};$('import').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let o=JSON.parse(r.result);if(o.key!==KEY)throw Error('This backup belongs to another app or unit.');state=o.state||state;save();renderTeacher();toast('Progress imported.')}catch(err){toast(err.message)}};r.readAsText(f)};$('clear').onclick=()=>{if(confirm('Clear only this Unit '+APP.unit+' progress?')){state={attempts:{},needs:{},teacher:[]};save();renderTeacher();updateCount();toast('This unit progress was cleared.')}};
-let ea=$('eaSet');if(ea)ea.onclick=buildEA;fillTopics();renderStatic();renderProgress();renderTeacher();updateCount();go('home');window.__PE_APP_TEST__={APP,BANK,filtered,runDiag,KEY};</script></body></html>
+let ea=$('eaSet');if(ea)ea.onclick=buildEA;fillTopics();renderStatic();renderProgress();renderTeacher();updateCount();go('home');window.__PE_APP_TEST__={APP,BANK,filtered,runDiag,KEY};</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Physical Education — Unit 4",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

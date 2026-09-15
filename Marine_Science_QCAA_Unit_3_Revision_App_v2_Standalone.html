@@ -25,4 +25,29 @@ function exportState(){let b=new Blob([JSON.stringify(state,null,2)],{type:"appl
 function importState(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{state={...state,...JSON.parse(r.result)};save();location.reload()}catch(x){note("Progress file could not be imported.")}};r.readAsText(f)}
 function note(s){let x=$("toast");x.textContent=s;x.className="toast";clearTimeout(x.t);x.t=setTimeout(()=>x.className="hidden",1600)}
 function init(){refresh();cards();progress();teacher();document.querySelectorAll(".nav").forEach(x=>x.onclick=()=>go(x.dataset.view));$("brand").onclick=e=>{e.preventDefault();go("home")};$("topic").onchange=refresh;["variant","find","fresh","needs"].forEach(id=>{let x=$(id);x.oninput=x.onchange=refresh});$("random").onclick=random;$("set10").onclick=set10;$("begin").onclick=random;$("previous").onclick=()=>{if(state.at){state.at--;show()}};$("next").onclick=()=>{if(state.at<state.session.length-1){state.at++;show()}else note("End of set.")};$("change").onclick=()=>{let x=state.session[state.at];if(!x)return;let vs=["A","B","C"].filter(v=>v!==x.v);x.v=vs[Math.floor(Math.random()*vs.length)];show()};$("check").onclick=check;$("open").onclick=openCode;$("copy").onclick=copyCode;$("export").onclick=exportState;$("import").onchange=importState;$("clear").onclick=()=>{if(confirm("Clear only this unit’s Marine Science progress?")){localStorage.removeItem(DATA.store);location.reload()}};$("run").onclick=diagnostic;if(DATA.exam){$("buildExam").onclick=exam;exam()}}
-document.addEventListener("DOMContentLoaded",init);</script></body></html>
+document.addEventListener("DOMContentLoaded",init);</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Marine Science — Unit 3",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

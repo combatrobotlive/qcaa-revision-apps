@@ -53,4 +53,29 @@ $('#timerReset').onclick=()=>{clearInterval(timer);timer=null;secs=0;timerText()
 $('#unitFilter').addEventListener('change',()=>{let qs=BANK.filter(q=>!$('#unitFilter').value||q.unit===$('#unitFilter').value);fill($('#topicFilter'),unique(qs.map(q=>q.topic)),'Any topic');fill($('#sectionFilter'),unique(qs.map(q=>q.section)),'Any subtopic');updatePool()});
 $('#topicFilter').addEventListener('change',()=>{let qs=BANK.filter(q=>(!$('#unitFilter').value||q.unit===$('#unitFilter').value)&&(!$('#topicFilter').value||q.topic===$('#topicFilter').value));fill($('#sectionFilter'),unique(qs.map(q=>q.section)),'Any subtopic');updatePool()});
 $('#clearFilters').onclick=()=>{['unitFilter','topicFilter','sectionFilter','techFilter','diffFilter','typeFilter','searchFilter'].forEach(id=>$('#'+id).value='');$('#unattempted').checked=false;fill($('#topicFilter'),unique(BANK.map(q=>q.topic)),'Any topic');fill($('#sectionFilter'),unique(BANK.map(q=>q.section)),'Any subtopic');updatePool()};
-initFilters();$('#unitFilter').value=BANK[0]?.unit||'';$('#unitFilter').disabled=true;stats();show('#welcome');window.__METHODS_TEST__={BANK,filtered,mathExpr,parseNum,startSet,courseView,formulas,checkAuto};})();</script><div id="printArea"></div></body></html>
+initFilters();$('#unitFilter').value=BANK[0]?.unit||'';$('#unitFilter').disabled=true;stats();show('#welcome');window.__METHODS_TEST__={BANK,filtered,mathExpr,parseNum,startSet,courseView,formulas,checkAuto};})();</script><div id="printArea"></div><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Mathematical Methods — Unit 1",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

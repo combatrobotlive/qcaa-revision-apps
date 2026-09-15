@@ -37,4 +37,29 @@ function bindCommon(){document.querySelectorAll('[data-view]').forEach(b=>b.oncl
 
 
 function renderReference(){let by={};for(const f of FAMILIES){(by[f.topic]??=[]).push(CONCEPTS[f.concept].title)}for(const k in by)by[k]=[...new Set(by[k])];$('topicReference').innerHTML=Object.entries(by).map(([t,cs])=>`<article class="topic-card"><div class="eyebrow">UNIT ${UNIT_NO}</div><h3>${esc(t)}</h3><div class="concept-list">${cs.map(c=>`<span class="pill">${esc(c)}</span>`).join('')}</div></article>`).join('')}
-function bind(){bindCommon()}function init(){refreshTopics();renderReference();bind();pScenario();renderProgress();renderTeacher()}document.addEventListener('DOMContentLoaded',init);})();</script></body></html>
+function bind(){bindCommon()}function init(){refreshTopics();renderReference();bind();pScenario();renderProgress();renderTeacher()}document.addEventListener('DOMContentLoaded',init);})();</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Psychology — Unit 1",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

@@ -42,4 +42,29 @@ function buildEASet(seed=uid()){let r=rnd(seed),recall=FAMILIES.filter(f=>f.mode
 
 
 function renderReference(){let by={};for(const f of FAMILIES){(by[f.topic]??=[]).push(CONCEPTS[f.concept].title)}for(const k in by)by[k]=[...new Set(by[k])];$('topicReference').innerHTML=Object.entries(by).map(([t,cs])=>`<article class="topic-card"><div class="eyebrow">UNIT ${UNIT_NO}</div><h3>${esc(t)}</h3><div class="concept-list">${cs.map(c=>`<span class="pill">${esc(c)}</span>`).join('')}</div></article>`).join('')}
-function bind(){bindCommon();$('startResearch').onclick=()=>view('research');$('startEA').onclick=()=>{view('ea');buildEASet()};$('newEA').onclick=()=>buildEASet();$('buildResRQ').onclick=buildResRQ;$('addSource').onclick=addSource;$('exportResearch').onclick=()=>download({claim:$('claimSelect').value,researchQuestion:$('resRQOut').innerText,sources:state.sources,checklist:state.resChecks},'Psychology_QCAA_Unit_4_IA3_notes.json')}function init(){refreshTopics();renderReference();bind();pScenario();renderProgress();renderTeacher();checklist('resChecklist',RES_CHECKS,'resChecks');renderSources();buildEASet('PRACT1')}document.addEventListener('DOMContentLoaded',init);})();</script></body></html>
+function bind(){bindCommon();$('startResearch').onclick=()=>view('research');$('startEA').onclick=()=>{view('ea');buildEASet()};$('newEA').onclick=()=>buildEASet();$('buildResRQ').onclick=buildResRQ;$('addSource').onclick=addSource;$('exportResearch').onclick=()=>download({claim:$('claimSelect').value,researchQuestion:$('resRQOut').innerText,sources:state.sources,checklist:state.resChecks},'Psychology_QCAA_Unit_4_IA3_notes.json')}function init(){refreshTopics();renderReference();bind();pScenario();renderProgress();renderTeacher();checklist('resChecklist',RES_CHECKS,'resChecks');renderSources();buildEASet('PRACT1')}document.addEventListener('DOMContentLoaded',init);})();</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Psychology — Unit 4",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

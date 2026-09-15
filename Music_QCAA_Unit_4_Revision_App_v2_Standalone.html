@@ -43,4 +43,29 @@ teacherCodeBtn.onclick=()=>{let seed=Math.random().toString(36).slice(2,8).toUpp
 function updateProgress(){attemptStat.textContent=Object.keys(STATE.attempts||{}).length;accuracyStat.textContent=STATE.total?Math.round(STATE.correct/STATE.total*100)+'%':'—';generatedStat.textContent=STATE.generated||0;checkStat.textContent=Object.values(STATE.checks||{}).filter(Boolean).length;let pct=Math.min(100,Math.round((Object.keys(STATE.attempts||{}).length/BANK.length*.6+Math.min(1,(STATE.total||0)/10)*.2+Math.min(1,Object.values(STATE.checks||{}).filter(Boolean).length/6)*.2)*100));overallBar.style.width=pct+'%';overallText.textContent=pct+'% practice progress'}
 resetProgress.onclick=()=>{if(confirm('Reset Unit '+UNIT+' Music progress on this browser?')){STATE={attempts:{},correct:0,total:0,generated:0,checks:{}};localStorage.removeItem(STORAGE);location.reload()}};
 newStimulus();updateProgress();console.assert(BANK.length===90,'Expected 90 question variants');
-</script></body></html>
+</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Music — Unit 4",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>
