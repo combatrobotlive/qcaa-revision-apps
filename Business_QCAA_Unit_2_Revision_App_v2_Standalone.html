@@ -56,4 +56,29 @@ function concept(){let q=CONFIG.families.slice().sort(()=>Math.random()-.5).slic
 function exportProgress(){let a=document.createElement('a'),blob=new Blob([JSON.stringify(progress,null,2)],{type:'application/json'});a.href=URL.createObjectURL(blob);a.download=CONFIG.slug+'-progress.json';a.click();URL.revokeObjectURL(a.href)}
 async function importProgress(file){try{let x=JSON.parse(await file.text());if(!x||Array.isArray(x))throw Error();progress=Object.fromEntries(Object.entries(x).filter(([id,v])=>BANK.some(q=>q.id===id)&&['got','nearly','work'].includes(v)));localStorage.setItem(progressKey,JSON.stringify(progress));updateMini();progressView()}catch(e){alert('That file is not a valid '+CONFIG.unit+' progress export.')}$('#importFile').value=''}
 function init(){options('topic',uniq(BANK.map(q=>q.topic)),'All topics');options('focus',uniq(BANK.map(q=>q.section)),'All focus areas');options('command',uniq(BANK.map(q=>q.verb)),'All command words');['topic','focus','command','search','unattempted'].forEach(id=>$('#'+id).addEventListener(id==='unattempted'?'change':'input',updateMini));$('#familyCount').textContent=CONFIG.families.length;$('#variantCount').textContent=BANK.length;$('#scenarioCount').textContent=CONFIG.scenarios.length;$('#teacherFamilies').textContent=CONFIG.families.length;$('#teacherVariants').textContent=BANK.length;$('#homeBtn').onclick=()=>show('homeView');$('#progressBtn').onclick=progressView;$('#progressSideBtn').onclick=progressView;$('#referenceBtn').onclick=reference;$('#teacherBtn').onclick=()=>show('teacherView');$('#heroReference').onclick=reference;$('#randomBtn').onclick=()=>randomQuestion();$('#heroRandom').onclick=()=>randomQuestion();$('#setBtn').onclick=()=>openSet(pool().sort(()=>Math.random()-.5).slice(0,10),'Random 10-question set');$$('[data-drill]').forEach(b=>b.onclick=()=>drill(b.dataset.drill));$('#conceptBtn').onclick=concept;$('#scenarioBtn').onclick=scenarios;$('#heroScenario').onclick=scenarios;$('#backScenarios').onclick=scenarios;$('#revealScenario').onclick=()=>$('#scenarioSolution').classList.add('show');$('#revealBtn').onclick=()=>{$('#solution').classList.add('show');$('#rating').classList.add('show')};$('#response').oninput=()=>{if(current){responses[current.id]=$('#response').value;localStorage.setItem(responseKey,JSON.stringify(responses))}};$$('[data-rate]').forEach(b=>b.onclick=()=>rate(b.dataset.rate));$('#nextBtn').onclick=()=>openQuestion(currentSet[(setIndex+1)%currentSet.length],currentSet);$('#previousBtn').onclick=()=>openQuestion(currentSet[(setIndex-1+currentSet.length)%currentSet.length],currentSet);$('#setViewBtn').onclick=()=>openSet(currentSet,'Current set');$('#copySetBtn').onclick=()=>navigator.clipboard&&navigator.clipboard.writeText($('#setCode').textContent.replace('Question IDs: ',''));$('#exportBtn').onclick=exportProgress;$('#importFile').onchange=e=>e.target.files[0]&&importProgress(e.target.files[0]);$('#resetBtn').onclick=()=>{if(confirm('Reset all saved progress for '+CONFIG.unit+'?')){progress={};localStorage.setItem(progressKey,'{}');updateMini();progressView()}};$('#printBtn').onclick=()=>window.print();updateMini();show('homeView')}init();
-</script></body></html>
+</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Business — Unit 2",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

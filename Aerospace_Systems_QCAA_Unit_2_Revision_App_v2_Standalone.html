@@ -43,4 +43,29 @@ function renderProgress(){let a=APP.questions.filter(q=>state.attempts[q.title])
 function initPlan(){let checks=['Problem and system boundaries identified','Visual relationships or feedback included','Success criteria are specific and justified','Ideas are compared using evidence','Generation, simulation or hypothetical application provides data','Evaluation addresses each criterion','Refinement is justified with evidence'];let k=KEY+'-plan',d={};try{d=JSON.parse(localStorage.getItem(k)||'{}')}catch(e){};$('checklist').innerHTML=checks.map((x,i)=>'<label class="choice"><input type="checkbox" data-check="'+i+'" '+(d[i]?'checked':'')+'>'+esc(x)+'</label>').join('');$('checklist').querySelectorAll('input').forEach(e=>e.onchange=()=>{d[e.dataset.check]=e.checked;localStorage.setItem(k,JSON.stringify(d))});$('planNotes').value=localStorage.getItem(k+'-notes')||'';$('planNotes').oninput=()=>localStorage.setItem(k+'-notes',$('planNotes').value);$('exportPlan').onclick=()=>{let txt=checks.map((x,i)=>(d[i]?'[x] ':'[ ] ')+x).join('\n')+'\n\nNotes\n'+$('planNotes').value,blob=new Blob([txt],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Aerospace_Systems_Unit_2_planning_notes.txt';a.click()}}
 function bind(){document.querySelectorAll('[data-view]').forEach(e=>e.onclick=()=>showView(e.dataset.view));['topic','kind','search','unattempted','needs'].forEach(id=>$(id).oninput=$(id).onchange=()=>{$('pool').textContent=pool().length+' matching question families'});$('random').onclick=random;$('build10').onclick=makeTen;$('start').onclick=random;$('previous').onclick=()=>{if(state.index>0){state.index--;renderQuestion()}};$('next').onclick=()=>{if(state.index<state.session.length-1){state.index++;renderQuestion()}};$('newVariant').onclick=()=>{if(state.session.length){state.session[state.index].seed=Math.random().toString(36);renderQuestion()}};$('toggleNeed').onclick=()=>{let q=state.session[state.index];if(q){state.needs[q.title]=!state.needs[q.title];save()}};$('copyCode').onclick=()=>{if(!state.session.length)return;let c=setCode();$('setcode').value=c;navigator.clipboard?.writeText(c);state.saved.push({n:state.name,c});save()};$('openCode').onclick=openCode;$('makeClass').onclick=makeTen;$('diagnose').onclick=()=>{let bad=APP.questions.filter(q=>!q.title||!q.kind||!APP.topics.some(t=>t[0]===q.topic));$('diag').textContent=bad.length?'Check failed: '+bad.map(q=>q.title).join(', '):'Passed: Unit 2; '+APP.topics.length+' topics, '+APP.questions.length+' question families and an isolated progress key.'};$('exportProgress').onclick=()=>{let a=document.createElement('a'),b=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});a.href=URL.createObjectURL(b);a.download='Aerospace_Systems_Unit_2_progress.json';a.click()};$('importProgress').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{state={...state,...JSON.parse(r.result)};save();location.reload()}catch(x){alert('Could not import that progress file.')}};r.readAsText(f)};$('clearProgress').onclick=()=>{if(confirm('Clear Unit 2 progress on this browser?')){localStorage.removeItem(KEY);location.reload()}}}
 function init(){renderTopics();renderStudy();renderProgress();bind();$('pool').textContent=APP.questions.length+' question families';if($('checklist'))initPlan()}document.addEventListener('DOMContentLoaded',init);
-})();</script></body></html>
+})();</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Aerospace Systems — Unit 2",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

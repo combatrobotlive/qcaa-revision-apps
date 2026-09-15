@@ -47,4 +47,29 @@ function renderProgress(){const attempted=Object.keys(state.attempted).filter(id
 el('exportProgress').onclick=()=>{const blob=new Blob([JSON.stringify({subject:SUBJECT,unit:UNIT.code,version:'v2',progress:state},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Chinese_'+UNIT.code+'_Revision_Progress_v2.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};el('importProgress').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(d.subject!==SUBJECT||d.unit!==UNIT.code||!d.progress)throw Error('That progress file is for a different app.');state={attempted:d.progress.attempted||{},needs:d.progress.needs||{},score:d.progress.score||{}};save();toast('Progress imported')}catch(err){toast(err.message)}};r.readAsText(f)};el('clearProgress').onclick=()=>{if(confirm('Clear progress for Chinese '+UNIT.code+' only?')){state={attempted:{},needs:{},score:{}};save();toast('This unit progress was cleared')}};
 function renderTeacher(){const byTopic=UNIT.topics.map(t=>{const fs=APP.families.filter(f=>f.topic===t.name);return '<div class="teacher-item"><span>'+esc(t.name)+'</span><b>'+fs.length+' families · '+(fs.length*3)+' versions</b></div>'}).join('');el('teacherCoverage').innerHTML=byTopic;el('teacherCode').textContent=teacherSet.length?encodeSet(teacherSet):'No set built yet.'}
 el('teacher5').onclick=()=>{teacherSet=buildSet(5,false);renderTeacher()};el('teacher10').onclick=()=>{teacherSet=buildSet(10,false);renderTeacher()};el('teacherCopy').onclick=()=>{if(!teacherSet.length)return toast('Build a teacher set first');copyText(encodeSet(teacherSet))};el('runDiag').onclick=()=>{const ids=new Set(),errors=[];Q.forEach(q=>{if(ids.has(q.id))errors.push('Duplicate '+q.id);ids.add(q.id);if(!UNIT.topics.some(t=>t.name===q.topic))errors.push('Bad topic '+q.id);['id','topic','title','skill','level','marks','stimulus','prompt','guide','response'].forEach(k=>{if(q[k]===undefined||q[k]==='')errors.push('Missing '+k+' '+q.id)})});APP.families.forEach(f=>{if(f.variants.length!==3)errors.push(f.id+' does not have A/B/C variants')});el('diag').textContent=errors.length?'Issues: '+errors.join('; '):'Pass: '+APP.families.length+' families, '+Q.length+' unique question versions, three variants per family, all topics restricted to Unit '+UNIT.num+'.'};
-load();initFilters();renderStatic();renderProgress();renderTeacher();</script></body></html>
+load();initFilters();renderStatic();renderProgress();renderTeacher();</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Chinese — Unit 2",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

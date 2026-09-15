@@ -75,4 +75,29 @@ function exportProgress(){let blob=new Blob([JSON.stringify({app:'French Unit '+
 function diagnostics(){let errors=[];for(const f of FAMILIES)for(const v of ['A','B','C']){try{let q=question({id:f.id,v,seed:'test'});if(!q.prompt||q.topic.id!==f.topic)errors.push(f.id+' '+v)}catch(e){errors.push(f.id+' '+v)}}let code=encode([{id:FAMILIES[0].id,v:'A'}],'Test');try{let x=decode(code);if(x.u!==CONFIG.unit||x.r[0].id!==FAMILIES[0].id)errors.push('code round-trip')}catch(e){errors.push('code round-trip')}$('diag').classList.remove('hidden');$('diag').textContent=errors.length?'Check failed: '+[...new Set(errors)].join(', '):'Passed: '+FAMILIES.length+' unit-only families × 3 variants, '+(FAMILIES.length*3)+' generated versions, and Unit '+CONFIG.unit+' set-code round-trip.'}
 function bind(){document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>view(b.dataset.view));['topicFilter','kindFilter','challengeFilter','variantFilter','search','unattempted','needs'].forEach(id=>{let e=$(id);e.oninput=e.onchange=renderPool});$('random').onclick=randomQ;$('make10').onclick=make10;$('start').onclick=randomQ;$('newVariant').onclick=()=>{if(!state.session.length)return;let r=state.session[state.index],vs=['A','B','C'].filter(v=>v!==r.v);state.session[state.index]={...r,v:rnd(vs),seed:uid()};save();renderCurrent()};$('saveSet').onclick=saveCurrent;$('prev').onclick=()=>{if(state.index>0){state.index--;save();renderCurrent()}};$('next').onclick=()=>{if(state.index<state.session.length-1){state.index++;save();renderCurrent()}};$('newListening').onclick=newListening;$('playListen').onclick=()=>listenRef&&speak(listenRef.q.st.text,$('listenRate').value);$('stopListen').onclick=()=>speechSynthesis.cancel();$('revealTranscript').onclick=()=>$('listenTranscript').classList.toggle('hidden');$('listenCheck').onclick=()=>{if(!listenRef)return;$('listenFeedback').innerHTML='<div class="feedback">Relevant detail: '+esc(listenRef.q.st.evidence)+'<br>Use this evidence to justify your answer rather than relying on a single translated word.</div>'};$('newPaper').onclick=()=>generatePaper(true);$('printPaper').onclick=()=>window.print();$('toggleMemo').onclick=()=>document.querySelectorAll('.memo').forEach(x=>x.classList.toggle('hidden'));$('teacherAdd5').onclick=()=>addTeacher(5);$('teacherAdd10').onclick=()=>addTeacher(10);$('teacherClear').onclick=()=>{state.teacher=[];save();renderTeacher()};$('teacherOpenBuilt').onclick=()=>{if(state.teacher.length)startSession(state.teacher.map(x=>({...x,seed:uid()})),'Teacher-built set')};$('openCodeBtn').onclick=()=>openSet($('openCode').value);$('runDiag').onclick=diagnostics;$('exportProgress').onclick=exportProgress;$('importProgress').onchange=importProgress;$('clearProgress').onclick=()=>{if(confirm('Clear progress for French Unit '+CONFIG.unit+' only?')){localStorage.removeItem(KEY);location.reload()}};$('themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem(KEY+'-theme',document.body.classList.contains('dark')?'dark':'light');$('themeBtn').textContent=document.body.classList.contains('dark')?'Light mode':'Dark mode'}}
 function init(){if(localStorage.getItem(KEY+'-theme')==='dark'){document.body.classList.add('dark');$('themeBtn').textContent='Light mode'}renderTopics();renderReference();renderAssessment();$('metricTopics').textContent=CONFIG.topics.length;$('metricFamilies').textContent=FAMILIES.length;$('metricVariants').textContent=FAMILIES.length*3;$('metricListening').textContent=FAMILIES.filter(f=>f.type==='listening').length;bind();renderPool();renderProgress();newListening();if(state.session.length)renderCurrent();generatePaper(false)}init();
-</script></body></html>
+</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "French — Unit 3",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

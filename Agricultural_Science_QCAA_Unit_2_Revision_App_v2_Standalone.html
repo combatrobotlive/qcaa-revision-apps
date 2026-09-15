@@ -35,4 +35,29 @@ function wireQuestion(r,d){let f=r.f,flag=byId('toggleFlag');if(flag)flag.onclic
 function renderProgress(){let all=refs(),done=all.filter(r=>state.attempts[r.key]).length,correct=all.filter(r=>state.attempts[r.key]&&state.attempts[r.key].correct===true).length,pct=all.length?Math.round(100*done/all.length):0;byId('homeProgress').textContent=pct+'%';byId('homeDetail').textContent=done+' of '+all.length+' versions attempted';byId('homeMeter').style.width=pct+'%';byId('progressGrid').innerHTML=TOPICS.map(t=>{let list=all.filter(r=>r.f.topic===t[0]),d=list.filter(r=>state.attempts[r.key]).length,fl=list.filter(r=>state.flags[r.key]).length;return '<div class="progresscard"><b>'+esc(t[1])+'</b><span>'+d+' / '+list.length+' attempted</span><div class="meter"><i style="width:'+(list.length?100*d/list.length:0)+'%"></i></div><small>'+fl+' flagged for review</small></div>'}).join('')+'<div class="progresscard"><b>Auto-marked accuracy</b><span>'+correct+' correct</span><div class="meter"><i style="width:'+(all.length?100*correct/all.length:0)+'%"></i></div><small>Written responses are saved for self-review.</small></div>'}
 function initialise(){TOPICS.forEach(t=>{byId('topicFilter').insertAdjacentHTML('beforeend','<option value="'+t[0]+'">'+esc(t[1])+'</option>');byId('topicList').insertAdjacentHTML('beforeend','<li><b>'+esc(t[1])+'</b><span>'+esc(t[2])+'</span></li>')});REFS.forEach(r=>byId('refGrid').insertAdjacentHTML('beforeend','<article class="refcard"><h3>'+esc(r[0])+'</h3><p>'+esc(r[1])+'</p></article>'));byId('familyCount').textContent=QUESTIONS.length;byId('versionCount').textContent=refs().length;['topicFilter','typeFilter','levelFilter','search'].forEach(id=>byId(id).addEventListener(id==='search'?'input':'change',buildVisible));byId('clearFilters').onclick=()=>{['topicFilter','typeFilter','levelFilter','search'].forEach(id=>byId(id).value='');buildVisible()};byId('random').onclick=()=>{if(visible.length){cursor=Math.floor(Math.random()*visible.length);renderQuestion();location.hash='practice'}};byId('previous').onclick=()=>{if(visible.length){cursor=(cursor-1+visible.length)%visible.length;renderQuestion()}};byId('next').onclick=()=>{if(visible.length){cursor=(cursor+1)%visible.length;renderQuestion()}};byId('resetProgress').onclick=()=>{if(confirm('Reset all saved progress for this unit on this browser?')){state={attempts:{},answers:{},flags:{},plans:{}};save();renderQuestion()}};byId('runCheck').onclick=()=>{let ids=new Set(),bad=QUESTIONS.filter(f=>ids.has(f.id)?true:(ids.add(f.id),!TOPICS.some(t=>t[0]===f.topic)));byId('diagnostic').textContent=bad.length?'Check failed: duplicate ID or topic mismatch.':'Passed: '+QUESTIONS.length+' unit-only families and '+refs().length+' question versions have unique local IDs.'};byId('copySnapshot').onclick=async()=>{let all=refs(),done=all.filter(r=>state.attempts[r.key]).length,flag=all.filter(r=>state.flags[r.key]).length;let text='Agricultural Science Unit '+UNIT+': '+done+'/'+all.length+' versions attempted; '+flag+' flagged.';try{await navigator.clipboard.writeText(text);byId('copySnapshot').textContent='Copied';setTimeout(()=>byId('copySnapshot').textContent='Copy snapshot',1100)}catch(e){prompt('Copy this summary:',text)}};byId('exportProgress').onclick=()=>{let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}));a.download='agricultural-science-unit-'+UNIT+'-progress.json';a.click();URL.revokeObjectURL(a.href)};byId('importProgress').onclick=()=>byId('importFile').click();byId('importFile').onchange=e=>{let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=()=>{try{let x=JSON.parse(reader.result);if(!x.attempts||!x.answers||!x.flags)throw Error();state=x;save();renderQuestion()}catch(err){alert('That is not a compatible progress file for this app.')}};reader.readAsText(file)};document.querySelectorAll('[data-plan]').forEach(el=>{el.value=state.plans[el.dataset.plan]||'';el.addEventListener('input',()=>{state.plans[el.dataset.plan]=el.value;save()})});document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.support .tabshow,.support #experiment').forEach(x=>x.hidden=true);byId(b.dataset.tab).hidden=false});buildVisible();renderProgress()}
 initialise();
-</script></body></html>
+</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Agricultural Science — Unit 2",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

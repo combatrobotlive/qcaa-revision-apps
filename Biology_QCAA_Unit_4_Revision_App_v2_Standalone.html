@@ -49,4 +49,29 @@ function showTimer(el){let s=Number(el.dataset.seconds||0);el.textContent=`${Mat
 function startTimer(id){clearInterval(timerInt);let el=$(id);timerInt=setInterval(()=>{let s=Number(el.dataset.seconds||0);if(s<=0){clearInterval(timerInt);toast('Time finished');return}el.dataset.seconds=s-1;showTimer(el)},1000)}
 function bindNotes(){['resFinding','resBiology','resArgument','resConclusion','resClaimEval','resExtension'].forEach(id=>{let e=$(id);if(!e)return;e.value=state.notes[id]||'';e.oninput=()=>{state.notes[id]=e.value;save()}})}
 function bind(){document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>view(b.dataset.view));$('brandHome').onclick=e=>{e.preventDefault();view('home')};['topicFilter','levelFilter','variantFilter','search','unattempted','needs'].forEach(id=>{let e=$(id);e.oninput=e.onchange=refreshPool});$('topicFilter').onchange=refreshPool;$('random').onclick=randomQ;$('make10').onclick=make10;$('startPractice').onclick=randomQ;$('prev').onclick=()=>{if(state.sessionIndex>0){state.sessionIndex--;renderCurrent()}};$('next').onclick=()=>{if(state.sessionIndex<state.session.length-1){state.sessionIndex++;renderCurrent()}else toast('End of set')};$('newVariant').onclick=()=>{if(!state.current)return;let vs=['A','B','C'].filter(x=>x!==state.current.variant);state.session[state.sessionIndex]={...state.current,variant:vs[Math.floor(Math.random()*vs.length)],seed:uid()};renderCurrent()};$('openCode').onclick=openCode;$('copyCode').onclick=copyCurrent;$('saveSet').onclick=saveSet;$('runDiag').onclick=runDiag;$('buildResRQ').onclick=buildResRQ;$('addSource').onclick=addSource;$('exportResearch').onclick=exportResearch;$('buildMock').onclick=()=>buildMock();$('mockStart').onclick=()=>startTimer('mockTimer');$('mockWork').onclick=()=>resetTimer('mockTimer',90);$('exportProgress').onclick=exportProgress;$('importProgress').onchange=importProgress;$('clearProgress').onclick=()=>{if(confirm('Clear Biology Unit 4 progress on this device?')){localStorage.removeItem(STORE);location.reload()}}}
-function init(){renderUnits();refreshTopics();bindNotes();bind();setupResearch();buildMock('U4PRACT');renderProgress();renderTeacher()}document.addEventListener('DOMContentLoaded',init);})();</script></body></html>
+function init(){renderUnits();refreshTopics();bindNotes();bind();setupResearch();buildMock('U4PRACT');renderProgress();renderTeacher()}document.addEventListener('DOMContentLoaded',init);})();</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Biology — Unit 4",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

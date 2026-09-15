@@ -68,4 +68,29 @@ function diagnostics(){const ids=CFG.families.map(f=>f.id),dupes=ids.filter((x,i
 $('topicFilter').innerHTML='<option value="">All Unit '+CFG.num+' topics</option>'+topicNames().map(x=>'<option>'+esc(x)+'</option>').join('');const cats=[...new Set(CFG.families.map(f=>f.category))];$('catFilter').innerHTML='<option value="">All question types</option>'+cats.map(x=>'<option>'+esc(x)+'</option>').join('');const levels=[...new Set(CFG.families.map(f=>f.level))];$('levelFilter').innerHTML='<option value="">All challenge levels</option>'+levels.map(x=>'<option>'+esc(x)+'</option>').join('');['topicFilter','catFilter','levelFilter','variantFilter','search','unattempted','needs'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',filteredFamilies));filteredFamilies();renderTopics();renderLab();renderAssessment();renderReference();renderProgress();
 $$('.nav').forEach(n=>n.onclick=()=>go(n.dataset.view));$('start').onclick=randomQuestion;$('random').onclick=randomQuestion;$('make10').onclick=()=>makeSet(10);$('openCourse').onclick=()=>go('course');$('prev').onclick=()=>{if(state.sessionIndex>0){state.sessionIndex--;save();renderQuestion()}};$('next').onclick=()=>{if(state.sessionIndex<state.session.length-1){state.sessionIndex++;save();renderQuestion()}};$('newVariant').onclick=()=>{if(!state.session.length)return;const r=state.session[state.sessionIndex];let vs=['A','B','C'].filter(v=>v!==r.variant);r.variant=vs[Math.floor(Math.random()*vs.length)];save();renderQuestion()};$('saveSet').onclick=()=>{if(!state.session.length){toast('Open a practice set first');return}const name=window.prompt('Name this saved set:',state.sessionName||'Unit '+CFG.num+' set');if(!name)return;state.savedSets.push({name,refs:state.session.map(r=>({id:r.id,variant:r.variant}))});save();renderSavedSets();toast('Set saved')};$('openCodeBtn').onclick=()=>{try{newSession(parseCode($('codeInput').value),'Shared exact set')}catch(e){toast(e.message)}};$('copyCode').onclick=()=>{if(!state.session.length){toast('Open a practice set first');return}copyText(setCode(state.session))};$('checkLab').onclick=()=>{const v=Number($('labChoice').value);if(!Number.isInteger(v)){toast('Choose an interpretation first');return}$('labFeedback').innerHTML='<div class="feedback"><b>'+(v===CFG.lab.answer?'Strong choice.':'Review the reasoning.')+'</b> '+esc(CFG.lab.feedback)+'</div>'};$('newLab').onclick=renderLab;$('exportProgress').onclick=()=>download('Drama_QCAA_Unit_'+CFG.num+'_Progress.json',JSON.stringify({subject:'Drama',unit:CFG.num,version:'v2',state},null,2));$('importProgress').onchange=e=>{const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(d.subject!=='Drama'||Number(d.unit)!==CFG.num)throw Error('That progress file belongs to another subject or unit.');state={...state,...d.state};save();renderProgress();toast('Progress imported')}catch(err){toast(err.message)}};r.readAsText(file)};$('clearProgress').onclick=()=>{if(confirm('Clear saved progress, drafts and sets for Drama Unit '+CFG.num+' only?')){state={attempts:{},needs:{},drafts:{},savedSets:[],session:[],sessionIndex:0,sessionName:'Practice'};save();renderProgress();toast('Unit '+CFG.num+' progress cleared')}};$('runDiag').onclick=diagnostics;$('teacherBuild').onclick=()=>makeSet(10);updateProgressBadge();
 })();
-</script></body></html>
+</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Drama — Unit 2",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

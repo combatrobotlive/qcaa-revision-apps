@@ -62,4 +62,29 @@ function setupEAPrompt(){let b=$('new-ea-prompt');if(!b)return;const stems=['To 
 function runDiagnostics(){let problems=[];if(!DATA.questions.length)problems.push('No questions');if(new Set(DATA.questions.map(x=>x.id)).size!==DATA.questions.length)problems.push('Duplicate question IDs');if(DATA.questions.some(x=>x.variants.length!==3))problems.push('A question family does not have 3 variants');if(DATA.questions.some(x=>!x.guide||!x.guide.length))problems.push('Missing checking guide');let d=$('diagnosticStatus');d.textContent=problems.length?'Problems: '+problems.join('; '):`Ready: ${DATA.questions.length} question families · ${allVariants().length} variants · storage key ${STORAGE_KEY}`;d.className=problems.length?'diag-bad':'diag-ok';return !problems.length}
 function init(){fillFilters();renderMetrics();loadNotes();setupTimers();setupEAPrompt();runDiagnostics();$('newQuestion').onclick=()=>randomPractice(1);$('newFive').onclick=()=>randomPractice(5);$('makeDrill').onclick=makeDrill;$$('select.filter-input').forEach(x=>x.onchange=()=>{if(!$('practiceList').children.length)return;});$$('.nav[data-view]').forEach(b=>b.onclick=()=>showView(b.dataset.view));$('exportProgress').onclick=exportProgress;$('importProgress').onchange=e=>e.target.files[0]&&importProgress(e.target.files[0]);$('resetProgress').onclick=resetProgress;$('teacherAdd5').onclick=()=>addTeacher(5);$('teacherAdd10').onclick=()=>addTeacher(10);$('teacherClear').onclick=()=>{state.teacherSet=[];save();renderTeacherSet()};$('copyCode').onclick=()=>copyText($('setCode').value);$('openCode').onclick=()=>{try{openTeacherSet(decodeSet($('openSetInput').value.trim()))}catch(e){alert(e.message)}};$('openTeacherSet').onclick=()=>openTeacherSet(state.teacherSet||[]);$('printQuestions').onclick=()=>printTeacher(false);$('printGuides').onclick=()=>printTeacher(true);$('runDiagnostics').onclick=runDiagnostics;$('reviewWeak').onclick=()=>{showView('practice');$('statusFilter').value='revision';randomPractice(5)};showView('practice');randomPractice(1)}
 window.addEventListener('DOMContentLoaded',init);
-</script></body></html>
+</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "English — Unit 4",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

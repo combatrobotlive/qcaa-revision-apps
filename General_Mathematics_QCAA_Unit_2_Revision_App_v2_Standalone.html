@@ -46,4 +46,29 @@ $('#psmtBtn').onclick=psmt;$('#psmtHome').onclick=psmt;
 $('#exportDraft').onclick=()=>{let text='General Mathematics — PSMT planning notes\n\n'+$$('[data-draft]').map(e=>e.previousElementSibling.textContent+'\n'+e.value).join('\n\n')+'\n\nChecklist\n'+checks.map((g,gi)=>g[0]+'\n'+g.slice(1).map((t,i)=>(draft['check'+gi+'-'+i]?'[x] ':'[ ] ')+t).join('\n')).join('\n\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/plain'}));a.download='General_Maths_PSMT_notes.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
 $('#printSet').onclick=()=>{if(!set.length)return;const box=$('#printArea');box.innerHTML='<h1>General Mathematics — practice set</h1><p>Unofficial practice • Daniel Kerrison • Show working and units.</p>'+set.map((q,i)=>`<article><h2>${i+1}. ${escape(q.familyTitle)} (${q.marks} marks)</h2>${q.question}${q.options?'<ol type="A">'+q.options.map(o=>'<li>'+o+'</li>').join('')+'</ol>':''}<div class="working-space"></div></article>`).join('');window.print()};
 $('#scenarioSolutions').onclick=()=>{if(!currentScenario)return;$('#scenarioAnswers').innerHTML=currentScenario.parts.map((p,i)=>`<p><b>Part ${String.fromCharCode(65+i)}</b><br>${p.a.map(a=>`${escape(a.label)}: ${Number(a.value.toFixed(4))} ${escape(a.unit||'')}`).join('<br>')}</p>`).join('');$('#scenarioAnswers').classList.remove('hidden')};
-$('#teacherPrintBtn').onclick=()=>$('#printSet').click();initFilters();stats();show('#welcome');window.__GENERAL_MATH_TEST__={BANK,MC,SC,filtered,mathExpr,parseNum,scenarioLibrary,course,psmt,startSet,choosePaper,openScenario};})();</script><div id="printArea"></div></body></html>
+$('#teacherPrintBtn').onclick=()=>$('#printSet').click();initFilters();stats();show('#welcome');window.__GENERAL_MATH_TEST__={BANK,MC,SC,filtered,mathExpr,parseNum,scenarioLibrary,course,psmt,startSet,choosePaper,openScenario};})();</script><div id="printArea"></div><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "General Mathematics — Unit 2",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>

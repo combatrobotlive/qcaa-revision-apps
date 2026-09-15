@@ -26,4 +26,29 @@ function updateCount(){$('count').textContent=pool().length+' matching questions
 function toast(t){$('toast').textContent=t;$('toast').hidden=false;setTimeout(()=>$('toast').hidden=true,1800)}
 function init(){state=load();$('subject').textContent='Accounting · Unit '+C.unit;$('unitTitle').textContent=C.title;$('unitSubtitle').textContent=C.subtitle;$('heroCount').textContent=C.bank.length;$('hub').href='index.html';$('area').innerHTML='<option value="">All unit topics</option>'+choices().map(x=>'<option>'+esc(x)+'</option>').join('');['area','type','search'].forEach(id=>$(id).oninput=updateCount);$('random').onclick=startRandom;$('set10').onclick=()=>startSet(10);$('homeStart').onclick=startRandom;$('previous').onclick=()=>{if(pos>0){pos--;renderQuestion()}};$('next').onclick=()=>{if(pos<session.length-1){pos++;renderQuestion()}};document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>show(b.dataset.view));$('build').onclick=()=>{builder=shuffle(pool()).slice(0,Math.min(Number($('buildNumber').value)||5,pool().length));renderTeacher();toast('Teacher set built')};$('openBuilder').onclick=()=>{if(builder.length)start(builder,'Teacher practice set');else toast('Build a set first.')};$('saveBuilder').onclick=()=>{if(!builder.length)return toast('Build a set first.');state.sets.push({name:$('setName').value||'Accounting Unit '+C.unit+' set '+(state.sets.length+1),ids:builder.map(q=>q.id)});save();renderTeacher();toast('Set saved')};$('printBuilder').onclick=()=>{if(!builder.length)return toast('Build a set first.');start(builder,'Teacher practice set');setTimeout(()=>window.print(),80)};$('clearProgress').onclick=()=>{if(confirm('Reset Unit '+C.unit+' progress on this device?')){state.progress={};save();renderProgress();updateCount()}};renderNotes();renderReference();renderProgress();updateCount()}
 document.addEventListener('DOMContentLoaded',init);
-})();</script></body></html>
+})();</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
+<script id="app-usage-analytics">
+(function () {
+  "use strict";
+  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
+  window.goatcounter = {
+    no_events: true,
+    allow_frame: true,
+    title: "Accounting — Unit 1",
+    path: function () { return window.location.pathname; },
+    referrer: function () {
+      try {
+        var source = new URL(document.referrer);
+        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
+      } catch (e) { return ""; }
+    }
+  };
+  var tracker = document.createElement("script");
+  tracker.async = true;
+  tracker.src = "https://gc.zgo.at/count.js";
+  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
+  document.head.appendChild(tracker);
+})();
+</script>
+<!-- END QCAA APP USAGE ANALYTICS -->
+</body></html>
