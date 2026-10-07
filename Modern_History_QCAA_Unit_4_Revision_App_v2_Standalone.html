@@ -1,9 +1,11 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Modern History QCAA Unit 4 Revision App v2 — original source-based revision practice."><title>Modern History QCAA Unit 4 Revision App v2</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Modern History QCAA Unit 4 Revision App v2.1 — standalone revision and a timed external-exam simulator aligned to Modern History 2025 v1.4."><meta name="author" content="Daniel Kerrison, Southport State High School; AI-assisted development by ChattyJeeps (ChatGPT by OpenAI)"><title>Modern History QCAA Unit 4 Revision App v2.1 — External Exam Simulator</title>
 <style>
 :root{--ink:#172d3a;--teal:#1f7180;--teal2:#155562;--gold:#b98527;--paper:#fff;--bg:#edf4f5;--muted:#5e7078;--line:#c8d9dd;--soft:#e4f0f2;--green:#226b50;--red:#a64640;--shadow:0 8px 26px rgba(24,63,72,.09)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}.top{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(20,61,70,.05)}.top-inner{max-width:1500px;margin:auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px}.seal{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#f3cf81;font:900 16px Georgia,serif}.brand h1{font-size:18px;margin:0}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.top-actions,.button-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.btn,.hub{border:1px solid #a9c1c7;border-radius:8px;background:#fff;color:var(--ink);font-weight:700;font-size:12px;padding:8px 10px;text-decoration:none}.btn:hover,.hub:hover{background:#f3f9fa}.btn.primary{background:var(--teal2);border-color:var(--teal2);color:#fff}.btn.gold{background:#fff8e9;border-color:#d7b878;color:#715016}.btn.danger{color:#8b302c;border-color:#d49c98;background:#fff7f6}.app{max-width:1500px;margin:auto;display:grid;grid-template-columns:294px minmax(0,1fr)}.side{border-right:1px solid var(--line);padding:15px;background:#f8fbfb;min-height:calc(100vh - 65px)}.main{padding:18px;min-width:0}.panel,.view{background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);margin-bottom:14px}.panel{padding:13px;box-shadow:none}.panel h3{font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;color:#45616a}.field{margin:10px 0}.field label{display:block;font-weight:700;font-size:11px;margin-bottom:4px}.field select,.field input,textarea{width:100%;border:1px solid #b9cdd2;border-radius:7px;padding:9px;background:#fff;color:var(--ink)}textarea{line-height:1.48;min-height:135px;resize:vertical}.check{display:block;font-size:12px;margin:8px 0}.small{font-size:12px;line-height:1.48}.muted{color:var(--muted)}.eyebrow{font-size:10px;letter-spacing:.11em;color:var(--teal);font-weight:900}.welcome{padding:25px;background:linear-gradient(135deg,#fff 0%,#f0f8f8 100%)}.welcome h2,.heading h2{margin:5px 0 8px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.callout,.help{border-left:4px solid var(--gold);padding:12px 14px;background:#fff8e9;border-radius:7px;font-size:12px;line-height:1.5}.hero-side{border:1px solid var(--line);border-radius:9px;padding:14px;background:#fff}.hero-side h3{margin:0 0 7px;font-size:14px}.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}.tile{text-align:center;padding:11px;border-radius:8px;background:var(--soft)}.tile b{font-size:21px;display:block}.tile span{font-size:10px;color:var(--muted)}.heading{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:15px 18px;border-bottom:1px solid var(--line)}.question-body{padding:18px}.meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.tag{font-size:10px;padding:4px 7px;border-radius:999px;background:var(--soft)}.source-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.source{border:1px solid var(--line);border-radius:9px;background:#fbfefe;padding:12px}.source h3{font-size:14px;margin:4px 0}.source-type{font-size:10px;color:var(--muted);margin-bottom:8px}.source p{font-size:12px;line-height:1.48;margin:0}.question{white-space:pre-wrap;font-size:16px;line-height:1.52;margin:14px 0}.choice{display:block;border:1px solid var(--line);border-radius:8px;padding:10px;margin:7px 0;font-size:13px;line-height:1.4}.choice.good{border-color:#74ad95;background:#eff8f2}.choice.bad{border-color:#d6928e;background:#fff2f1}.solution{display:none;margin-top:12px;padding:13px;border-radius:8px;border:1px solid var(--line);background:#f7fbfb;font-size:12px;line-height:1.5}.solution.show{display:block}.rating{display:none;margin-top:11px}.rating.show{display:block}.navline{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:13px}.cards,.tools,.assessment{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;padding:18px}.card{border:1px solid var(--line);border-radius:9px;padding:13px;background:#fff}.card h3{margin:0 0 7px;font-size:15px}.card p,.card li{font-size:12px;line-height:1.5}.card ul{padding-left:18px;margin:7px 0}.pack-controls{display:flex;gap:9px;align-items:end;padding:14px 18px}.grow{flex:1}.pack-q{border-top:1px solid var(--line);padding:14px 0}.pack-q:first-child{border-top:0}.pack-content{padding:0 18px 18px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:7px}.stat{padding:9px;text-align:center;border-radius:8px;background:var(--soft)}.stat b{display:block;font-size:18px}.stat span{font-size:10px;color:var(--muted)}.stat.wide{grid-column:1/-1}.progress-row{display:grid;grid-template-columns:220px 1fr 55px;gap:10px;align-items:center;padding:10px 18px;border-top:1px solid #e4ecee}.bar{height:8px;background:#e2ecee;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--teal)}.teacher-body,.reference-body{padding:18px}.set-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 0;border-top:1px solid #e4ecee}.footer{max-width:1500px;margin:0 auto;padding:13px 18px 25px;text-align:center;color:#5d7078;font-size:10px;line-height:1.5}.toast{position:fixed;right:18px;bottom:18px;z-index:60;background:var(--ink);color:#fff;padding:10px 13px;border-radius:8px;font-size:12px;box-shadow:var(--shadow)}.fixed-hub{position:fixed;left:13px;bottom:13px;z-index:50;border-radius:999px;background:var(--teal2);color:#fff!important;border:1px solid rgba(255,255,255,.35);padding:8px 11px;text-decoration:none;font:700 12px Arial;box-shadow:0 3px 12px rgba(0,0,0,.2)}@media(max-width:940px){.app{grid-template-columns:1fr}.side{min-height:auto;border-right:0;border-bottom:1px solid var(--line)}.hero,.source-grid{grid-template-columns:1fr}.top{position:static}.progress-row{grid-template-columns:1fr 1fr 45px}}@media(max-width:620px){.top-inner{display:block}.top-actions{margin-top:8px}.main,.side{padding:10px}.welcome{padding:16px}.tiles,.cards,.tools,.assessment{grid-template-columns:1fr}.pack-controls{display:block}.pack-controls .field{margin-bottom:8px}.heading{display:block}.heading .button-row{margin-top:10px}.fixed-hub{position:static;display:block;border-radius:0;text-align:center;margin-top:8px}.top-actions{gap:5px}.btn,.hub{font-size:11px;padding:7px 8px}}
+button:disabled{cursor:not-allowed;opacity:.6}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.top-actions [aria-current="page"]{box-shadow:inset 0 -3px 0 var(--gold)}body.exam-focus .side{display:none}body.exam-focus .app{grid-template-columns:minmax(0,1fr);max-width:1440px}.exam-intro,.exam-setup,.exam-review,.exam-history{padding:18px 22px}.exam-intro{background:#f3f9fa;border-bottom:1px solid var(--line)}.exam-intro p{font-size:13px;line-height:1.55;max-width:1000px}.exam-intro details{font-size:12px;line-height:1.6}.exam-intro summary{cursor:pointer;font-weight:700}.exam-setup-grid{display:grid;grid-template-columns:2fr 1.5fr 1.3fr;gap:14px}.exam-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}.exam-metrics div{background:var(--soft);border-radius:9px;padding:12px}.exam-metrics b{display:block;font-size:18px}.exam-metrics span{font-size:12px;color:var(--muted)}.exam-statusbar{display:flex;justify-content:space-between;align-items:center;gap:15px;background:var(--ink);color:#fff;padding:14px 22px;position:sticky;top:70px;z-index:20}.exam-statusbar h3{margin:4px 0;font-size:15px}.exam-statusbar .eyebrow{color:#b7e8e7}.exam-clock{text-align:right;flex-shrink:0}.exam-clock output{font-size:29px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums;display:block}.exam-clock small{font-size:11px}.exam-clock.warning{color:#f7d99c}.exam-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 22px;background:#f8fbfb;border-bottom:1px solid var(--line)}.exam-actions .btn{font-size:12px}.exam-actions .exam-spacer{flex:1}.exam-workspace{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:18px;padding:18px 22px;align-items:start}.exam-workspace.single{grid-template-columns:1fr}.exam-book{min-width:0}.exam-book-title{padding:13px 15px;background:#e5f0f2;border:1px solid var(--line);border-radius:9px;margin-bottom:12px}.exam-book-title h3{margin:3px 0 6px;font-size:18px}.exam-book-title p{margin:4px 0;font-size:12px;line-height:1.5}.exam-source{padding:16px;margin-bottom:12px;border:1px solid var(--line);border-radius:9px;background:#fcfefe;break-inside:avoid}.exam-source h4{font-size:16px;margin:5px 0 10px}.exam-source .source-context{font-size:12px;line-height:1.5;padding-bottom:10px;border-bottom:1px dashed var(--line);color:#425d65}.exam-source .source-evidence{font:15px/1.65 Georgia,serif;white-space:pre-wrap;margin:12px 0}.exam-source .source-credit{font-size:11px;line-height:1.5;overflow-wrap:anywhere;color:var(--muted)}.exam-question{padding:17px;margin-bottom:13px;border:1px solid var(--line);border-radius:9px;scroll-margin-top:150px;break-inside:avoid}.exam-question h4{margin:0 0 8px;font-size:17px}.exam-question p{font-size:14px;line-height:1.6}.exam-question textarea{min-height:220px;font-size:14px;background:#fffefb}.exam-question textarea:disabled{background:#eef3f4;color:#4a6068;opacity:1}.exam-question textarea[readonly]{background:#f5f8f8}.exam-question .count{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:6px}.exam-planning{margin-bottom:13px;padding:15px;border:1px solid #d9bf85;border-radius:9px;background:#fff8e9}.exam-planning summary{font-weight:700;cursor:pointer;font-size:13px}.exam-planning p{font-size:12px;line-height:1.5}.exam-planning textarea{min-height:110px}.exam-review{border-top:1px solid var(--line);background:#f8fbfb}.exam-review h3{margin:5px 0 10px}.exam-guide{padding:14px;margin:12px 0;border:1px solid var(--line);border-radius:9px;background:#fff}.exam-guide summary{cursor:pointer;font-weight:700}.exam-guide p,.exam-guide li{font-size:13px;line-height:1.6}.exam-guide ul{padding-left:20px}.exam-checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px 15px;margin-top:15px}.exam-checklist label{font-size:12px;line-height:1.5;display:flex;gap:8px;align-items:flex-start}.exam-checklist input{margin-top:4px}.exam-history{border-top:1px solid var(--line)}.exam-history-row{display:flex;gap:12px;align-items:center;justify-content:space-between;border-top:1px solid #e3ecee;padding:12px 0}.exam-history-row p{font-size:12px;margin:4px 0;line-height:1.5}.exam-save-status{font-size:11px;margin-left:6px}.exam-error{color:#862f26;background:#fff0eb;padding:10px;border-radius:7px;font-size:12px}.exam-print-sheet{display:none}.exam-format-note{font-size:12px;line-height:1.6;max-width:950px}.exam-jump{font-weight:700;font-size:12px;color:var(--teal2);padding:6px;white-space:nowrap}.exam-print-question{margin:16px 0;break-before:page}.exam-print-lines{height:300px;background:repeating-linear-gradient(#fff,#fff 27px,#cedadc 28px)}@media(max-width:1150px){.exam-statusbar{top:105px}}@media(max-width:940px){.exam-statusbar{top:0}.exam-setup-grid{grid-template-columns:1fr}.exam-workspace{grid-template-columns:1fr}.exam-source .source-evidence{font-size:14px}.exam-statusbar{padding:12px 15px}}@media(max-width:620px){.exam-intro,.exam-setup,.exam-review,.exam-history{padding:15px}.exam-metrics{grid-template-columns:1fr}.exam-workspace{padding:13px;gap:12px}.exam-actions{padding:12px}.exam-checklist{grid-template-columns:1fr}.exam-clock output{font-size:22px}.exam-statusbar h3{font-size:13px}.exam-history-row{align-items:flex-start;flex-direction:column}.exam-actions .exam-spacer{display:none}}@media print{body.exam-print{background:#fff;color:#111}body.exam-print > *{display:none!important}body.exam-print > .exam-print-sheet{display:block!important;font:12px/1.5 Arial;padding:0}body.exam-print .exam-source{background:#fff;border-color:#aaa}body.exam-print .exam-source .source-evidence{font-size:13px}body.exam-print .source-credit a{color:#111;text-decoration:none}body.exam-print .print-cover{break-after:page}body.exam-print .exam-print-notes{height:250px}body.exam-print .exam-print-lines{print-color-adjust:exact;-webkit-print-color-adjust:exact}@page{size:A4;margin:18mm}}
+body.exam-focus .exam-statusbar{top:var(--exam-sticky-top,70px)}body.exam-focus .exam-actions{position:sticky;top:calc(var(--exam-sticky-top,70px) + var(--exam-status-height,90px));z-index:19}@media(min-width:941px){.exam-book{height:calc(100vh - 425px);min-height:420px;max-height:860px;overflow-y:auto;scrollbar-gutter:stable;overscroll-behavior:contain;padding-right:6px}.exam-book .exam-question{scroll-margin-top:12px}}@media print{body.exam-print .exam-question{padding:10px}}
 </style></head><body>
-<header class="top"><div class="top-inner"><div class="brand"><div class="seal">MH</div><div><h1 id="appTitle">Modern History · Unit 4</h1><small id="appSub">International experiences in the Modern World · Queensland revision</small></div></div><div class="top-actions"><button class="btn" data-view="home">Home</button><button class="btn" data-view="practice">Practice</button><button class="btn" data-view="packs">Source lab</button><button class="btn" data-view="tools">Skills tools</button><button class="btn" data-view="teacher">Teacher tools</button><button class="btn" data-view="progress">Progress</button><button class="btn" data-view="reference">Reference</button><a class="hub" href="./index.html">Main hub</a></div></div></header>
+<header class="top"><div class="top-inner"><div class="brand"><div class="seal">MH</div><div><h1 id="appTitle">Modern History · Unit 4</h1><small id="appSub">International experiences in the Modern World · v2.1</small></div></div><div class="top-actions"><button class="btn" data-view="home">Home</button><button class="btn" data-view="practice">Practice</button><button class="btn" data-view="packs">Source lab</button><button class="btn primary" data-view="exam">External exam</button><button class="btn" data-view="tools">Skills tools</button><button class="btn" data-view="teacher">Teacher tools</button><button class="btn" data-view="progress">Progress</button><button class="btn" data-view="reference">Reference</button><a class="hub" href="./index.html">Main hub</a></div></div></header>
 <div class="app"><aside class="side"><div class="panel"><h3>Your class topics</h3><div id="topicControls"></div><button class="btn gold" id="saveTopics">Save topics &amp; reset progress</button><p class="small muted">Settings are stored only in this browser for this Modern History unit.</p></div><div class="panel"><h3>Practice filters</h3><div class="field"><label for="areaFilter">Course focus</label><select id="areaFilter"></select></div><div class="field"><label for="skillFilter">Historical skill</label><select id="skillFilter"><option value="">All skills</option></select></div><div class="field"><label for="diffFilter">Difficulty</label><select id="diffFilter"><option value="">All difficulty</option></select></div><label class="check"><input type="checkbox" id="unattempted"> Unattempted only</label><p class="small muted" id="poolNote"></p><button class="btn primary" id="randomOne">Random question (<span id="poolCount">0</span>)</button><button class="btn" id="randomEight">Random 8</button></div><div class="panel"><h3>Progress</h3><div class="stats"><div class="stat"><b id="attemptedStat">0</b><span>attempts</span></div><div class="stat"><b id="masteredStat">0</b><span>got it</span></div><div class="stat wide"><b id="familyStat">0/0</b><span>families attempted</span></div></div><button class="btn" style="width:100%;margin-top:8px" data-view="progress">View progress</button></div><div class="panel small muted">All practice source cards are original scenarios, not quotations or QCAA examination stimulus. Apply the method to your studied sources.</div></aside>
 <main class="main">
 <section class="view welcome" id="homeView"><div class="eyebrow">QCAA Modern History 2025 v1.4 · UNIT 4</div><h2>International experiences in the Modern World</h2><div class="hero"><div><p>Investigate international experiences that cross national borders. Practise source-based explanations of causes, interactions, perspectives, consequences, legacy, contestability and historical significance.</p><div class="tiles"><div class="tile"><b id="familyTotal">0</b><span>question families</span></div><div class="tile"><b id="variantTotal">0</b><span>generated variants</span></div><div class="tile"><b>4</b><span>source-skill tools</span></div></div><div class="button-row"><button class="btn primary" id="startHome">Start practice</button><button class="btn gold" data-view="packs">Build a source pack</button></div></div><div class="hero-side"><h3>A useful revision routine</h3><p class="small">Choose your actual class topics first. Attempt one response without guidance, identify exact source evidence, then reveal the method and rate your confidence.</p><p class="small">For source questions, a judgment must explain why evidence is useful or reliable for the specific inquiry — not simply label a source as biased.</p></div></div><div class="callout"><b>Unit boundary:</b> Schools study one Topic 1 and one Topic 2. Topic 2 is externally assessed and must be different from Topic 1. This app keeps Topic 1 research support and Topic 2 external-exam practice distinct.</div></section>
@@ -15,8 +17,16 @@
 <section class="view hidden" id="teacherView"><div class="heading"><div><div class="eyebrow">TEACHER TOOLS</div><h2>Build an exact practice set</h2></div></div><div class="teacher-body"><p class="small">Use the active filters, add questions, then share the code. It preserves this unit, question family and generated variant.</p><div class="button-row"><button class="btn primary" id="teacherFive">Add 5 from filters</button><button class="btn" id="teacherTen">Add 10 from filters</button><button class="btn danger" id="teacherClear">Clear set</button><button class="btn gold" id="teacherOpen">Open set</button></div><div class="field"><label>Teacher set code</label><textarea id="teacherCode" readonly></textarea></div><div class="field"><label>Open an exact set code</label><textarea id="openCode" placeholder="Paste a MH25U4 set code..."></textarea><button class="btn" id="openSet">Open code</button></div><p class="small muted" id="diagnostic"></p><button class="btn" id="runDiagnostic">Run app diagnostics</button></div></section>
 <section class="view hidden" id="progressView"><div class="heading"><div><div class="eyebrow">THIS BROWSER ONLY</div><h2>Your Unit 4 progress</h2></div><button class="btn primary" id="weakReview">Review weak areas</button></div><div id="progressRows"></div><div class="teacher-body"><div class="callout"><b>Separate subject-unit storage:</b> Unit 4 progress cannot overwrite another Modern History unit. Export a backup before changing device or browser profile.</div><div class="button-row" style="margin-top:12px"><button class="btn" id="exportProgress">Export progress + drafts</button><label class="btn" for="importProgress">Import progress</label><input class="hidden" id="importProgress" type="file" accept="application/json"><button class="btn danger" id="resetProgress">Reset Unit 4 progress</button></div></div></section>
 <section class="view hidden" id="referenceView"><div class="heading"><div><div class="eyebrow">REFERENCE &amp; ASSESSMENT</div><h2>Unit 4 scope and method guide</h2></div></div><div class="reference-body"><div class="cards"><article class="card"><h3>Unit focus</h3><p>Investigate international experiences that cross national borders. Practise source-based explanations of causes, interactions, perspectives, consequences, legacy, contestability and historical significance.</p><p><b>QCAA syllabus:</b> <a href="https://www.qcaa.qld.edu.au/downloads/senior-qce/syllabuses/snr_modern_history_25_syll.pdf" target="_blank" rel="noopener">Modern History 2025 v1.4</a>.</p></article><article class="card"><h3>Selected topics</h3><p>Each app uses only the topics selected in its own settings. The official prescribed topic list is available in the topic selectors on this page and in the left panel.</p><p><b>Study structure:</b> contextual study, depth study and concluding study should each inform your revision.</p></article></div><div class="assessment" id="assessmentCards"></div><div class="panel" style="padding:15px"><h3>Historical source reminder</h3><p class="small">A source is material a historian examines. Evidence is information selected from a source to help answer a particular historical question. Primary and secondary sources can both be useful, and both need to be evaluated in relation to the inquiry.</p></div></div></section>
+<section class="view hidden" id="examView" aria-labelledby="examHeading">
+<div class="heading"><div><div class="eyebrow">UNIT 4 · TOPIC 2 · INDEPENDENT REHEARSAL</div><h2 id="examHeading">External exam simulator</h2><p class="small muted">Read the evidence. Plan your argument. Write under timed conditions.</p></div><button class="btn" data-view="reference">Unit 4 reference</button></div>
+<div class="exam-intro" id="examIntro"><p>Rehearse the <b>revised 2026 example format</b>: choose the topic studied by your class, use its six sources and answer three short-response questions in full-sentence paragraphs. The full timer gives <b>15 minutes of planning, then 120 minutes of working</b>. The actual external assessment is handwritten; printing this paper lets you practise handwriting with the same timer.</p><details><summary>Format, source provenance and official references</summary><p>This is original educational practice, not a QCAA paper or a prediction of unseen questions. QCAA’s July 2026 examples show three questions and six sources per topic, in a combined question-and-stimulus book with a separate response book. The examples use placeholder marks, so this app does not invent official question weightings. Actual instructions and marking allocations take precedence.</p><p>The embedded stimulus cards are <b>app-authored abridged evidence digests of verified, cited records</b>, not verbatim quotations or facsimiles. Each has a distinct context statement. Historical document types and authors refer to the underlying records; the digests themselves are secondary representations. Practise reasoning from their evidence, but use authentic extracts and visual sources from your teacher for additional unseen-source practice. Short quotations, if shown, are separately identified. Linked originals are optional and are disabled during a timed attempt.</p><p><a href="https://www.qcaa.qld.edu.au/downloads/senior-qce/syllabuses/snr_modern_history_25_syll.pdf" target="_blank" rel="noopener">Modern History 2025 v1.4 syllabus</a> · <a href="https://www.qcaa.qld.edu.au/downloads/senior-qce/hass/snr_modern_history_25_question_stimulus_smple.pdf" target="_blank" rel="noopener">2026 example question-and-stimulus book</a> · <a href="https://www.qcaa.qld.edu.au/downloads/senior-qce/hass/snr_modern_history_25_response_smple.pdf" target="_blank" rel="noopener">Example response book</a> · <a href="https://www.qcaa.qld.edu.au/downloads/memos/26/031-26.pdf" target="_blank" rel="noopener">QCAA memo 031/26</a>. Format and source checks: 7 October 2026. These nominated aspects apply to the General syllabus in 2026 and 2027; later cohorts must check QCAA notices.</p></details></div>
+<div class="exam-setup" id="examSetup"><div class="exam-setup-grid"><div class="field"><label for="examTopic">Your class’s external-assessment topic</label><select id="examTopic"><option value="migration">Mass migrations — Migration from Asia to Australia, 1960s–1990s</option><option value="soviet">Cold War — Reasons for the end of the Soviet Union, 1980s–1990s</option></select></div><div class="field"><label for="examPaper">Practice paper</label><select id="examPaper"></select></div><div class="field"><label for="examMode">Conditions</label><select id="examMode"><option value="full">Full simulation · 15 + 120 min</option><option value="short">Short rehearsal · 3 + 24 min</option><option value="untimed">Untimed practice</option></select></div></div><p class="small muted" id="examPaperFocus"></p><div class="exam-metrics"><div><b>3 questions</b><span>paragraph responses, not an extended essay</span></div><div><b>6 sources</b><span id="examSourceRange">one chosen external-assessment aspect</span></div><div><b id="examTimingLabel">15 + 120 min</b><span id="examTimingSub">planning followed by working time</span></div></div><div class="callout"><b>Before you start:</b> close other resources and choose a quiet space. In timed modes, response boxes stay locked during planning. There is no pause; the clock continues if you reload or close this file. Submission or time expiry locks your responses and unlocks review guidance. This is a self-managed rehearsal, not secure assessment software.</div><div class="button-row" style="margin-top:15px"><button class="btn primary" id="examStart">Start full simulation</button><button class="btn gold" id="examPrintBlank">Print paper + blank response book</button></div><p class="exam-format-note">Short and untimed modes are learning accommodations, not official exam conditions. Starting working time early is recorded as assisted. No responses leave this browser unless you export them; no AI feedback, writing generation, API or account is used. Exam attempts are saved separately from ordinary Unit 4 revision progress.</p></div>
+<div class="hidden" id="examAttempt"><div class="exam-statusbar"><div><div class="eyebrow" id="examAttemptCode"></div><h3 id="examAttemptTitle"></h3><span class="small" id="examStage"></span></div><div class="exam-clock" id="examClockWrap"><output id="examClock" role="timer" aria-live="off">15:00</output><small id="examClockLabel">planning remaining</small></div></div><div class="exam-actions"><button class="btn" id="examShowBoth">Both books</button><button class="btn" id="examShowSources">Question + stimulus</button><button class="btn" id="examShowResponses">Response book</button><span class="exam-spacer"></span><button class="btn" id="examEarlyWork">Begin working early (assisted)</button><button class="btn danger" id="examSubmit">Submit &amp; finish</button><button class="btn hidden" id="examExport">Export responses (.txt)</button><button class="btn hidden" id="examPrintAttempt">Print completed attempt</button><button class="btn gold hidden" id="examNew">New attempt</button><span class="exam-save-status" id="examSaveStatus" role="status"></span></div><p class="small" id="examPhaseLive" role="status" aria-live="polite" style="padding:0 22px"></p><div class="exam-workspace" id="examWorkspace"><div class="exam-book" id="examStimulusBook"></div><div class="exam-book" id="examResponseBook"></div></div><div class="exam-review hidden" id="examReview"></div></div>
+<div class="exam-error hidden" id="examStorageError" role="alert" style="margin:12px 22px"></div><div class="exam-history" id="examHistory"></div>
+</section>
 </main></div>
-<footer class="footer"><b>Created by Daniel Kerrison</b>, Engineering Teacher, Southport State High School · AI-assisted development with <b>ChattyJeeps (ChatGPT by OpenAI)</b> · Shared free for educational use; please retain attribution when redistributing.<br>Independent educational resource. School affiliation does not imply endorsement by Southport State High School, the Department of Education or QCAA.</footer><a class="fixed-hub" href="./index.html">← Main hub</a><div class="toast hidden" id="toast"></div>
+<footer class="footer"><b>Created by Daniel Kerrison</b>, Engineering Teacher, Southport State High School · AI-assisted development with <b>ChattyJeeps (ChatGPT by OpenAI)</b> · Shared free for educational use; please retain attribution when redistributing.<br>Independent educational resource. School affiliation does not imply endorsement by Southport State High School, the Department of Education or QCAA. Exam papers and review guidance are original rehearsal resources, not QCAA assessment or official marking advice.</footer><a class="fixed-hub" href="./index.html">← Main hub</a><div class="toast hidden" id="toast"></div>
+<div class="exam-print-sheet" id="examPrintSheet"></div>
 <script>
 (()=>{'use strict';
 const CONFIG={"subject":"Modern History","syllabus":"Modern History 2025 v1.4","syllabusUrl":"https://www.qcaa.qld.edu.au/downloads/senior-qce/syllabuses/snr_modern_history_25_syll.pdf","historicalSkills":["Comprehending","Analysing","Evaluating","Synthesising","Research"],"difficulties":["Foundation","Standard","Challenge"],"unit":4,"title":"International experiences in the Modern World","code":"MH25U4","overview":"Investigate international experiences that cross national borders. Practise source-based explanations of causes, interactions, perspectives, consequences, legacy, contestability and historical significance.","rule":"Schools study one Topic 1 and one Topic 2. Topic 2 is externally assessed and must be different from Topic 1. This app keeps Topic 1 research support and Topic 2 external-exam practice distinct.","areas":[{"label":"Topic 1: selected topic","default":"Australian engagement with Asia since 1945","options":["Australian engagement with Asia since 1945","Search for collective peace and security since 1815","Trade and commerce between nations since 1833","Mass migrations since 1848","Information Age since 1936","Genocides and ethnic cleansings since the 1930s","Nuclear Age since 1945","Cold War and its aftermath, 1945–2014","Struggle for peace in the Middle East since 1948","Cultural globalisation since 1956","Space exploration since the 1950s","Rights and recognition of First Peoples since 1982","Terrorism, anti-terrorism and counter-terrorism since 1984"]},{"label":"Topic 2: external-assessment aspect","default":"Mass migrations since 1848 — Migration from Asia to Australia, 1960s–1990s","options":["Mass migrations since 1848 — Migration from Asia to Australia, 1960s–1990s","Cold War and its aftermath, 1945–2014 — Reasons for the end of the Soviet Union, 1980s–1990s"]}],"sourceMode":"international","focusWords":["international context and perspectives","causes, interactions and consequences","nations, groups, agreements and conflict","continuity, change, significance and contestability"],"assessment":{"heading":"Unit 4 assessment support","intro":"This page supports the Unit 4 research investigation and the external short-response examination. It does not replace your school’s assessment instrument or QCAA materials.","cards":[["IA3 — Historical essay based on research","25 marks, up to 2000 words. Research an area associated with a Unit 4 topic and aspect studied in class that is not the selected external-assessment focus. Include the key inquiry question, set historical context, establish a hypothesis and argument outline, develop evidence-led body paragraphs, conclude the argument and use recognised referencing."],["External assessment — short response","25%. Questions relate to the selected Topic 2 and aspect. Students write paragraph responses using evidence from historical sources supplied by QCAA. The stimulus can include evidence from up to 12 succinct sources with separate context statements. Conditions: 15 minutes planning and 120 minutes working."],["External-exam routine","Read each source context first; identify terms and evidence features; answer the exact verb; use source evidence in historical context; make judgments that are specific to the question; and combine sources by ideas rather than source order."]]}};
@@ -85,7 +95,7 @@ function refreshFilters(){const p=filtered();$('poolCount').textContent=p.length
 function sourceHtml(s,i){return '<article class="source"><div class="eyebrow">SOURCE '+(i+1)+' · PRACTICE SCENARIO</div><h3>'+esc(s.title)+'</h3><div class="source-type">'+esc(s.type)+'</div><p>'+esc(s.text)+'</p><p class="small muted" style="margin-top:9px"><b>Source-use cue:</b> '+esc(s.context)+'</p></article>'}
 function start(refs,name){state.session=refs;state.index=0;state.sessionName=name;renderQuestion();show('practice')}
 function renderQuestion(){const ref=state.session[state.index];if(!ref)return;const q=build(ref);state.current=ref;$('qId').textContent=q.fam.id+ref.variant+' · '+CONFIG.code;$('qTitle').textContent=q.p.title;$('qArea').textContent=q.area.name;$('qSkill').textContent=q.p.skill;$('qDiff').textContent=q.p.diff;$('qMarks').textContent=q.marks+' practice mark'+(q.marks>1?'s':'');$('qContext').innerHTML='<b>'+esc(q.area.name)+'</b> — focus this question on '+esc(CONFIG.focusWords[{A:0,B:1,C:2}[ref.variant]%CONFIG.focusWords.length])+'.';$('sources').innerHTML=q.key==='question'?'':q.sources.map(sourceHtml).join('');$('qText').textContent=q.q;const mc=q.kind==='mc';$('options').classList.toggle('hidden',!mc);$('writtenWrap').classList.toggle('hidden',mc);$('checkChoice').classList.toggle('hidden',!mc);$('reveal').classList.toggle('hidden',mc);if(mc){$('options').innerHTML=q.choices.map((c,i)=>'<label class="choice"><input type="radio" name="choice" value="'+esc(c)+'"> <b>'+String.fromCharCode(65+i)+'.</b> '+esc(c)+'</label>').join('')}else{$('response').value=state.drafts[ref.id+ref.variant]||'';$('response').oninput=()=>{state.drafts[ref.id+ref.variant]=$('response').value;save()}}$('solution').classList.remove('show');$('solution').innerHTML='';$('rating').classList.remove('show');$('qStatus').textContent=state.ratings[ref.id+ref.variant]||'';$('previous').disabled=state.index===0;$('next').textContent=state.index===state.session.length-1?'Finish set':'Next →'}
-function checkChoice(){const q=build(state.current),selected=document.querySelector('input[name="choice"]:checked');if(!selected)return toast('Choose an answer first');document.querySelectorAll('#options .choice').forEach(el=>{const v=el.querySelector('input').value;el.classList.add(v===q.answer?'good':v===selected.value?'bad':'')});state.attempts[state.current.id]=(state.attempts[state.current.id]||0)+1;save();toast(selected.value===q.answer?'Correct':'Check the highlighted answer')}
+function checkChoice(){const q=build(state.current),selected=document.querySelector('input[name="choice"]:checked');if(!selected)return toast('Choose an answer first');document.querySelectorAll('#options .choice').forEach(el=>{const v=el.querySelector('input').value;el.classList.remove('good','bad');if(v===q.answer)el.classList.add('good');else if(v===selected.value)el.classList.add('bad')});state.attempts[state.current.id]=(state.attempts[state.current.id]||0)+1;save();toast(selected.value===q.answer?'Correct':'Check the highlighted answer')}
 function reveal(){const q=build(state.current);$('solution').innerHTML='<b>Indicative guidance</b><p>'+esc(q.sol)+'</p>'+q.sources.map((s,i)=>'<p><b>Source '+(i+1)+' evaluation cue:</b> Strength — '+esc(s.strength)+'<br>Limitation — '+esc(s.limit)+'</p>').join('');$('solution').classList.add('show');$('rating').classList.add('show');state.attempts[state.current.id]=(state.attempts[state.current.id]||0)+1;save()}
 function rate(v){const k=state.current.id+state.current.variant;state.ratings[k]=v;save();$('qStatus').textContent=v;toast('Saved')}
 function randomRefs(n,pool=filtered()){if(!pool.length)return null;const refs=[];for(let i=0;i<n;i++){const f=pick(pool);refs.push({id:f.id,variant:pick(['A','B','C'])})}return refs}
@@ -106,35 +116,443 @@ function loadPlan(){const p=state.planner||{};$('planQuestion').value=p.q||'';$(
 function exportProgress(){const a=document.createElement('a'),b=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});a.href=URL.createObjectURL(b);a.download='Modern_History_QCAA_Unit_'+CONFIG.unit+'_Progress.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),200)}
 function importProgress(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state={...state,...JSON.parse(r.result)};save();location.reload()}catch(x){toast('Could not import that progress file')}};r.readAsText(f)}
 function diagnostic(){const bad=[];families().forEach(f=>['A','B','C'].forEach(v=>{const q=build({id:f.id,variant:v});if(!q||!q.q||!q.sol||q.sources.length!==2)bad.push(f.id+v)}));try{if(decode(encode([{id:families()[0].id,variant:'A'}],'Test')).r.length!==1)bad.push('set code')}catch(e){bad.push('set code')}$('diagnostic').innerHTML=bad.length?'<b>Diagnostics failed:</b> '+esc([...new Set(bad)].join(', ')):'<b>Passed:</b> '+families().length+' families × 3 variants, source scenarios, separate unit storage and exact-set code.'}
-function show(name){['home','practice','set','packs','pack','tools','teacher','progress','reference'].forEach(x=>{const e=$(x+'View');if(e)e.classList.toggle('hidden',x!==name)});if(name==='progress')renderProgress();if(name==='packs')renderPackLibrary();if(name==='reference')renderAssessment();window.scrollTo(0,0)}
+function show(name){if(document.body.classList.contains('exam-in-progress')&&name!=='exam'){toast('Submit your exam before returning to revision tools. The timer is still running.');return}if(name==='practice'&&!state.session.length){randomOne();return}document.querySelectorAll('.main > .view').forEach(e=>e.classList.toggle('hidden',e.id!==name+'View'));document.querySelectorAll('.top-actions [data-view]').forEach(e=>e.setAttribute('aria-current',e.dataset.view===name?'page':'false'));document.body.classList.toggle('exam-focus',name==='exam');if(name==='progress')renderProgress();if(name==='packs')renderPackLibrary();if(name==='reference')renderAssessment();if(name==='teacher')$('teacherCode').value=state.teacher.length?encode(state.teacher,'Teacher set'):'';window.dispatchEvent(new CustomEvent('mh:view',{detail:name}));window.scrollTo(0,0)}
 function bind(){document.querySelectorAll('[data-view]').forEach(e=>e.onclick=()=>show(e.dataset.view));$('saveTopics').onclick=saveTopics;['areaFilter','skillFilter','diffFilter','unattempted'].forEach(id=>{const e=$(id);e.oninput=e.onchange=refreshFilters});$('randomOne').onclick=randomOne;$('startHome').onclick=randomOne;$('randomEight').onclick=()=>{const x=randomRefs(8);if(x)start(x,'Random 8');else toast('No questions match those filters')};$('checkChoice').onclick=checkChoice;$('reveal').onclick=reveal;document.querySelectorAll('[data-rate]').forEach(e=>e.onclick=()=>rate(e.dataset.rate));$('previous').onclick=()=>{if(state.index>0){state.index--;renderQuestion()}};$('next').onclick=()=>{if(state.index<state.session.length-1){state.index++;renderQuestion()}else showSet()};$('viewSet').onclick=showSet;$('returnPractice').onclick=()=>show('practice');$('buildPack').onclick=buildPack;$('newPack').onclick=()=>{if(state.lastPack){$('packArea').value=state.lastPack.area;$('packDifficulty').value=state.lastPack.diff;$('packSeed').value=String(Date.now());buildPack()}};$('savePlan').onclick=savePlan;$('clearPlan').onclick=()=>{state.planner={};loadPlan();save();toast('Planner cleared')};$('teacherFive').onclick=()=>{const x=randomRefs(5);if(x){state.teacher=[...state.teacher,...x];save();show('teacher')}};$('teacherTen').onclick=()=>{const x=randomRefs(10);if(x){state.teacher=[...state.teacher,...x];save();show('teacher')}};$('teacherClear').onclick=()=>{state.teacher=[];save();show('teacher')};$('teacherOpen').onclick=()=>{if(state.teacher.length)start(state.teacher,'Teacher set');else toast('Add questions first')};$('openSet').onclick=()=>{try{const d=decode($('openCode').value);start(d.r,d.n||'Imported set')}catch(e){toast('That code is not for this Modern History unit')}};$('runDiagnostic').onclick=diagnostic;$('weakReview').onclick=()=>{const weak=families().filter(f=>!state.attempts[f.id]||Object.entries(state.ratings).some(([k,v])=>k.startsWith(f.id)&&v==='Need work'));const x=randomRefs(Math.min(8,weak.length),weak);if(x)start(x,'Weak-area review');else toast('No weak areas recorded yet')};$('exportProgress').onclick=exportProgress;$('importProgress').onchange=importProgress;$('resetProgress').onclick=()=>{if(confirm('Clear all Unit '+CONFIG.unit+' Modern History progress in this browser?')){localStorage.removeItem(KEY);location.reload()}}}
 function init(){$('familyTotal').textContent=families().length;$('variantTotal').textContent=families().length*3;renderTopics();populateFilters();refreshFilters();refreshStats();renderPackLibrary();renderAssessment();loadPlan();bind();show('home')}
 document.addEventListener('DOMContentLoaded',init);
 globalThis.__MH_APP_TEST__={CONFIG,areas,families,build,sourceTemplates,encode,decode};
 })();
-</script><!-- BEGIN QCAA APP USAGE ANALYTICS -->
-<script id="app-usage-analytics">
-(function () {
-  "use strict";
-  if (window.location.protocol !== "https:" && window.location.protocol !== "http:") return;
-  window.goatcounter = {
-    no_events: true,
-    allow_frame: true,
-    title: "Modern History — Unit 4",
-    path: function () { return window.location.pathname; },
-    referrer: function () {
-      try {
-        var source = new URL(document.referrer);
-        return source.protocol === "http:" || source.protocol === "https:" ? source.origin : "";
-      } catch (e) { return ""; }
-    }
-  };
-  var tracker = document.createElement("script");
-  tracker.async = true;
-  tracker.src = "https://gc.zgo.at/count.js";
-  tracker.setAttribute("data-goatcounter", "https://qcaa-revision-apps.goatcounter.com/count");
-  document.head.appendChild(tracker);
-})();
 </script>
-<!-- END QCAA APP USAGE ANALYTICS -->
-</body></html>
+<script>
+(()=>{'use strict';
+// Unit 4 only. Original rehearsal questions; cited evidence digests, not an official paper.
+const EXAM_KEY='dk.modern-history.qcaa.2025.v1.4.unit.4.external-exam.v1';
+const E=id=>document.getElementById(id);
+const safe=s=>String(s==null?'':s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const TOPICS={
+ migration:{title:'Mass migrations since 1848',aspect:'Migration from Asia to Australia, 1960s–1990s',start:7},
+ soviet:{title:'Cold War and its aftermath, 1945–2014',aspect:'Reasons for the end of the Soviet Union, 1980s–1990s',start:1}
+};
+const MODES={
+ full:{label:'Full simulation',planning:15,working:120},
+ short:{label:'Short rehearsal (non-official)',planning:3,working:24},
+ untimed:{label:'Untimed practice (non-official)',planning:0,working:0}
+};
+const RECORDS={
+ m1:{
+  title:'A government report on the 1966 immigration changes',
+  context:'Department of Immigration report, covering decisions announced on 9 March 1966 and results to 30 September 1967. Underlying record: contemporary government policy report, transcribed by the National Archives of Australia.',
+  text:'The report states that non-European residents on temporary permits who were likely to remain could seek resident status and citizenship after five years, instead of fifteen. New applications from well-qualified non-European settlers would be considered for suitability and qualifications useful to Australia.\n\nEntry approvals in the eighteen months to 30 September 1967: 160 principal skilled applicants and 335 dependants, totalling 495 people. Its comparison for the calendar year 1965 is 58 principal applicants and 93 dependants. The later principal applicants included doctors, engineers, university lecturers and scientists.',
+  credit:'National Archives of Australia, “Revision of 1966 immigration policy affecting non-Europeans”. App-authored digest of the record’s transcription.',
+  url:'https://www.naa.gov.au/learn/learning-resources/learning-resource-themes/society-and-culture/migration-and-multiculturalism/revision-1966-immigration-policy-affecting-non-europeans'
+ },
+ m2:{
+  title:'A museum interpretation of the end of racial selection',
+  context:'National Museum of Australia, “Ending the White Australia policy”, updated 6 March 2025. Underlying source: a retrospective institutional historical interpretation for a public audience.',
+  text:'The museum identifies the Holt government’s 1966 changes as a major step towards dismantling racial restrictions. Selection increasingly emphasised skills and contributions to Australia. It also notes that practical equality remained incomplete: the government did not establish migration offices in Asian countries or provide assistance for Asian migrants. The Whitlam government definitively renounced the White Australia policy in 1973. The account presents the change as a process with more than one political turning point, rather than a single event that immediately transformed every migrant’s experience.',
+  credit:'National Museum of Australia, “Ending the White Australia policy”. App-authored digest of a secondary account.',
+  url:'https://www.nma.gov.au/defining-moments/resources/end-of-white-australia-policy'
+ },
+ m3:{
+  title:'Vietnamese displacement and the resettlement pathway',
+  context:'National Museum of Australia, “Vietnamese refugees boat arrival”. Underlying source: a retrospective museum account drawing on historical records and refugee experiences, concerning the late 1970s and early 1980s.',
+  text:'The museum links departure from Vietnam to the fall of South Vietnam and changes under the new government, including re-education and disruption to employment. It describes dangerous voyages and pressures on neighbouring countries. Australia negotiated to increase resettlement while seeking an end to the practice of sending boats back to sea. Australian officials selected refugees in South-East Asian camps. Although Lam Binh’s boat reached Darwin on 26 April 1976, the great majority of Vietnamese refugees entering Australia arrived by air after selection in camps.',
+  credit:'National Museum of Australia, “Vietnamese refugees boat arrival”. App-authored digest; the museum’s present-day census material is not included.',
+  url:'https://www.nma.gov.au/defining-moments/resources/vietnamese-refugees-boat-arrival'
+ },
+ m4:{
+  title:'Fraser describes multicultural policy and services',
+  context:'Prime Minister Malcolm Fraser, inaugural address to the Australian Institute of Multicultural Affairs, 30 November 1981. Underlying source: a public speech explaining his government’s multicultural policy.',
+  text:'Fraser described acceptance of the 1978 Galbally Report as a turning point in government action. He emphasised equal access to general services, additional services where required, cultural diversity and consultation. He listed English-language instruction, migrant resource centres, welfare workers, multicultural education and broadcasting among subsequent initiatives. He said migrants’ dignity and full participation were fundamental issues, not distractions from other concerns. He also announced an independent evaluation of the report’s objectives and outcomes, indicating that the effectiveness of the initiatives still needed examination.',
+  credit:'Department of the Prime Minister and Cabinet, PM Transcripts, transcript 5702. App-authored digest of Fraser’s speech.',
+  url:'https://pmtranscripts.pmc.gov.au/release/transcript-5702'
+ },
+ m5:{
+  title:'One family recalls escape, sponsorship and settlement',
+  context:'Vuong Thanh Loc presents his father’s retrospective family account, reproduced by the National Museum of Australia from the NSW Migration Heritage Centre. It was recorded after 1999; the extract concerns departure in 1984 and arrival in 1985. Underlying source: mediated personal recollection, not a population survey.',
+  text:'The father recalled restrictions on the family business and fear because relatives had worked for the South Vietnamese government. Repeated attempts to leave included imprisonment. In 1984 an overcrowded boat with an unreliable engine reached Malaysia after seven days; he then spent about nine months in a refugee camp. His brother sponsored his arrival in Melbourne in 1985. He remembered homesickness and anxiety about finding work with limited English. Friends helped him obtain jewellery-manufacturing work related to his previous occupation. His son described continuing connections with Vietnamese language and culture.',
+  credit:'National Museum of Australia Digital Classroom, “From there (Vietnam) to here (Australia)” family account. App-authored digest; date of recording is not specified.',
+  url:'https://digital-classroom.nma.gov.au/learning-modules/migration-experiences-defining-moments-1945-present/34-1976-first-postwar-boat-people-first-arrival-vietnamese-refugees-boat'
+ },
+ m6:{
+  title:'Hawke launches the National Agenda',
+  context:'Prime Minister Bob Hawke, launch of the National Agenda for a Multicultural Australia, Sydney, 26 July 1989. Underlying source: a public policy-launch speech delivered to an audience including multicultural advisers.',
+  text:'Hawke argued that cultural diversity could strengthen Australia and that prejudice, rather than diversity, created division. He linked multicultural policy to cultural identity, social justice and economic efficiency. All Australians, he maintained, should have dignity and access to government services. Yet he acknowledged that migrants’ overseas qualifications had often gone unrecognised and that language, culture and race had obstructed access to services. He presented new measures as remedies. He also criticised the federal opposition’s position, placing the policy within a contested political debate.',
+  credit:'Department of the Prime Minister and Cabinet, PM Transcripts, transcript 7690. App-authored digest of Hawke’s speech.',
+  url:'https://pmtranscripts.pmc.gov.au/release/transcript-7690'
+ },
+ m7:{
+  title:'Settlement services after the Galbally review',
+  context:'National Archives of Australia learning resource about the Footscray Settlement and Language Centre. Underlying source: retrospective archival interpretation of post-arrival services and the 1978 Galbally Report; publication date is not stated.',
+  text:'The archival account explains that the government commissioned a review of migrant services in 1977. The 1978 report found existing services inadequate and recommended stronger provision. Migrant resource centres were to help with accommodation, interpreting, English lessons, access to doctors and recognition of qualifications. Local ethnic-community representatives and volunteers participated in their operation. Services particularly addressed the needs of non-English-speaking migrants. The account describes a shift away from expecting assimilation into a British-based culture towards participation while maintaining cultural heritage.',
+  credit:'National Archives of Australia, “Support for new migrants – Footscray Settlement and Language Centre”. App-authored digest of the explanatory account, not the photograph.',
+  url:'https://www.naa.gov.au/students-and-teachers/learning-resources/learning-resource-themes/society-and-culture/migration-and-multiculturalism/support-new-migrants-footscray-settlement-and-language-centre'
+ },
+ m8:{
+  title:'Temporary protection for Chinese nationals in 1989',
+  context:'Prime Minister Bob Hawke, media release after meeting representatives of Australia’s Chinese community, 16 June 1989, following violence in China. Underlying source: an announcement of government decisions and matters still under consideration.',
+  text:'Hawke announced that PRC nationals legally in Australia on 4 June 1989 could apply to extend temporary permits for a further twelve months, until 31 July 1990. Students could work up to twenty hours each week, or full-time after their courses finished during that period. The government was examining assistance for people without social security or Medicare. Urgent family visa arrangements were being made. A Cabinet submission would consider refugee status, humanitarian residence and reunion issues. These further matters were not described as already settled.',
+  credit:'Department of the Prime Minister and Cabinet, PM Transcripts, transcript 7641. App-authored digest of the media release.',
+  url:'https://pmtranscripts.pmc.gov.au/release/transcript-7641'
+ },
+ s1:{
+  title:'US intelligence assesses the economic reform agenda',
+  context:'Central Intelligence Agency, “Gorbachev’s Economic Agenda: Promises, Potentials, and Pitfalls”, September 1985. Underlying source: an intelligence assessment for US policymakers, later declassified and published by the National Security Archive.',
+  text:'The assessment presented serious economic problems confronting the new Soviet leader. It anticipated an ambitious programme, including efforts to improve performance, reconsider resource commitments to defence, allow some private activity in consumer services and change foreign-trade arrangements. Its judgment was conditional: limited adjustments could become a politically convenient but economically ineffective approach. The analysts were assessing proposals and possibilities in 1985, not describing the dissolution of the Soviet Union six years later. Their account linked economic performance with the political choices facing the leadership.',
+  credit:'CIA assessment, September 1985, reproduced by the National Security Archive. App-authored digest of the document and its archival description.',
+  url:'https://nsarchive.gwu.edu/document/28325-document-5-cia-intelligence-assessment-gorbachevs-economic-agenda-promises'
+ },
+ s2:{
+  title:'Yakovlev argues for democratisation within socialism',
+  context:'Alexander Yakovlev, presentation to the Communist Party Politburo, 28 September 1987. Underlying source: an internal presentation by a senior reformer, preserved in the State Archive of the Russian Federation; English translation published by the National Security Archive.',
+  text:'Yakovlev argued that perestroika required democratisation and competing points of view. He said censorship of differing opinions was inconsistent with democracy. He rejected the idea that reform had created every problem now being discussed: stagnation had produced problems that openness brought into public view. He recognised that some opinions were unacceptable to party leaders but opposed hiding all disagreement. He described democratisation as necessary to strengthen socialism, not as a programme to dissolve the Soviet state.',
+  credit:'Yakovlev presentation, 28 September 1987, pp. 1–2 of the published translation. App-authored digest.',
+  url:'https://nsarchive.gwu.edu/document/28336-document-16-text-yakovlevs-presentation-cc-cpsu-politburo-session-september-28-1987'
+ },
+ s3:{
+  title:'Gorbachev outlines new thinking at the United Nations',
+  context:'Mikhail Gorbachev, address to the UN General Assembly, 7 December 1988. Underlying source: a public diplomatic speech by the Soviet leader to an international audience; translated excerpts reproduced by Vancouver Island University.',
+  text:'Gorbachev argued that force should not determine foreign policy and that peoples should have freedom of choice. He presented democratic reform as a way to advance restructuring and acknowledged resistance and new difficulties. He announced a reduction of 500,000 armed-forces personnel over two years, plus withdrawal and disbanding of six tank divisions from East Germany, Czechoslovakia and Hungary by 1991. He linked disarmament with the possibility of converting military production to civilian uses. He described these changes as renewal of socialism and international cooperation.',
+  credit:'Gorbachev UN address, 7 December 1988; translated excerpts, Vancouver Island University. App-authored digest. UN record: A/43/PV.72.',
+  url:'https://web.viu.ca/davies/H102/Gorbachev.UNspeech.Dec1988.htm'
+ },
+ s4:{
+  title:'Lithuania declares the re-establishment of its state',
+  context:'Supreme Council of the Republic of Lithuania, Act No. I-12, 11 March 1990. Underlying source: an act asserting national sovereignty, reproduced in English in UNHCR’s Refworld collection.',
+  text:'The Supreme Council asserted that sovereign powers removed by foreign forces in 1940 were re-established and that Lithuania was again independent. It identified earlier independence acts as the continuing constitutional foundation of the state. It declared its territory indivisible and rejected the validity of any other state’s constitution within Lithuania. It also affirmed international-law principles, borders and rights. The document presented independence as restoration of a state, rather than permission granted by the Soviet centre.',
+  credit:'Lithuanian Act No. I-12, 11 March 1990, English text in Refworld. App-authored digest.',
+  url:'https://www.refworld.org/legal/legislation/natlegbod/1990/en/85586'
+ },
+ s5:{
+  title:'Scowcroft reports on the centre after the failed coup',
+  context:'Brent Scowcroft, US National Security Adviser, memorandum to President George H. W. Bush, “Developments in the USSR”, 5 September 1991. Underlying source: internal advice after the failed August coup, held by the Bush Presidential Library and later declassified.',
+  text:'Scowcroft described a weakened Soviet centre and changing relations between Gorbachev, Yeltsin and the republics. He noted Yeltsin’s moves to gain control of central institutions and important posts. He reported disputes over borders and warned about the risks of disintegration. He wanted Gorbachev and Yeltsin to cooperate in keeping the union together. He was uncertain whether leaders who spoke of democracy and markets would consistently pursue those policies. The assessment treated the future political arrangement as unsettled, not as an inevitable completed outcome.',
+  credit:'Scowcroft memorandum, 5 September 1991, Bush Presidential Library, published by the National Security Archive. App-authored digest of its archival description.',
+  url:'https://nsarchive.gwu.edu/document/22493-1-memorandum-scowcroft-president'
+ },
+ s6:{
+  title:'Three republics establish a new commonwealth',
+  context:'Leaders of Belarus, the Russian republic and Ukraine, Minsk declaration and agreement establishing the Commonwealth of Independent States, 8 December 1991. Underlying sources: official agreements transmitted to the United Nations as A/46/771; reproduced in International Legal Materials.',
+  text:'The three leaders declared that the Soviet Union no longer existed as an international legal entity and geopolitical reality. Their declaration described deadlocked union-treaty talks, republics’ withdrawal, a deep economic and political crisis and falling living standards. It blamed the centre’s policy for the crisis. They established the Commonwealth of Independent States, open to further members, while committing to international obligations and arrangements for nuclear control. They presented the new association as a response to the breakdown of the former union.',
+  credit:'Minsk declaration and agreement, 8 December 1991, reproduced in International Legal Materials from UN documents. App-authored digest of pp. 5–6 of the linked PDF.',
+  url:'https://www.justsecurity.org/wp-content/uploads/2022/03/alma-alta-commonwealth-of-independent-states-december-1991.pdf'
+ },
+ s7:{
+  title:'Gates interprets reform through strategic competition',
+  context:'Robert M. Gates, Deputy Director of the CIA, memorandum “Gorbachev’s Gameplan: The Long View”, 24 November 1987, before the Washington summit. Underlying source: classified advice circulated to senior US officials, later declassified.',
+  text:'Gates acknowledged Soviet economic weakness but argued that modernisation aimed to strengthen Soviet power at home and abroad. He interpreted reduced tensions as a way to avoid costly defence spending and obtain Western economic assistance. He expected the Communist Party’s monopoly and basic economic structures to remain. He predicted that arms reductions would protect Soviet advantages. The memo treated diplomacy as part of a continuing strategic rivalry and anticipated a more competitive Soviet adversary, rather than the state’s imminent dissolution.',
+  credit:'Gates memorandum, 24 November 1987, CIA release published by the National Security Archive. App-authored digest of the memorandum.',
+  url:'https://nsarchive.gwu.edu/document/28337-document-17-orbachevs-gameplan-long-view-robert-m-gates-deputy-director-central'
+ },
+ s8:{
+  title:'Gorbachev’s final presidential call to Bush',
+  context:'US memorandum of the Gorbachev–Bush telephone conversation, 25 December 1991, shortly before Gorbachev’s resignation announcement. Underlying source: a US official record of a private discussion, held by the Bush Presidential Library.',
+  text:'Gorbachev said the debate over the union’s future had taken a different direction from the one he considered right. He asked Bush to support cooperation among the republics and Russia’s reforms rather than allow further disintegration. He said nuclear-use authority would pass to the Russian president when he resigned. Both leaders valued their cooperation and friendship. Bush indicated that the United States would recognise and deal with the republics while maintaining contact with Gorbachev. The conversation presented partnership and management of separation, not a plan for renewed superpower confrontation.',
+  credit:'Gorbachev–Bush telephone memorandum, 25 December 1991, published by the National Security Archive. App-authored digest of the US record.',
+  url:'https://nsarchive.gwu.edu/document/27273-document-10-memorandum-telephone-conversation-gorbachev-bush-december-25-1991-last'
+ }
+};
+const PAPERS=[
+ {id:'migration-A',code:'MH4-EA-MA',topic:'migration',label:'Paper A · Policy and displacement',focus:'Policy change, refugee push factors and the relationship between migration and settlement.',sources:['m1','m2','m3','m5','m4','m6'],questions:[
+  {skill:'Analysis',prompt:'Using Sources 7 and 8, analyse how Australian immigration policy changed between 1966 and 1973. Explain one limit to treating the change as an immediate achievement of equality.',points:[
+   'Identify the five-year eligibility change and the qualified-settler criteria in Source 7; explain what these enabled for non-European applicants.',
+   'Use Source 8 to distinguish the 1966 step from the definitive renunciation in 1973. Explain change as a process, not a single total break.',
+   'Connect the lack of Asian migration offices or assistance in Source 8 with limits on practical equality. Source 7’s selective skilled categories also qualify a claim of completely unrestricted entry.',
+   'If using the approval figures, acknowledge that eighteen months and one calendar year are different comparison periods. Do not calculate an unqualified annual growth rate.'
+  ]},
+  {skill:'Evaluation',prompt:'Evaluate the usefulness and reliability of Source 10 for investigating the reasons Vietnamese people migrated to Australia and their settlement experiences in the 1980s. Use Source 9 to test your judgment.',points:[
+   'Make separate, inquiry-specific judgments of usefulness and reliability. The family account supplies detailed motives, a camp-and-sponsorship pathway, language anxiety and help finding work.',
+   'Weigh personal proximity to lived experience against retrospective memory, selection by a son, an unspecified recording date and the inability of one family to represent all migrants.',
+   'Source 9 corroborates the broader displacement and camp-selection context and challenges a generalisation that most arrivals reached Australia directly by boat.',
+   'Distinguish corroboration of a broad pattern from independent proof of each family detail. Avoid treating all refugees’ motives, employment or outcomes as identical.'
+  ]},
+  {skill:'Synthesis',prompt:'To what extent were changes in Australian government policy the main reason for migration from Asia to Australia during the 1960s–1990s? Develop a historical argument using evidence from at least four of Sources 7–12.',points:[
+   'Offer a defensible, qualified extent judgment. Distinguish policies enabling admission from circumstances compelling people to leave.',
+   'Sources 7 and 8 support policy change as an enabling condition; Sources 9 and 10 support political displacement, danger, family sponsorship and regional camp pathways.',
+   'Sources 11 and 12 show changes in belonging, services and access. Explain their role carefully: post-arrival services do not by themselves prove why every person initially migrated.',
+   'Combine evidence around causal ideas and compare contributions. Account for the time range and different migrant groups; the Vietnamese case cannot establish every Asian migration experience.',
+   'Alternative arguments are acceptable when supported by the supplied evidence. A source-by-source retelling without causal reasoning is not sufficient synthesis.'
+  ]}
+ ]},
+ {id:'migration-B',code:'MH4-EA-MB',topic:'migration',label:'Paper B · Protection and participation',focus:'Settlement barriers, humanitarian responses and multicultural policy in practice.',sources:['m1','m7','m5','m4','m8','m6'],questions:[
+  {skill:'Analysis',prompt:'Using Sources 8 and 9, analyse two challenges faced by Vietnamese arrivals in the 1980s and how settlement support could address them.',points:[
+   'Select two precise challenges from the family account, such as limited English, employment anxiety or homesickness. Explain their significance rather than merely listing them.',
+   'Relate those challenges to interpreting, language learning, qualifications or community support described in Source 8.',
+   'Distinguish a service programme’s intended role from proof of the family’s actual use of it. Source 9 attributes job assistance to friends, not to a named resource centre.',
+   'Situate the account in 1985 and the earlier services review in 1978. Do not assume that every migrant received identical help or achieved the same outcome.'
+  ]},
+  {skill:'Evaluation',prompt:'Evaluate the usefulness and reliability of Source 12 for investigating how far official multicultural policies achieved equality for migrants from Asia. Test your judgment against Sources 9 and 10.',points:[
+   'Source 12 is useful for government priorities and recognition of qualifications and service barriers. Its acknowledgment of continuing problems complicates a simple claim of completed equality.',
+   'Its author had direct knowledge of policy but was promoting an agenda and criticising political opponents. Weigh authority against persuasion; a speech is not an outcomes survey.',
+   'Compare Fraser’s programmes in Source 10 with Hawke’s later calls for remedies. Shared concern is not independent measurement of programme effectiveness.',
+   'Use the family account in Source 9 as a lived example that can qualify broad policy claims, while acknowledging its limited representativeness.',
+   'Keep the inquiry specific to migrants from Asia: statements about all Australians need carefully supported application to that group.'
+  ]},
+  {skill:'Synthesis',prompt:'“Migration from Asia to Australia during the 1960s–1990s was shaped by humanitarian needs as well as economic goals.” Evaluate this interpretation using at least four of Sources 7–12.',points:[
+   'Establish an argument about the interaction of humanitarian and economic influences, not just two separate lists.',
+   'Use the skills-based selection in Source 7 and qualifications/economic efficiency in Source 12 for economic priorities; compare the personal pressures in Source 9 and protection measures in Source 11.',
+   'Source 11 concerns temporary extensions and proposals in June 1989. It is not evidence that permanent residence was automatically granted at that moment.',
+   'Sources 8 and 10 connect admission with post-arrival participation and needs. Explain whether they qualify the interpretation or extend it beyond initial entry.',
+   'Account for differences among skilled migrants, refugees and Chinese nationals already in Australia. Support a balanced judgment with precise source references.'
+  ]}
+ ]},
+ {id:'soviet-A',code:'MH4-EA-SA',topic:'soviet',label:'Paper A · Reform and fragmentation',focus:'Economic pressure, political reform, republican sovereignty and the breakdown of the centre.',sources:['s1','s2','s3','s4','s5','s6'],questions:[
+  {skill:'Analysis',prompt:'Using Sources 1 and 2, analyse the relationship between the problems facing the Soviet system and the case for reform in the 1980s.',points:[
+   'Source 1 links economic performance and resource choices to the new leadership’s reform agenda. Its forecasts should not be presented as achieved outcomes.',
+   'Source 2 links stagnation, public criticism and demands for democratisation. Explain how glasnost could expose problems previously less visible.',
+   'Distinguish economic restructuring from political openness while explaining their relationship. Yakovlev intended to strengthen socialism, not explicitly end the state.',
+   'Use evidence to explain a relationship; do not assume that proposals in 1985 or 1987 already prove an inevitable 1991 collapse.'
+  ]},
+  {skill:'Evaluation',prompt:'Evaluate the usefulness and reliability of Source 5 for investigating the effect of the failed August 1991 coup on Soviet central authority. Use Source 4 to qualify your judgment.',points:[
+   'Source 5 is close in time to the failed coup and useful for a US adviser’s assessment of a weakened centre, Yeltsin’s influence and uncertainty about the republics.',
+   'Its internal audience and official access are relevant strengths, but it remains an external, selective policy assessment shaped by US concerns about stability.',
+   'Source 4 predates the coup and establishes that republican sovereignty challenges were already present in March 1990. The coup cannot be treated as their sole origin.',
+   'Explain the difference between an accelerating event and longer-running centrifugal pressures. Neither digest measures all republican opinion or every institution’s strength.'
+  ]},
+  {skill:'Synthesis',prompt:'To what extent did long-running pressures, rather than Gorbachev’s decisions alone, explain the end of the Soviet Union? Use at least four of Sources 1–6, including Source 6, to develop a historical argument.',points:[
+   'Make an extent judgment that distinguishes structural pressures, reform choices and the immediate political settlement.',
+   'Source 1 supports economic pressures; Sources 2 and 3 show reform intentions and mechanisms. Explain unintended effects without assuming dissolution was the reformers’ stated aim.',
+   'Sources 4 and 5 support republican sovereignty and competition for central authority. Source 6 shows leaders actively replacing the union with a new association.',
+   'Evaluate the declaration’s blame of the centre in light of its authors’ interests. Its legal announcement establishes a political act, not an impartial ranking of all causes.',
+   'Connect the sources by causal ideas and weigh significance. A qualified argument for the importance of Gorbachev is also defensible if it addresses other pressures.'
+  ]}
+ ]},
+ {id:'soviet-B',code:'MH4-EA-SB',topic:'soviet',label:'Paper B · Rival interpretations',focus:'Western assessments, reform intentions, national self-determination and competing explanations.',sources:['s1','s7','s3','s4','s5','s8'],questions:[
+  {skill:'Analysis',prompt:'Using Sources 2 and 3, analyse how their representations of Soviet reform differ. Explain how context helps account for the difference.',points:[
+   'Gates represents reform and diplomacy as strengthening a continuing strategic rival. Gorbachev emphasises freedom of choice, cooperation and reductions in armed forces.',
+   'Support the contrast with precise features, such as the party-monopoly forecast and the announced 500,000-person reduction.',
+   'Explain the different authors, audiences and purposes: internal US intelligence advice in 1987 versus Soviet public diplomacy in 1988.',
+   'The dates allow developments over time as well as contrasting perspectives. Neither text alone demonstrates implementation of every claim or promise.'
+  ]},
+  {skill:'Evaluation',prompt:'Evaluate the usefulness and reliability of Source 4 for investigating the role of national self-determination in weakening Soviet central authority. Use Source 5 to test your judgment.',points:[
+   'The act directly records an assertion of sovereignty, constitutional continuity and rejection of another state’s constitution. It is strong evidence of an official Lithuanian position.',
+   'Its authors were asserting statehood and legitimacy. Distinguish reliability for what they declared from proof of every citizen’s views, immediate practical independence or the motives of all republics.',
+   'Source 5 supplies a later external account of competition between the centre and republics, including border disputes. It can support a broader pattern without proving uniform motives.',
+   'Acknowledge different dates, origins and purposes, then make a reasoned judgment specific to national self-determination rather than dismissing the act as merely “biased”.'
+  ]},
+  {skill:'Synthesis',prompt:'“The Soviet Union ended mainly because of external Western pressure.” Evaluate this interpretation using at least four of Sources 1–6.',points:[
+   'Define and test the interpretation with an extent judgment. Distinguish Western pressure from internal economic problems, leadership decisions and republican sovereignty.',
+   'Sources 1 and 2 link economic and strategic pressures to reform; explain why an American author’s interpretation is not itself proof of decisive external causation.',
+   'Sources 3 and 4 support reform choices and national claims; Source 5 supports internal competition and US anxiety about disintegration.',
+   'Source 6 shows cooperation in December 1991 and management of separation. It qualifies a claim that US policy uniformly sought immediate fragmentation.',
+   'Weigh evidence and competing causes. Avoid equating the end of Cold War confrontation with the dissolution of the USSR, or assuming the 1987 forecasts accurately predicted the outcome.'
+  ]}
+ ]}
+];
+const REVIEW_ITEMS=[
+ ['context','I used accurate terms, chronology and the selected aspect; I did not substitute background narrative for source evidence.'],
+ ['analysis','I identified precise features and explained their meaning or historical relationship, rather than only paraphrasing.'],
+ ['evaluation','I judged usefulness and reliability for the exact inquiry, weighing origin, purpose, context and relevant limits.'],
+ ['synthesis','I combined sources by ideas, addressed a competing interpretation and sustained a qualified argument.'],
+ ['communication','I used clear full-sentence paragraphs and source numbers; I distinguished what the evidence shows from what I infer.']
+];
+const copy=v=>JSON.parse(JSON.stringify(v));
+const paperById=id=>PAPERS.find(p=>p.id===id);
+let exam={schema:1,subject:'Modern History',unit:4,selection:{topic:'migration',paper:'migration-A',mode:'full'},active:null,history:[]};
+let storageReadable=true,viewReady=false,loadedSelection=false;
+function validAttempt(a){
+ return a&&paperById(a.paper)&&MODES[a.mode]&&/^[0-9]+-[a-z0-9]+$/.test(a.id)&&
+ ['planning','working','submitted'].includes(a.status)&&Number.isFinite(a.startedAt)&&
+ (a.mode==='untimed'||(Number.isFinite(a.planningEnd)&&Number.isFinite(a.workingEnd)&&a.workingEnd>=a.planningEnd&&a.planningEnd>=a.startedAt))&&
+ Array.isArray(a.answers)&&a.answers.length===3&&a.answers.every(x=>typeof x==='string')&&
+ typeof a.notes==='string'&&(a.status!=='submitted'||Number.isFinite(a.submittedAt));
+}
+try{
+ const raw=localStorage.getItem(EXAM_KEY);
+ if(raw){
+  const x=JSON.parse(raw);
+  if(x.schema!==1||x.subject!=='Modern History'||x.unit!==4||!Array.isArray(x.history)||!x.history.every(validAttempt)||(x.active&&!validAttempt(x.active)))throw Error('Invalid unit exam data');
+  exam={...exam,...x};
+  loadedSelection=!!(x.selection&&TOPICS[x.selection.topic]&&paperById(x.selection.paper)&&MODES[x.selection.mode]);
+ }
+}catch(err){storageReadable=false}
+function storageError(message){E('examStorageError').textContent=message;E('examStorageError').classList.remove('hidden')}
+function persist(){
+ try{localStorage.setItem(EXAM_KEY,JSON.stringify(exam));E('examSaveStatus').textContent='Saved on this device';E('examStorageError').classList.add('hidden');storageReadable=true;return true}
+ catch(err){E('examSaveStatus').textContent='Not saved — keep this tab open';storageError('Browser storage is unavailable or full. Your work is held in this tab only. Keep it open, submit when ready and export your responses before closing. Ordinary revision progress is not changed.');return false}
+}
+function currentPaper(){return exam.active?paperById(exam.active.paper):paperById(E('examPaper').value)}
+function liveAttempt(){return !!(exam.active&&exam.active.status!=='submitted')}
+function timedAttempt(){return liveAttempt()&&exam.active.mode!=='untimed'}
+function words(s){return String(s).trim()?String(s).trim().split(/\s+/).length:0}
+function range(p){const start=TOPICS[p.topic].start;return 'Sources '+start+'–'+(start+5)}
+function dateText(n){return new Date(n).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'})}
+function modeText(a){return MODES[a.mode].label+(a.assisted?' · assisted / early finish':'')}
+function openExam(){document.querySelector('.top-actions [data-view="exam"]').click()}
+function fillPapers(){
+ const topic=E('examTopic').value,old=E('examPaper').value;
+ E('examPaper').innerHTML=PAPERS.filter(p=>p.topic===topic).map(p=>'<option value="'+p.id+'">'+safe(p.label)+' · '+p.code+'</option>').join('');
+ const wanted=paperById(exam.selection.paper);
+ E('examPaper').value=paperById(old)&&paperById(old).topic===topic?old:wanted&&wanted.topic===topic?wanted.id:PAPERS.find(p=>p.topic===topic).id;
+ updateSetup();
+}
+function updateSetup(){
+ const p=paperById(E('examPaper').value);if(!p)return;
+ const mode=MODES[E('examMode').value]||MODES.full;
+ E('examPaperFocus').innerHTML='<b>'+safe(TOPICS[p.topic].aspect)+'</b> — '+safe(p.focus)+'<br>Your exam selection does not change your ordinary revision topic settings.';
+ E('examSourceRange').textContent=range(p)+' · '+p.code;
+ E('examTimingLabel').textContent=mode.planning?mode.planning+' + '+mode.working+' min':'Untimed';
+ E('examTimingSub').textContent=mode===MODES.full?'planning followed by working time':'learning mode · not official conditions';
+ E('examStart').textContent=mode===MODES.full?'Start full simulation':mode===MODES.short?'Start short rehearsal':'Start untimed practice';
+ exam.selection={topic:p.topic,paper:p.id,mode:E('examMode').value};
+}
+function startExam(){
+ updateSetup();const p=paperById(exam.selection.paper),mode=MODES[exam.selection.mode];
+ if(!storageReadable&&!confirm('Previous exam data could not be loaded. Starting a new attempt will replace unreadable exam data in this browser. Continue?'))return;
+ if(!confirm('Start '+p.code+' — '+mode.label+'? '+(mode.planning?'The timer cannot be paused and continues when this file is closed.':'Responses and guidance will remain separate until you submit.')))return;
+ const now=Date.now();
+ exam.active={id:now+'-'+Math.random().toString(36).slice(2,10),paper:p.id,mode:exam.selection.mode,startedAt:now,planningEnd:mode.planning?now+mode.planning*60000:null,workingEnd:mode.planning?now+(mode.planning+mode.working)*60000:null,status:mode.planning?'planning':'working',answers:['','',''],notes:'',assisted:false,review:{},nextStep:''};
+ persist();renderExam();openExam();
+}
+function sourceCard(record,number,allowLinks){
+ return '<article class="exam-source"><div class="eyebrow">SOURCE '+number+' · ABRIDGED EVIDENCE DIGEST</div><h4>'+safe(record.title)+'</h4><div class="source-context"><b>Context statement</b><br>'+safe(record.context)+'</div><p class="source-evidence">'+safe(record.text)+'</p><div class="source-credit">'+safe(record.credit)+(allowLinks?' <a href="'+safe(record.url)+'" target="_blank" rel="noopener">View cited record</a>':' <span>Original-record link available after submission.</span>')+'</div></article>';
+}
+function questionList(p){
+ return p.questions.map((q,i)=>'<div class="exam-question"><h4>Question '+(i+1)+'</h4><p>'+safe(q.prompt)+'</p></div>').join('');
+}
+function buildBooks(){
+ const a=exam.active,p=paperById(a.paper),topic=TOPICS[p.topic],complete=a.status==='submitted',start=topic.start;
+ E('examAttemptCode').textContent=p.code+' · '+modeText(a);
+ E('examAttemptTitle').textContent=topic.aspect;
+ E('examStimulusBook').innerHTML='<div class="exam-book-title"><div class="eyebrow">QUESTION AND STIMULUS BOOK · ORIGINAL PRACTICE</div><h3>'+safe(topic.title)+'</h3><p><b>Aspect:</b> '+safe(topic.aspect)+'</p><p>'+range(p)+'. Answer all three questions for this topic only. Questions and evidence digests are original practice, not unseen QCAA stimulus.</p></div><details class="exam-guide"><summary>Questions 1–3 (also shown in the response book)</summary>'+questionList(p)+'</details>'+p.sources.map((id,i)=>sourceCard(RECORDS[id],start+i,complete||a.mode==='untimed')).join('');
+ E('examResponseBook').innerHTML='<div class="exam-book-title"><div class="eyebrow">SEPARATE RESPONSE BOOK</div><h3>Your paragraph responses</h3><p>Use full sentences and refer to source numbers. Planning notes are not marked. Word counts are rehearsal aids only; no official word limit is imposed here. For handwriting, use a printed response book and this timer.</p><div class="button-row">'+p.questions.map((q,i)=>'<a class="exam-jump" href="#examQ'+(i+1)+'">Question '+(i+1)+'</a>').join('')+'</div></div><details class="exam-planning" '+(a.status==='planning'?'open':'')+'><summary>Unmarked planning paper</summary><p>Use your own notes to map source evidence to each question. These notes are saved separately from your answers.</p><label for="examNotes" class="small">Your planning notes</label><textarea id="examNotes" placeholder="Make your own plan here…">'+safe(a.notes)+'</textarea></details>'+p.questions.map((q,i)=>'<article class="exam-question" id="examQ'+(i+1)+'"><h4>Question '+(i+1)+'</h4><p>'+safe(q.prompt)+'</p><label for="examAnswer'+i+'" class="small"><b>Response to Question '+(i+1)+'</b></label><textarea id="examAnswer'+i+'" data-exam-answer="'+i+'" spellcheck="false" placeholder="Write full-sentence paragraphs when working time begins…">'+safe(a.answers[i])+'</textarea><span class="count" id="examWord'+i+'">'+words(a.answers[i])+' words · practice counter</span></article>').join('');
+ E('examNotes').addEventListener('input',()=>{tick();if(!liveAttempt())return;exam.active.notes=E('examNotes').value;persist()});
+ document.querySelectorAll('[data-exam-answer]').forEach(el=>el.addEventListener('input',()=>{
+  tick();if(!exam.active||exam.active.status!=='working')return;
+  const i=Number(el.dataset.examAnswer);exam.active.answers[i]=el.value;E('examWord'+i).textContent=words(el.value)+' words · practice counter';persist();
+ }));
+ setBookView('both');syncControls();
+}
+function syncControls(){
+ const a=exam.active;if(!a)return;
+ const done=a.status==='submitted',planning=a.status==='planning';
+ document.body.classList.toggle('exam-in-progress',!done&&a.mode!=='untimed');
+ document.querySelectorAll('[data-exam-answer]').forEach(el=>{el.disabled=planning;el.readOnly=done;el.setAttribute('aria-describedby','examPhaseLive')});
+ E('examNotes').readOnly=done;
+ E('examEarlyWork').classList.toggle('hidden',!planning);
+ E('examSubmit').classList.toggle('hidden',done);
+ E('examSubmit').textContent=planning?'End during planning (assisted)':'Submit & finish';
+ ['examExport','examPrintAttempt','examNew'].forEach(id=>E(id).classList.toggle('hidden',!done));
+ E('examIntro').classList.toggle('hidden',!done&&a.mode!=='untimed');
+ const label=done?'Submitted · responses locked':planning?'Planning · response boxes locked':'Working · paragraph responses enabled';
+ E('examStage').textContent=label;
+ E('examPhaseLive').textContent=done?'Attempt finished. Responses are read-only. Review guidance is now available.':planning?'Read the questions and sources. Use the unmarked planning paper; answer boxes unlock automatically after planning time.':'Working time: write all three responses. The deadline does not pause if you leave or reload this file.';
+}
+function tick(){
+ if(!viewReady||!exam.active)return;
+ const a=exam.active,now=Date.now();
+ if(a.status==='submitted'){
+  E('examClock').textContent='Finished';E('examClockLabel').textContent=dateText(a.submittedAt);E('examClockWrap').classList.remove('warning');return;
+ }
+ if(a.mode==='untimed'){E('examClock').textContent='Untimed';E('examClockLabel').textContent='self-managed practice';return}
+ if(now>=a.workingEnd){finishExam('Time expired',false);return}
+ if(a.status==='planning'&&now>=a.planningEnd){a.status='working';persist();syncControls()}
+ const planning=a.status==='planning',seconds=Math.max(0,Math.ceil(((planning?a.planningEnd:a.workingEnd)-now)/1000));
+ E('examClock').textContent=Math.floor(seconds/60).toString().padStart(2,'0')+':'+(seconds%60).toString().padStart(2,'0');
+ E('examClockLabel').textContent=(planning?'planning':'working')+' remaining · no pause';
+ E('examClockWrap').classList.toggle('warning',seconds<=(planning?60:MODES[a.mode].working*60/12));
+}
+function earlyWork(){
+ tick();const a=exam.active;if(!a||a.status!=='planning')return;
+ if(!confirm('Begin working before planning time finishes? This attempt will be labelled assisted, not a full-conditions simulation.'))return;
+ a.assisted=true;a.planningEnd=Date.now();a.workingEnd=a.planningEnd+MODES[a.mode].working*60000;a.status='working';persist();syncControls();tick();
+}
+function finishExam(reason,assisted){
+ const a=exam.active;if(!a||a.status==='submitted')return;
+ a.submittedAt=reason==='Time expired'?a.workingEnd:Date.now();a.status='submitted';a.finishReason=reason;a.assisted=a.assisted||assisted;
+ if(!exam.history.some(h=>h.id===a.id))exam.history.unshift(copy(a));
+ persist();renderExam();
+}
+function submitExam(){
+ tick();if(!liveAttempt())return;const planning=exam.active.status==='planning';
+ const blank=exam.active.answers.filter(s=>!s.trim()).length;
+ if(confirm((planning?'End this attempt during planning? It will be labelled assisted. ':'Submit your attempt now? ')+(blank?blank+' response(s) are blank. ':'')+'Responses will become read-only and review guidance will open.')){
+  finishExam(planning?'Ended during planning':'Submitted by student',planning);
+ }
+}
+function setBookView(name){
+ E('examStimulusBook').classList.toggle('hidden',name==='responses');E('examResponseBook').classList.toggle('hidden',name==='sources');
+ E('examWorkspace').classList.toggle('single',name!=='both');
+ [['examShowBoth','both'],['examShowSources','sources'],['examShowResponses','responses']].forEach(([id,value])=>E(id).setAttribute('aria-pressed',String(value===name)));
+}
+function mirrorReview(){
+ const a=exam.active,index=exam.history.findIndex(h=>h.id===a.id);if(index>=0)exam.history[index]=copy(a);persist();
+}
+function renderReview(){
+ const a=exam.active,p=paperById(a.paper);
+ E('examReview').innerHTML='<div class="eyebrow">POST-ATTEMPT REVIEW · NO AUTOMATIC MARKING</div><h3>Review your evidence and reasoning</h3><p class="small">'+safe(a.finishReason||'Submitted')+' · '+safe(modeText(a))+'. These are indicative evidence points and a qualitative self-review checklist, not a QCAA marking guide, numerical score or predicted grade. Other defensible arguments may be valid. Ask your teacher to apply the appropriate assessment criteria.</p>'+p.questions.map((q,i)=>'<details class="exam-guide"><summary>Question '+(i+1)+' · '+q.skill+' · indicative evidence and reasoning</summary><ul>'+q.points.map(point=>'<li>'+safe(point)+'</li>').join('')+'</ul><p><b>Review test:</b> '+(i===0?'Did I explain what precise evidence means in context, not only restate it?':i===1?'Did I make an inquiry-specific judgment and weigh evidence-based strengths and limitations?':'Did I combine source evidence into a sustained, qualified historical argument?')+'</p></details>').join('')+'<h3>Self-review against the assessed skills</h3><p class="small muted">This checklist reflects the syllabus skills of comprehending, analysing, evaluating, synthesising and communicating. Ticks record your reflection only.</p><div class="exam-checklist">'+REVIEW_ITEMS.map(([id,text])=>'<label><input type="checkbox" data-exam-review="'+id+'" '+(a.review&&a.review[id]?'checked':'')+'><span>'+safe(text)+'</span></label>').join('')+'</div><div class="field"><label for="examNextStep">Your next revision step</label><textarea id="examNextStep" placeholder="Write one concrete skill or knowledge gap to work on next…">'+safe(a.nextStep||'')+'</textarea></div><p class="small muted">Use authentic primary extracts, images, graphs and cartoons from your teacher as a next rehearsal: these evidence digests cannot reproduce all the features of unseen examination stimulus.</p>';
+ document.querySelectorAll('[data-exam-review]').forEach(el=>el.addEventListener('change',()=>{a.review=a.review||{};a.review[el.dataset.examReview]=el.checked;mirrorReview()}));
+ E('examNextStep').addEventListener('input',()=>{a.nextStep=E('examNextStep').value;mirrorReview()});
+}
+function renderHistory(){
+ const live=liveAttempt();E('examHistory').classList.toggle('hidden',live);
+ if(live)return;
+ E('examHistory').innerHTML='<div class="eyebrow">SEPARATE UNIT 4 EXAM HISTORY · THIS DEVICE ONLY</div><h3>Completed attempts ('+exam.history.length+')</h3><p class="small muted">Review or export a completed attempt before clearing browser data or changing devices. Normal revision resets and topic changes do not delete this exam history.</p>'+(exam.history.length?exam.history.map(a=>{const p=paperById(a.paper);return '<div class="exam-history-row"><div><b>'+p.code+' · '+safe(p.label)+'</b><p>'+safe(TOPICS[p.topic].aspect)+'<br>'+safe(dateText(a.submittedAt))+' · '+safe(modeText(a))+' · '+a.answers.reduce((n,s)=>n+words(s),0)+' response words</p></div><div class="button-row"><button class="btn" data-exam-history="'+a.id+'">Review attempt</button><button class="btn" data-exam-history-export="'+a.id+'">Export</button><button class="btn danger" data-exam-history-delete="'+a.id+'">Delete</button></div></div>'}).join(''):'<p class="small">No completed attempts yet. Choose your class’s topic and start a rehearsal.</p>');
+ document.querySelectorAll('[data-exam-history]').forEach(el=>el.addEventListener('click',()=>{exam.active=copy(exam.history.find(a=>a.id===el.dataset.examHistory));persist();renderExam();E('examAttempt').scrollIntoView({behavior:'smooth',block:'start'})}));
+ document.querySelectorAll('[data-exam-history-export]').forEach(el=>el.addEventListener('click',()=>exportAttempt(exam.history.find(a=>a.id===el.dataset.examHistoryExport))));
+ document.querySelectorAll('[data-exam-history-delete]').forEach(el=>el.addEventListener('click',()=>{
+  if(!confirm('Delete this completed Unit 4 exam attempt from this browser? Export first if you want a backup. This will not delete ordinary revision progress.'))return;
+  const id=el.dataset.examHistoryDelete;exam.history=exam.history.filter(a=>a.id!==id);if(exam.active&&exam.active.id===id)exam.active=null;persist();renderExam();
+ }));
+}
+function updateStickyOffsets(){
+ const top=window.matchMedia('(max-width:940px)').matches?0:document.querySelector('.top').getBoundingClientRect().height;
+ document.documentElement.style.setProperty('--exam-sticky-top',top+'px');
+ const height=document.querySelector('.exam-statusbar').getBoundingClientRect().height;
+ if(height)document.documentElement.style.setProperty('--exam-status-height',height+'px');
+}
+function renderExam(){
+ const a=exam.active;
+ E('examSetup').classList.toggle('hidden',!!a);E('examAttempt').classList.toggle('hidden',!a);
+ E('examIntro').classList.toggle('hidden',timedAttempt());E('examReview').classList.toggle('hidden',!a||a.status!=='submitted');
+ document.body.classList.toggle('exam-in-progress',timedAttempt());
+ if(a){buildBooks();if(a.status==='submitted')renderReview();else E('examReview').innerHTML='';tick()}
+ else{E('examReview').innerHTML='';document.body.classList.remove('exam-in-progress')}
+ renderHistory();updateStickyOffsets();
+}
+function exportAttempt(a){
+ if(!a||a.status!=='submitted')return;
+ const p=paperById(a.paper),topic=TOPICS[p.topic];
+ const text=['MODERN HISTORY — UNIT 4 EXTERNAL-EXAM REHEARSAL',p.code+' — '+p.label,topic.title,topic.aspect,modeText(a),'Started: '+new Date(a.startedAt).toISOString(),'Finished: '+new Date(a.submittedAt).toISOString(),'Finish: '+(a.finishReason||'Submitted'),'Original educational practice, not a QCAA examination or marking result.','',...p.questions.flatMap((q,i)=>['QUESTION '+(i+1),q.prompt,'RESPONSE:',a.answers[i]||'[No response]','']),'UNMARKED PLANNING NOTES',a.notes||'[None]','','SELF-REVIEW (student reflection, not a mark)',...REVIEW_ITEMS.map(([id,s])=>(a.review&&a.review[id]?'[Checked] ':'[Not checked] ')+s),'','NEXT REVISION STEP',a.nextStep||'[Not recorded]','','Created by Daniel Kerrison, Southport State High School.','AI-assisted development by ChattyJeeps (ChatGPT by OpenAI).'].join('\n');
+ const blob=new Blob([text],{type:'text/plain;charset=utf-8'}),link=document.createElement('a');
+ const url=URL.createObjectURL(blob);link.href=url;link.download='Modern_History_Unit_4_External_Exam_'+p.code+'_'+new Date(a.startedAt).toISOString().replace(/[:.]/g,'-')+'.txt';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function populatePrint(){
+ const a=exam.active,p=currentPaper();if(!p)return;
+ const topic=TOPICS[p.topic],complete=a&&a.status==='submitted',mode=MODES[a?a.mode:E('examMode').value];
+ E('examPrintSheet').innerHTML='<div class="print-cover"><p><b>ORIGINAL EDUCATIONAL PRACTICE · NOT A QCAA PAPER</b></p><h1>Modern History · Unit 4</h1><h2>External-exam rehearsal</h2><h3>'+p.code+' · '+safe(p.label)+'</h3><p>'+safe(topic.title)+'<br><b>'+safe(topic.aspect)+'</b></p><p>'+safe(mode.label)+' · '+(mode.planning?mode.planning+' minutes planning, '+mode.working+' minutes working':'no time limit')+'</p><p>Name: ___________________________________________</p><p>Answer all three questions for this selected topic. Respond in full-sentence paragraphs with evidence from '+range(p)+'. Planning notes are not marked. This practice follows the published 2026 example layout, not an official question-weighting scheme.</p><p><b>Evidence note:</b> source cards are app-authored abridged digests of cited records, not authentic verbatim extracts or facsimiles. Each underlying record has its own context. Use teacher-supplied authentic unseen sources for further practice.</p><p>Created by Daniel Kerrison, Southport State High School. AI-assisted development by ChattyJeeps (ChatGPT by OpenAI). Free educational use with attribution. No school, departmental or QCAA endorsement.</p></div><h2>Question and stimulus book</h2>'+questionList(p)+p.sources.map((id,i)=>sourceCard(RECORDS[id],topic.start+i,true)).join('')+'<div class="exam-print-question"><h2>Separate response book</h2><h3>Unmarked planning paper</h3>'+(complete?'<p style="white-space:pre-wrap">'+safe(a.notes||'[No planning notes]')+'</p>':'<div class="exam-print-lines exam-print-notes"></div>')+'</div>'+p.questions.map((q,i)=>'<div class="exam-print-question"><h3>Question '+(i+1)+'</h3><p>'+safe(q.prompt)+'</p>'+(complete?'<p style="white-space:pre-wrap">'+safe(a.answers[i]||'[No response]')+'</p>':'<div class="exam-print-lines"></div><div class="exam-print-lines"></div>')+'</div>').join('');
+ document.body.classList.add('exam-print');
+}
+function printPaper(){populatePrint();window.print()}
+function newAttempt(){if(liveAttempt())return;exam.active=null;persist();renderExam();E('examSetup').scrollIntoView({behavior:'smooth',block:'start'})}
+function initExam(){
+ viewReady=true;
+ if(!loadedSelection){
+  const name=globalThis.__MH_APP_TEST__.areas()[1].name;exam.selection.topic=name.includes('Soviet')?'soviet':'migration';exam.selection.paper=exam.selection.topic+'-A';exam.selection.mode='full';
+ }
+ E('examTopic').value=TOPICS[exam.selection.topic]?exam.selection.topic:'migration';E('examMode').value=MODES[exam.selection.mode]?exam.selection.mode:'full';fillPapers();
+ E('examTopic').addEventListener('change',fillPapers);E('examPaper').addEventListener('change',updateSetup);E('examMode').addEventListener('change',updateSetup);
+ E('examStart').addEventListener('click',startExam);E('examEarlyWork').addEventListener('click',earlyWork);E('examSubmit').addEventListener('click',submitExam);
+ E('examExport').addEventListener('click',()=>exportAttempt(exam.active));E('examNew').addEventListener('click',newAttempt);
+ E('examPrintBlank').addEventListener('click',printPaper);E('examPrintAttempt').addEventListener('click',printPaper);
+ [['examShowBoth','both'],['examShowSources','sources'],['examShowResponses','responses']].forEach(([id,value])=>E(id).addEventListener('click',()=>setBookView(value)));
+ window.addEventListener('mh:view',event=>{if(event.detail==='exam'){tick();renderExam()}});
+ document.addEventListener('visibilitychange',tick);
+ window.addEventListener('beforeprint',()=>{if(!E('examView').classList.contains('hidden'))populatePrint()});
+ window.addEventListener('afterprint',()=>{document.body.classList.remove('exam-print');tick()});
+ document.querySelectorAll('a[href="./index.html"]').forEach(link=>link.addEventListener('click',event=>{if(timedAttempt()&&!confirm('Leave this rehearsal for the main hub? Your saved attempt remains active and the timer continues.'))event.preventDefault()}));
+ window.addEventListener('beforeunload',event=>{if(timedAttempt()){event.preventDefault();event.returnValue=''}});
+ const shortcut=document.createElement('button');shortcut.className='btn primary';shortcut.textContent='External exam simulator';shortcut.addEventListener('click',openExam);E('homeView').querySelector('.button-row').appendChild(shortcut);
+ const teaser=document.createElement('p');teaser.className='small';teaser.textContent='External-exam rehearsal: two papers for each nominated topic, a 15 + 120 minute timer, separate source and response books, and post-submission review.';E('homeView').querySelector('.hero-side').appendChild(teaser);
+ const teacher=document.createElement('div');teacher.className='callout';teacher.style.marginTop='15px';teacher.innerHTML='<b>Common external-exam rehearsal:</b> use fixed paper codes MH4-EA-MA / MB (migration) or MH4-EA-SA / SB (Soviet Union). Choose the same topic, paper and conditions for your class. Print a blank paper and response book for handwriting; use this app’s timer. The embedded review is indicative, not an official marking guide.';E('teacherView').querySelector('.teacher-body').appendChild(teacher);
+ renderExam();
+ if(!storageReadable)storageError('Saved exam data could not be read, or browser storage is unavailable. Ordinary Unit 4 revision is unaffected. A new attempt will request confirmation before replacing unreadable exam data.');
+ if(liveAttempt())openExam();
+ if(typeof ResizeObserver!=='undefined'){const observer=new ResizeObserver(updateStickyOffsets);observer.observe(document.querySelector('.top'));observer.observe(document.querySelector('.exam-statusbar'))}
+ window.addEventListener('resize',updateStickyOffsets);
+ setInterval(tick,1000);
+}
+document.addEventListener('DOMContentLoaded',initExam);
+globalThis.__MH_EXAM_TEST__={KEY:EXAM_KEY,PAPERS,RECORDS,TOPICS,MODES,validAttempt,tick,snapshot:()=>copy(exam)};
+})();
+</script></body></html>
