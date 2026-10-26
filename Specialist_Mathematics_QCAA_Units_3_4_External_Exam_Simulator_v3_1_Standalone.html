@@ -175,6 +175,31 @@ function init(){const inlineBrand=JSON.parse($('brand-content').textContent||'{}
 document.addEventListener('DOMContentLoaded',()=>{originalHTML='<!doctype html>\n'+document.documentElement.outerHTML;init()});
 })();</script>
 </div>
+<style>
+.exam-formula-link{display:inline-flex;align-items:center;margin-top:8px;padding:7px 10px;border:1px solid #c7d7dc;border-radius:7px;background:#fff;color:#173b4b;text-decoration:none;font-size:11px;font-weight:850}.exam-formula-link:hover{filter:brightness(.98)}.exam-formula-link small{margin-left:6px;color:#5a7280;font-weight:700}
+</style>
+<script id="specialist-formula-book-links">
+/* The official Formula Book is permitted in both Specialist Mathematics papers. */
+(function () {
+  'use strict';
+  var href = 'https://www.qcaa.qld.edu.au/downloads/senior-qce/mathematics/snr_specialist_maths_25_formula_book.pdf';
+  function link(id, label, extra) {
+    var a = document.createElement('a');
+    a.id = id;
+    a.className = 'exam-formula-link';
+    a.href = href;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = label;
+    if (extra) { var note = document.createElement('small'); note.textContent = extra; a.appendChild(note); }
+    return a;
+  }
+  var start = document.getElementById('start-new');
+  if (start && !document.getElementById('formula-book-start-link')) start.parentElement.insertBefore(link('formula-book-start-link', 'Open official QCAA Formula Book ↗', 'Permitted in both papers'), start);
+  var banner = document.getElementById('active-paper-subtitle');
+  if (banner && banner.parentElement && !document.getElementById('formula-book-active-link')) banner.parentElement.appendChild(link('formula-book-active-link', 'Formula Book ↗', 'Permitted material'));
+}());
+</script>
 <script id="qcaa-hosted-analytics" data-qcaa-hosted-analytics>
 /* Hosted-only, privacy-preserving visit count. Downloaded and custom-hosted copies do not load it. */
 (function () {
