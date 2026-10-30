@@ -175,6 +175,27 @@ function init(){const inlineBrand=JSON.parse($('brand-content').textContent||'{}
 document.addEventListener('DOMContentLoaded',()=>{originalHTML='<!doctype html>\n'+document.documentElement.outerHTML;init()});
 })();</script>
 </div>
+<script id="mc-response-save-fix">
+/*
+ * v3.1.1 compatibility fix: the original MC response handler mistakenly used
+ * its ID-only helper to retrieve a CSS radio-button selector.  Keep normal ID
+ * lookups unchanged, but route only that selector-shaped argument to the DOM
+ * selector API.  This lets the existing handler update in-memory state and
+ * localStorage together, including on Resume.
+ */
+(function () {
+  'use strict';
+  if (!window.CSS) window.CSS = {};
+  if (typeof window.CSS.escape !== 'function') window.CSS.escape = function (value) { return String(value); };
+  var originalGetById = document.getElementById.bind(document);
+  document.getElementById = function (id) {
+    if (typeof id === 'string' && /^input\[name=".+"\]:checked$/.test(id)) {
+      return document.querySelector(id);
+    }
+    return originalGetById(id);
+  };
+}());
+</script>
 <style>
 .exam-formula-link{display:inline-flex;align-items:center;margin-top:8px;padding:7px 10px;border:1px solid #c7d7dc;border-radius:7px;background:#fff;color:#173b4b;text-decoration:none;font-size:11px;font-weight:850}.exam-formula-link:hover{filter:brightness(.98)}.exam-formula-link small{margin-left:6px;color:#5a7280;font-weight:700}
 </style>
