@@ -224,6 +224,171 @@ const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const asText=x=>String(x??'');
 const safeFile=s=>String(s??'app').replace(/[^a-z0-9_-]+/gi,'_').replace(/^_+|_+$/g,'').slice(0,95);
 const CFG=JSON.parse($('unit-content').textContent);
+// VISUAL STIMULUS UPGRADE — MM Unit 4 2026.1
+// These original, self-contained SVG stimuli address the QCAA expectation that
+// students may interpret unseen graphs, tables and diagrams. No remote assets
+// are used; progress remains keyed to the existing subject/unit storage record.
+(function addVisualStimulusBank(){
+ const added=[],letter=i=>String.fromCharCode(65+i),r3=n=>Math.round(n*1000)/1000;
+ const erfVisual=x=>{const sign=x<0?-1:1,z=Math.abs(x),t=1/(1+.3275911*z),a1=.254829592,a2=-.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429;return sign*(1-(((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t)*Math.exp(-z*z));};
+ const normalCdfVisual=(x,mu,sd)=>.5*(1+erfVisual((x-mu)/(sd*Math.SQRT2)));
+ const svg=body=>'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360" role="img">'+body+'</svg>')));
+ const text=(x,y,value,anchor='middle',size=15,weight=500,color='#173345')=>'<text x="'+x+'" y="'+y+'" text-anchor="'+anchor+'" font-family="Arial, sans-serif" font-size="'+size+'" font-weight="'+weight+'" fill="'+color+'">'+value+'</text>';
+ const line=(x1,y1,x2,y2,stroke='#2c5263',width=2,dash='')=>'<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+stroke+'" stroke-width="'+width+'"'+(dash?' stroke-dasharray="'+dash+'"':'')+'/>';
+ const background=title=>'<rect width="760" height="360" fill="#fff"/><rect x="18" y="16" width="724" height="328" rx="10" fill="#fbfdfd" stroke="#c7d7dc"/>'+text(42,44,title,'start',17,700);
+ const axis=(x1,y1,x2,y2,labelX,labelY)=>line(x1,y1,x2,y2,'#294c5d',2)+line(x1,y1,x1,y2,'#294c5d',2)+text(x2+5,y1+5,labelX,'start',14,700)+text(x1-10,y2-6,labelY,'end',14,700);
+ const trapSvg=d=>{
+   const left=90,right=690,base=292,top=75,max=Math.max(...d.ys)*1.25;
+   const sx=i=>left+(right-left)*i/(d.ys.length-1),sy=v=>base-(base-top)*v/max;
+   let out=background('Equally spaced ordinates')+axis(left,base,right,top,'x','f(x)');
+   for(let i=0;i<d.ys.length;i++){out+=line(sx(i),base,sx(i),sy(d.ys[i]),'#b2c4cc',1,'4 4')+text(sx(i),base+24,String(d.xs[i]),'middle',13,600)+text(sx(i),sy(d.ys[i])-10,String(d.ys[i]),'middle',13,700,'#176b73');}
+   out+='<path d="M '+d.ys.map((v,i)=>sx(i)+' '+sy(v)).join(' L ')+'" fill="none" stroke="#176b73" stroke-width="3"/>';
+   for(let i=0;i<d.ys.length-1;i++){out+='<path d="M '+sx(i)+' '+base+' L '+sx(i)+' '+sy(d.ys[i])+' L '+sx(i+1)+' '+sy(d.ys[i+1])+' L '+sx(i+1)+' '+base+' Z" fill="#bce5df" fill-opacity=".45" stroke="#4f938d" stroke-width="1.3"/>';}
+   out+=text(390,330,'Each horizontal interval has width '+d.w,'middle',14,700,'#355d68');
+   return svg(out);
+ };
+ const velocitySvg=d=>{
+   const left=92,right=690,base=190,top=72,bottom=300,max=Math.max(...d.v.map(Math.abs))*1.28;
+   const sx=i=>left+(right-left)*(d.t[i]-d.t[0])/(d.t[d.t.length-1]-d.t[0]),sy=v=>base-v*(base-top)/max;
+   let out=background('Velocity-time graph')+line(left,base,right,base,'#294c5d',2)+line(left,top,left,bottom,'#294c5d',2)+text(right+8,base+5,'t (s)','start',14,700)+text(left-9,top-7,'v (m/s)','end',14,700);
+   for(let i=0;i<d.t.length;i++){out+=line(sx(i),base,sx(i),sy(d.v[i]),'#b7c7cd',1,'4 4')+text(sx(i),base+23,String(d.t[i]),'middle',13,600)+text(left-13,sy(d.v[i])+4,String(d.v[i]),'end',13,600);}
+   out+='<path d="M '+d.v.map((v,i)=>sx(i)+' '+sy(v)).join(' L ')+'" fill="none" stroke="#a64935" stroke-width="3.5"/>';
+   for(let i=0;i<d.v.length;i++)out+='<circle cx="'+sx(i)+'" cy="'+sy(d.v[i])+'" r="4.5" fill="#a64935"/>';
+   out+=text(390,330,'Straight-line segments join the plotted values.','middle',14,700,'#355d68');
+   return svg(out);
+ };
+ const bearingSvg=d=>{
+   const cx=320,cy=245,scale=4.7,point=(dist,b)=>({x:cx+dist*Math.sin(b*Math.PI/180)*scale,y:cy-dist*Math.cos(b*Math.PI/180)*scale});
+   const a=point(d.a,d.ba),b=point(d.b,d.bb),diff=Math.abs(d.ba-d.bb)>180?360-Math.abs(d.ba-d.bb):Math.abs(d.ba-d.bb);
+   let out=background('Navigation diagram — not to scale')+line(cx,cy,cx,68,'#294c5d',2)+text(cx,61,'N','middle',15,800)+line(cx,cy,a.x,a.y,'#176b73',3)+line(cx,cy,b.x,b.y,'#a64935',3)+line(a.x,a.y,b.x,b.y,'#7d6a9b',2,'6 4');
+   out+='<circle cx="'+cx+'" cy="'+cy+'" r="5" fill="#173345"/><circle cx="'+a.x+'" cy="'+a.y+'" r="5" fill="#176b73"/><circle cx="'+b.x+'" cy="'+b.y+'" r="5" fill="#a64935"/>';
+   out+=text(cx,cy+22,'S','middle',15,800)+text(a.x,a.y-12,'A','middle',15,800,'#176b73')+text(b.x,b.y-12,'B','middle',15,800,'#a64935');
+   out+=text((cx+a.x)/2,(cy+a.y)/2-10,'SA = '+d.a+' km','middle',14,700,'#176b73')+text((cx+b.x)/2,(cy+b.y)/2-10,'SB = '+d.b+' km','middle',14,700,'#a64935');
+   out+=text(565,95,'Bearing of A: '+String(d.ba).padStart(3,'0')+'°','start',14,700)+text(565,120,'Bearing of B: '+String(d.bb).padStart(3,'0')+'°','start',14,700)+text(565,155,'Included angle at S: '+diff+'°','start',14,700,'#5e4c7b');
+   out+=text(390,330,'Use the labelled bearings and distances; the drawing is not to scale.','middle',14,700,'#355d68');
+   return svg(out);
+ };
+ const elevationSvg=d=>{
+   const x0=125,y0=270,x1=600,y1=270,top=105;
+   let out=background('Angle of elevation diagram — not to scale')+line(x0,y0,x1,y1,'#5f795f',4)+line(x1,y0,x1,top,'#697987',3)+line(x0,y0,x1,top,'#176b73',3)+line(x0,y0,x1,y0,'#294c5d',2);
+   out+='<path d="M '+(x0+55)+' '+y0+' A 55 55 0 0 0 '+(x0+49)+' '+(y0-26)+'" fill="none" stroke="#a64935" stroke-width="2"/>';
+   out+=text(x0+76,y0-27,d.angle+'°','middle',16,800,'#a64935')+text((x0+x1)/2,y0+27,d.distance+' m','middle',16,700)+text(x1+18,(y0+top)/2,'h','start',16,800,'#697987')+text(x0,y0+24,'Observer','middle',14,700)+text(x1,top-12,'Top of tower','middle',14,700);
+   out+=text(390,330,'The horizontal ground distance and angle of elevation are shown.','middle',14,700,'#355d68');
+   return svg(out);
+ };
+ const histSvg=d=>{
+   const left=100,right=690,base=285,top=75,max=Math.max(...d.counts)*1.2,bw=(right-left)/d.counts.length;
+   let out=background('Histogram of a continuous variable')+axis(left,base,right,top,d.unit,'Frequency');
+   for(let i=0;i<d.counts.length;i++){const h=(base-top)*d.counts[i]/max,x=left+i*bw;out+='<rect x="'+(x+3)+'" y="'+(base-h)+'" width="'+(bw-6)+'" height="'+h+'" fill="'+(i>=d.from&&i<d.to?'#176b73':'#bfd8d6')+'" stroke="#397b78"/>'+text(x+bw/2,base-h-9,String(d.counts[i]),'middle',13,800,'#176b73')+text(x,base+23,String(d.edges[i]),'middle',12,600);}
+   out+=text(right,base+23,String(d.edges[d.edges.length-1]),'middle',12,600)+text(390,330,'The highlighted bars are the interval named in the question.','middle',14,700,'#355d68');
+   return svg(out);
+ };
+ const normalSvg=d=>{
+   const left=80,right=690,base=280,top=78,xmin=d.mu-3.2*d.sd,xmax=d.mu+3.2*d.sd;
+   const sx=x=>left+(right-left)*(x-xmin)/(xmax-xmin),density=x=>Math.exp(-.5*((x-d.mu)/d.sd)**2),sy=x=>base-(base-top)*density(x);
+   const lo=d.lo==null?xmin:d.lo,hi=d.hi==null?xmax:d.hi,points=[],shade=[];
+   for(let i=0;i<=120;i++){const x=xmin+(xmax-xmin)*i/120,pt=sx(x)+' '+sy(x);points.push(pt);if(x>=lo&&x<=hi)shade.push(pt);}
+   let out=background('Normal distribution — shaded probability')+line(left,base,right,base,'#294c5d',2)+line(sx(d.mu),base,sx(d.mu),top+32,'#728894',1.5,'5 4');
+   out+='<path d="M '+points.join(' L ')+'" fill="none" stroke="#176b73" stroke-width="3"/>';
+   out+='<path d="M '+sx(lo)+' '+base+' L '+shade.join(' L ')+' L '+sx(hi)+' '+base+' Z" fill="#bce5df" fill-opacity=".82"/>';
+   if(d.lo!=null)out+=line(sx(d.lo),base,sx(d.lo),sy(d.lo),'#a64935',2)+text(sx(d.lo),base+24,String(d.lo),'middle',13,800,'#a64935');
+   if(d.hi!=null)out+=line(sx(d.hi),base,sx(d.hi),sy(d.hi),'#a64935',2)+text(sx(d.hi),base+24,String(d.hi),'middle',13,800,'#a64935');
+   out+=text(sx(d.mu),base+24,'μ = '+d.mu,'middle',13,800,'#355d68')+text(390,62,'X ~ N('+d.mu+', '+d.sd+'²)','middle',17,800)+text(390,330,'The shaded area is the required probability.','middle',14,700,'#355d68');
+   return svg(out);
+ };
+ const dotSvg=d=>{
+   const left=120,right=685,axisY=[145,270],min=.35,max=.65,sx=x=>left+(right-left)*(x-min)/(max-min);
+   let out=background('Repeated random-sampling displays');
+   ['Distribution A','Distribution B'].forEach((label,row)=>{out+=line(left,axisY[row],right,axisY[row],'#294c5d',2)+text(52,axisY[row]+5,label,'start',15,800);for(let tick=.35;tick<=.651;tick+=.05)out+=line(sx(tick),axisY[row]-5,sx(tick),axisY[row]+5,'#294c5d',1)+text(sx(tick),axisY[row]+23,tick.toFixed(2),'middle',11,600);const values=d[row],levels={};for(const v of values){const key=v.toFixed(2),lev=levels[key]||0;levels[key]=lev+1;out+='<circle cx="'+sx(v)+'" cy="'+(axisY[row]-13-lev*13)+'" r="5" fill="'+(row?'#a64935':'#176b73')+'"/>';}});out+=text(390,330,'Each dot is one observed value of p-hat from samples of the same population.','middle',14,700,'#355d68');return svg(out);
+ };
+ const surveySvg=d=>{
+   const x=175,y=92,w=410,h=178,rows=[['Response','Number of households'],['Supports proposal',String(d.yes)],['Does not support',String(d.no)]];
+   let out=background('Random survey results')+'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#fff" stroke="#426778" stroke-width="2"/>'+line(x+220,y,x+220,y+h,'#426778',1.5);
+   for(let i=1;i<3;i++)out+=line(x,y+i*h/3,x+w,y+i*h/3,'#426778',1.5);
+   rows.forEach((row,i)=>{const yy=y+h/6+i*h/3;out+=text(x+110,yy,row[0],'middle',15,i?500:800)+text(x+315,yy,row[1],'middle',15,i?700:800,i?'#176b73':'#173345');});
+   out+=text(390,310,'The table is from one random sample of households.','middle',14,700,'#355d68');return svg(out);
+ };
+ const intervalSvg=d=>{
+   const left=135,right=680,top=75,bottom=285,min=.30,max=.72,sx=x=>left+(right-left)*(x-min)/(max-min);
+   let out=background('Repeated confidence intervals')+line(sx(d.truth),top,sx(d.truth),bottom,'#a64935',3,'6 4')+text(sx(d.truth),58,'true population proportion p = '+d.truth,'middle',14,800,'#a64935');
+   d.intervals.forEach((v,i)=>{const y=92+i*17,hit=v[0]<=d.truth&&d.truth<=v[1],color=hit?'#176b73':'#a64935';out+=line(sx(v[0]),y,sx(v[1]),y,color,4)+'<circle cx="'+sx(v[0])+'" cy="'+y+'" r="3.5" fill="'+color+'"/><circle cx="'+sx(v[1])+'" cy="'+y+'" r="3.5" fill="'+color+'"/>'+text(110,y+4,String(i+1),'end',12,700);});
+   for(let tick=.30;tick<=.721;tick+=.05)out+=line(sx(tick),bottom,sx(tick),bottom+5,'#294c5d',1)+text(sx(tick),bottom+20,tick.toFixed(2),'middle',11,600);
+   out+=line(left,bottom,right,bottom,'#294c5d',2)+text(390,330,'Each horizontal line is an interval from a different random sample.','middle',14,700,'#355d68');return svg(out);
+ };
+ const calculatorSvg=d=>{
+   let out=background('Graphics-calculator intersection display')+'<rect x="100" y="75" width="560" height="225" rx="9" fill="#eef4f4" stroke="#375967" stroke-width="3"/><rect x="118" y="93" width="524" height="188" rx="4" fill="#173345"/>';
+   out+=text(145,126,'Y1='+d.f,'start',16,700,'#d9f4ef')+text(145,154,'Y2='+d.g,'start',16,700,'#d9f4ef')+text(145,201,'Intersect','start',18,800,'#f8d17c')+text(170,232,'X = '+d.x,'start',18,700,'#ffffff')+text(410,232,'Y = '+d.y,'start',18,700,'#ffffff')+text(390,330,'Use the calculator output as part of the mathematical model.','middle',14,700,'#355d68');return svg(out);
+ };
+ const add=(id,family,props)=>added.push(Object.assign({id,family:String(family),variant:id.slice(-1),stimulus:true},props));
+
+ const traps=[
+   {xs:[0,1,2,3,4],ys:[1,3,4,6,7],w:1},
+   {xs:[0,2,4,6,8],ys:[2,4,5,8,9],w:2},
+   {xs:[0,.5,1,1.5,2],ys:[3,5,6,8,9],w:.5}
+ ];
+ traps.forEach((d,i)=>{const value=d.w/2*(d.ys[0]+2*d.ys.slice(1,-1).reduce((a,b)=>a+b,0)+d.ys.at(-1));add('M195'+letter(i),195,{familyTitle:'Estimate an integral from a graph of ordinates',topic:'Further integration',section:'Visual stimulus — trapezoidal rule',difficulty:'Applied',marks:4,type:'numeric',question:'Use the supplied graph of equally spaced ordinates to estimate the definite integral with the trapezoidal rule.',figureData:trapSvg(d),figureAlt:'Graph of equally spaced ordinates: x values '+d.xs.join(', ')+' and f(x) values '+d.ys.join(', ')+'. Interval width '+d.w+'.',guide:'Read the five ordinates from the graph. Apply w/2 [first + 2(internal ordinates) + last] to obtain approximately '+r3(value)+'.',answers:[{label:'Trapezoidal estimate',value:r3(value),unit:'square units',tol:.12}],tech:'Technology-free'});});
+
+ const velocities=[
+   {t:[0,2,4,6],v:[2,4,0,-2],disp:8,dist:12},
+   {t:[0,1,3,5],v:[0,4,4,-4],disp:10,dist:14},
+   {t:[0,1,2,3],v:[-2,2,4,2],disp:6,dist:8}
+ ];
+ velocities.forEach((d,i)=>add('M196'+letter(i),196,{familyTitle:'Interpret a velocity-time graph',topic:'Further integration',section:'Visual stimulus — motion graph',difficulty:'Applied',marks:5,type:'numeric',question:'Use the supplied velocity-time graph to determine the displacement and total distance travelled over the interval shown.',figureData:velocitySvg(d),figureAlt:'Velocity-time graph with times '+d.t.join(', ')+' seconds and velocities '+d.v.join(', ')+' metres per second, joined by straight segments.',guide:'Use signed area below the time axis for displacement. For total distance, add the magnitudes of every area. Displacement = '+d.disp+' m; total distance = '+d.dist+' m.',answers:[{label:'Displacement',value:d.disp,unit:'m',tol:.12},{label:'Total distance',value:d.dist,unit:'m',tol:.12}],tech:'Technology-free'}));
+
+ const bearings=[
+   {a:18,b:25,ba:35,bb:105},
+   {a:16,b:21,ba:15,bb:95},
+   {a:22,b:28,ba:310,bb:40}
+ ];
+ bearings.forEach((d,i)=>{const raw=Math.abs(d.ba-d.bb),angle=raw>180?360-raw:raw,answer=r3(Math.sqrt(d.a*d.a+d.b*d.b-2*d.a*d.b*Math.cos(angle*Math.PI/180)));add('M197'+letter(i),197,{familyTitle:'Extract bearings from a navigation diagram',topic:'Trigonometry',section:'Visual stimulus — bearings and directions',difficulty:'Applied',marks:4,type:'numeric',question:'Using only the labelled information in the navigation diagram, determine the distance between A and B.',figureData:bearingSvg(d),figureAlt:'North-up navigation diagram: station S to A is '+d.a+' kilometres on bearing '+d.ba+' degrees; S to B is '+d.b+' kilometres on bearing '+d.bb+' degrees.',guide:'Find the included angle between the two bearings, then use the cosine rule. AB is approximately '+answer+' km.',answers:[{label:'Distance AB',value:answer,unit:'km',tol:.12}],tech:'Technology-active'});});
+
+ const elevations=[{distance:60,angle:28},{distance:85,angle:35},{distance:120,angle:22}];
+ elevations.forEach((d,i)=>{const answer=r3(d.distance*Math.tan(d.angle*Math.PI/180));add('M198'+letter(i),198,{familyTitle:'Interpret an angle-of-elevation diagram',topic:'Trigonometry',section:'Visual stimulus — elevation',difficulty:'Core',marks:3,type:'numeric',question:'Use the labelled angle-of-elevation diagram to determine the height h of the tower.',figureData:elevationSvg(d),figureAlt:'Right-triangle elevation diagram with horizontal ground distance '+d.distance+' metres and angle of elevation '+d.angle+' degrees.',guide:'Use tan(angle) = opposite/adjacent. h = '+d.distance+' tan('+d.angle+'°) = approximately '+answer+' m.',answers:[{label:'Tower height h',value:answer,unit:'m',tol:.12}],tech:'Technology-active'});});
+
+ const histograms=[
+   {edges:[0,2,4,6,8,10],counts:[10,18,32,24,16],from:2,to:4,unit:'Viewing time (min)',lo:4,hi:8},
+   {edges:[0,2,4,6,8,10],counts:[8,12,20,26,14],from:1,to:3,unit:'Fill time (min)',lo:2,hi:6},
+   {edges:[0,2,4,6,8,10],counts:[9,15,25,31,20],from:3,to:5,unit:'Travel time (min)',lo:6,hi:10}
+ ];
+ histograms.forEach((d,i)=>{const total=d.counts.reduce((a,b)=>a+b,0),selected=d.counts.slice(d.from,d.to).reduce((a,b)=>a+b,0),answer=r3(selected/total);add('M199'+letter(i),199,{familyTitle:'Estimate probability from a histogram',topic:'Continuous random variables and the normal distribution',section:'Visual stimulus — relative frequency and histogram',difficulty:'Applied',marks:3,type:'numeric',question:'The histogram summarises '+total+' observations. Estimate P('+d.lo+' ≤ X < '+d.hi+') by extracting the required frequencies from the display.',figureData:histSvg(d),figureAlt:'Histogram with class edges '+d.edges.join(', ')+' and frequencies '+d.counts.join(', ')+'. The required interval '+d.lo+' to '+d.hi+' is highlighted.',guide:'Add the frequencies in the highlighted interval ('+selected+') and divide by the total number of observations ('+total+'). Estimated probability = '+answer+'.',answers:[{label:'Estimated probability',value:answer,unit:'',tol:.015}],tech:'Technology-free'});});
+
+ const normals=[
+   {mu:70,sd:8,lo:62,hi:78},
+   {mu:100,sd:12,lo:94,hi:112},
+   {mu:45,sd:5,lo:50,hi:null}
+ ];
+ normals.forEach((d,i)=>{const p=r3((d.hi==null?1:normalCdfVisual(d.hi,d.mu,d.sd))-(d.lo==null?0:normalCdfVisual(d.lo,d.mu,d.sd)));add('M200'+letter(i),200,{familyTitle:'Interpret a shaded normal-distribution graph',topic:'Continuous random variables and the normal distribution',section:'Visual stimulus — normal distribution',difficulty:'Applied',marks:3,type:'numeric',question:'Use the normal model and shaded region shown to determine the probability represented by the shaded area.',figureData:normalSvg(d),figureAlt:'Normal distribution X with mean '+d.mu+' and standard deviation '+d.sd+'. Shaded interval is from '+(d.lo==null?'negative infinity':d.lo)+' to '+(d.hi==null?'positive infinity':d.hi)+'.',guide:'Translate the shaded region to calculator bounds using the mean and standard deviation shown. The probability is approximately '+p+'.',answers:[{label:'Shaded probability',value:p,unit:'',tol:.015}],tech:'Technology-active'});});
+
+ const dots=[
+   {A:[.38,.42,.46,.47,.49,.51,.52,.54,.58,.62],B:[.47,.48,.49,.49,.50,.50,.51,.51,.52,.53],correct:1},
+   {A:[.46,.47,.48,.49,.49,.50,.50,.51,.52,.53],B:[.37,.41,.44,.47,.49,.52,.55,.58,.61,.64],correct:0},
+   {A:[.39,.43,.46,.48,.50,.52,.55,.59,.61,.63],B:[.46,.47,.48,.49,.50,.50,.51,.52,.53,.54],correct:1}
+ ];
+ dots.forEach((d,i)=>{const correct=d.correct?'Distribution B':'Distribution A';add('M201'+letter(i),201,{familyTitle:'Compare sampling distributions of p-hat',topic:'Sampling and proportions',section:'Visual stimulus — repeated random sampling',difficulty:'Applied',marks:2,type:'mc',question:'The displays show repeated values of p-hat from two sampling processes with the same population proportion. Which distribution is most likely based on the larger sample size?',figureData:dotSvg([d.A,d.B]),figureAlt:'Two dot plots for sample proportions. Distribution A values '+d.A.join(', ')+'; Distribution B values '+d.B.join(', ')+'.',choices:[correct+' because it has less sampling variation.','Distribution A because it has a greater range.','Distribution B because it has more dots.','The larger sample cannot be inferred from sampling variation.'],correctIndex:0,guide:'For the same population proportion, a larger sample size gives a smaller standard deviation for p-hat. '+correct+' is more tightly clustered.',tech:'Technology-free'});});
+
+ const surveys=[{yes:72,no:48},{yes:45,no:105},{yes:96,no:64}];
+ surveys.forEach((d,i)=>{const n=d.yes+d.no,p=d.yes/n,m=1.96*Math.sqrt(p*(1-p)/n),lo=r3(p-m),hi=r3(p+m);add('M202'+letter(i),202,{familyTitle:'Use a survey table to construct a confidence interval',topic:'Interval estimates for proportions',section:'Visual stimulus — survey data and interval estimate',difficulty:'Hard',marks:5,type:'numeric',question:'Use the random-survey table to determine p-hat and then an approximate 95% confidence interval for the population proportion that supports the proposal.',figureData:surveySvg(d),figureAlt:'Survey table: '+d.yes+' households support the proposal and '+d.no+' do not support it.',guide:'n = '+n+' and p-hat = '+r3(p)+'. Use p-hat ± 1.96 sqrt[p-hat(1-p-hat)/n] to obtain ('+lo+', '+hi+').',answers:[{label:'Sample proportion p-hat',value:r3(p),unit:'',tol:.015},{label:'Lower confidence limit',value:lo,unit:'',tol:.015},{label:'Upper confidence limit',value:hi,unit:'',tol:.015}],tech:'Technology-active'});});
+
+ const intervals=[
+   {truth:.52,intervals:[[.43,.58],[.47,.61],[.54,.66],[.46,.55],[.41,.50],[.49,.63],[.45,.59],[.53,.67],[.48,.57],[.44,.56]]},
+   {truth:.48,intervals:[[.38,.52],[.43,.55],[.49,.60],[.40,.47],[.36,.50],[.45,.57],[.41,.53],[.50,.62],[.39,.51],[.44,.54]]},
+   {truth:.60,intervals:[[.51,.65],[.57,.68],[.62,.72],[.54,.59],[.49,.63],[.56,.67],[.53,.64],[.61,.70],[.55,.66],[.52,.58]]}
+ ];
+ intervals.forEach((d,i)=>{const miss=d.intervals.filter(v=>v[0]>d.truth||v[1]<d.truth).length;add('M203'+letter(i),203,{familyTitle:'Interpret repeated confidence intervals',topic:'Interval estimates for proportions',section:'Visual stimulus — confidence-interval coverage',difficulty:'Applied',marks:3,type:'written',question:'The vertical dashed line is the known population proportion. How many displayed intervals fail to contain it? Explain why this does not mean the confidence-interval procedure has necessarily failed.',figureData:intervalSvg(d),figureAlt:'Ten confidence intervals for a population proportion of '+d.truth+'. '+miss+' of the intervals do not include the true proportion.',guide:miss+' interval'+(miss===1?'':'s')+' does not contain the vertical true-proportion line. A confidence level describes the long-run capture rate of the procedure across many random samples; individual sets may contain intervals that miss p.',tech:'Technology-free'});});
+
+ const calculatorOutputs=[
+   {f:'0.8x + 2.6',g:'0.15x² + 1.1',x:3.27,y:5.19},
+   {f:'1.2x + 1.4',g:'0.2x² + 0.8',x:4.56,y:6.87},
+   {f:'0.6x + 3.1',g:'0.1x² + 2.0',x:5.10,y:6.16}
+ ];
+ calculatorOutputs.forEach((d,i)=>add('M204'+letter(i),204,{familyTitle:'Interpret graphics-calculator output',topic:'Further integration',section:'Visual stimulus — technology-active output',difficulty:'Core',marks:2,type:'numeric',question:'The graphics-calculator display reports an intersection of two modelled functions. State the x-coordinate of the intersection shown.',figureData:calculatorSvg(d),figureAlt:'Calculator display lists Y1='+d.f+', Y2='+d.g+', intersect x='+d.x+', y='+d.y+'.',guide:'Read the x-coordinate from the intersection result, not the y-coordinate. x = '+d.x+'.',answers:[{label:'Intersection x-coordinate',value:d.x,unit:'',tol:.015}],tech:'Technology-active'}));
+
+ CFG.questions=(Array.isArray(CFG.questions)?CFG.questions:[]).concat(added);
+ CFG.figures=CFG.figures||{};
+ CFG.stimulusUpgrade={version:'MM-U4-STIM-2026.1',families:10,variants:added.length,description:'Original answer-bearing SVG graphs, tables, diagrams and calculator displays.'};
+ const p1=added.filter(q=>q.tech==='Technology-free').map(q=>q.id),p2=added.filter(q=>q.tech==='Technology-active').map(q=>q.id);
+ if(Array.isArray(CFG.exam&&CFG.exam.presets))CFG.exam.presets.forEach(p=>{const addIds=String(p.id).startsWith('p1')?p1:String(p.id).startsWith('p2')?p2:p1.concat(p2);p.questionIds=Array.from(new Set((p.questionIds||[]).concat(addIds)));});
+})();
 const BANK=Array.isArray(CFG.questions)?CFG.questions:[];
 const EXAM_EXTRA=Array.isArray(CFG.exam?.extraQuestions)?CFG.exam.extraQuestions:[];
 const IDMAP=new Map([...BANK,...EXAM_EXTRA].map(q=>[String(q.id),q]));
@@ -526,11 +691,15 @@ function newExam(){const p=examPresets().find(x=>x.id===$('exam-preset').value)|
  const original=eligibleExamBank(p,paper),questions=CFG.exam?.papers?original:shuffleSeeded(original,`${APP_ID}-${paper}-${p.id}`);
  if(!questions.length)return toast('No eligible questions have been configured for this exam mode.');
  if(state.activeExam?.status==='active'&&!confirm('Discard the unfinished exam and start a new one?'))return;
- const selected=questions.slice(0,Math.max(1,Math.min(questions.length,Number(p.count)||6))).map(q=>String(q.id));
+ const take=Math.max(1,Math.min(questions.length,Number(p.count)||6)),stimulusTarget=Math.min(take,questions.filter(q=>q.stimulus).length,p.id==='untimed'?3:/full/.test(p.id)?3:/short/.test(p.id)?2:1);
+ const stimulus=shuffleSeeded(questions.filter(q=>q.stimulus),`${APP_ID}-${paper}-${p.id}-stimulus`).slice(0,stimulusTarget);
+ const remaining=shuffleSeeded(questions.filter(q=>!stimulus.includes(q)),`${APP_ID}-${paper}-${p.id}-text`).slice(0,take-stimulus.length);
+ const chosen=shuffleSeeded(stimulus.concat(remaining),`${APP_ID}-${paper}-${p.id}-order`);
+ const selected=chosen.map(q=>String(q.id));
  const sectionMap={};if(CFG.exam?.papers){for(const part of ['A','B','C'])for(const id of CFG.exam.papers[paper]?.[part]||[])if(selected.includes(id))sectionMap[id]=part}
  const now=Date.now(),plan=Math.max(0,Number(p.planningMinutes)||0),minutes=Math.max(0,Number(p.minutes)||0);
  const isPerusal=Boolean(CFG.exam?.perusal);
- state.activeExam={id:`${APP_ID}-${now}`,paper,label:p.label||'Exam rehearsal',preset:p.id,questionIds:selected,sectionMap,totalMarks:questions.reduce((n,q)=>n+(Number(q.marks)||1),0),responses:{},startedAt:now,planEndsAt:now+plan*60000,endAt:minutes?now+(plan+minutes)*60000:null,planningMinutes:plan,perusal:isPerusal,minutes,assisted:false,status:'active',lastOpenedAt:now};
+ state.activeExam={id:`${APP_ID}-${now}`,paper,label:p.label||'Exam rehearsal',preset:p.id,questionIds:selected,sectionMap,totalMarks:chosen.reduce((n,q)=>n+(Number(q.marks)||1),0),responses:{},startedAt:now,planEndsAt:now+plan*60000,endAt:minutes?now+(plan+minutes)*60000:null,planningMinutes:plan,perusal:isPerusal,minutes,assisted:false,status:'active',lastOpenedAt:now};
  currentExamIndex=0;examReviewRecord=null;examInWorkspace=true;examTick.lastPhase='';save();openScreen('exam');renderExamCurrent();
 }
 function resumeExam(){if(!state.activeExam||state.activeExam.status!=='active')return toast('No active exam to resume');examInWorkspace=true;examReviewRecord=null;currentExamIndex=0;openScreen('exam');renderExamCurrent()}
