@@ -1,0 +1,84 @@
+name: One-time update of legacy QCAA app links
+on:
+  push:
+    paths:
+      - .github/workflows/redirect-legacy-once.yml
+permissions:
+  contents: write
+jobs:
+  redirect:
+    if: github.repository == 'combatrobotlive/qcaa-revision-apps'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Add hosted-only redirects and canonical URLs to superseded apps
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          def key(name):
+              m = re.match(r'^(.*?)_Unit_?([1-4])(?:_|\.|$)', name, re.I)
+              if not m:
+                  return None
+              subject = re.sub(r'_QCAA\b', '', m.group(1), flags=re.I)
+              subject = re.sub(r'_and_', '_', subject, flags=re.I)
+              subject = re.sub(r'[^a-z0-9]', '', subject.lower())
+              if subject == 'english':
+                  subject = 'englishgeneral'
+              return (subject, m.group(2))
+
+          files = sorted(Path('.').glob('*.html'))
+          latest = {}
+          for f in files:
+              if re.search(r'QCAA_Unit_[1-4]_Revision_App_v3_1_Standalone\.html$', f.name, re.I):
+                  latest[key(f.name)] = f.name
+          if len(latest) != 164:
+              raise RuntimeError('Expected 164 unique current unit apps, found '+str(len(latest)))
+
+          superseded = [f for f in files
+                         if not re.search(r'v3_1', f.name, re.I)
+                         and re.search(r'Unit_?[1-4]', f.name, re.I)
+                         and key(f.name) in latest]
+          if len(superseded) != 235:
+              raise RuntimeError('Expected 235 superseded unit files, found '+str(len(superseded)))
+          if not any(f.name == 'Physics_QCAA_Unit_3_Revision_App_v2_Standalone.html' for f in superseded):
+              raise RuntimeError('Physics Unit 3 v2 mapping is missing')
+
+          head = re.compile(r'<head\b[^>]*>', re.I)
+          canonical = re.compile(r"""<link\b(?=[^>]*\brel\s*=\s*['"]canonical['"])[^>]*>""", re.I)
+          base = 'https://combatrobotlive.github.io/qcaa-revision-apps/'
+          count = 0
+          for p in superseded:
+              source = p.read_text(encoding='utf-8')
+              if 'legacy-qcaa-redirect' in source:
+                  continue
+              if not head.search(source):
+                  raise RuntimeError('Cannot locate HTML head in '+p.name)
+              target = latest[key(p.name)]
+              url = '/qcaa-revision-apps/'+target
+              addition = '<!-- legacy-qcaa-redirect: hosted only; add ?legacy=1 to use old app -->\n'
+              addition += '<link rel="canonical" href="'+base+target+'">\n'
+              addition += '<script>(function(){if(location.hostname==="combatrobotlive.github.io"&&location.pathname.indexOf("/qcaa-revision-apps/")===0&&!(new URLSearchParams(location.search)).has("legacy")){location.replace('+json.dumps(url)+'+location.search+location.hash);}}());</script>\n'
+              text = canonical.sub('', source)
+              text = head.sub(lambda match: match.group(0)+'\n'+addition, text, count=1)
+              p.write_text(text, encoding='utf-8')
+              count += 1
+          if count != 235:
+              raise RuntimeError('Expected to patch all 235 legacy apps, patched '+str(count))
+          print('Patched', count, 'legacy HTML apps; Physics Unit 3 v2 included.')
+          PY
+      - name: Commit redirects
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -u -- '*.html'
+          git diff --cached --quiet || {
+            git commit -m "Redirect superseded QCAA unit apps to v3.1 on hosted site"
+            git push origin HEAD:main
+          }
