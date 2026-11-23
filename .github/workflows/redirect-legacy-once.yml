@@ -57,15 +57,16 @@ jobs:
               source = p.read_text(encoding='utf-8')
               if 'legacy-qcaa-redirect' in source:
                   continue
-              if not head.search(source):
-                  raise RuntimeError('Cannot locate HTML head in '+p.name)
+              insertion_point = head if head.search(source) else re.compile(r'<html\b[^>]*>', re.I)
+              if not insertion_point.search(source):
+                  raise RuntimeError('Cannot locate HTML element in '+p.name)
               target = latest[key(p.name)]
               url = '/qcaa-revision-apps/'+target
               addition = '<!-- legacy-qcaa-redirect: hosted only; add ?legacy=1 to use old app -->\n'
               addition += '<link rel="canonical" href="'+base+target+'">\n'
               addition += '<script>(function(){if(location.hostname==="combatrobotlive.github.io"&&location.pathname.indexOf("/qcaa-revision-apps/")===0&&!(new URLSearchParams(location.search)).has("legacy")){location.replace('+json.dumps(url)+'+location.search+location.hash);}}());</script>\n'
               text = canonical.sub('', source)
-              text = head.sub(lambda match: match.group(0)+'\n'+addition, text, count=1)
+              text = insertion_point.sub(lambda match: match.group(0)+'\n'+addition, text, count=1)
               p.write_text(text, encoding='utf-8')
               count += 1
           if count != 235:
